@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', "ClientController@index");
+Route::get('/product-detail/{id}','ClientController@getProductDetail');
+Route::get('/category/{id}','ClientController@getProductByCategory');
+Route::get('/cart','ClientController@getCart');
+Route::get('/add-to-cart/{id}','ClientController@addToCart');
+Route::get('/remove-from-cart/{id}','ClientController@removeFromCart');
+Route::get('update-cart/{id}','ClientController@updateCart');
