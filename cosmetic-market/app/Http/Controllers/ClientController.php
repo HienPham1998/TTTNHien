@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
+use App\User;
+use App\Shippingaddress;
+use Auth;
+use App\Salers;
+use Redirect; 
 use Session;
 class ClientController extends Controller
 {
@@ -13,10 +19,66 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+     public function postSaler(Request $request){
+    $rules=[
+        'firstname'=> 'required',
+        'lastname'=> 'required',
+        'email'=> 'required',
+        'phone'=> 'required',
+     ];
+
+      $validator = Validator::make($request->all(), $rules);
+     
+     if ($validator->fails()) {
+         return redirect()->back()->withErrors($validator)->withInput();
+     }
+        $currentUser = Auth::user()->id;
+        $newSaler = new Salers();
+        $newSaler->user_id = Auth::user()->id;
+        $newSaler->firstname = $request->firstname;
+        $newSaler->lastname = $request->lastname;
+        $newSaler->email = $request->email;
+        $newSaler->phone = $request->phone;
+        $newSaler->save();
+     
+        return redirect('/profile');
+     
+    }
+
+    public function registerStore(){
+        $categories = Category::all();
+        return view('layouts.registerStore',compact('categories'));
+    }
+
+    public function getProfile(){
+        $categories = Category::all();
+        $user = User::orderBy("created_at","desc")->first();
+        return view('layouts.profile',compact('categories','user'));
+    }
+
+    public function getUpdateProfile(){
+        return view('layouts.postProfile');
+    }
+
+    public function postUpdateProfile(Request $request){
+    //     $rules=[
+    //     'firstname'=> 'required',
+    //     'lastname'=> 'required',
+    //     'email'=> 'required',
+    //     'phone'=> 'required',
+    //  ];
+    }
+
+     public function postProduct(){
+        $categories = Category::all();
+        return view('layouts.postProduct',compact('categories'));
+    }
+
     public function index()
     {
         $categories = Category::all();
-        $products = Product::orderBy("created_at","desc")->paginate(8);
+        $products = Product::orderBy("created_at","desc")->paginate(16);
         // dd($products);
         return view('layouts.index',compact('categories','products'));
     }
@@ -75,52 +137,32 @@ class ClientController extends Controller
         // $quantity = $request->quantity;
         // \Cart::update($product,['qty' => $quantity]);
 
-        return redirect()->back();
+        return redirect()->back();  
     }
       public function removeFromCart($id, Request $request) {
         \Cart::remove($id);
         return redirect()->back();
     }
-    /**
-     * Store a newly created resource in storage.P
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+      public function addAddress(Request $request){
+        $shippingaddress = new Shippingaddress();
+        $shippingaddress->name = $request->name;
+        $shippingaddress->email = $request->email;
+        $shippingaddress->phone = $request->phone;
+        $shippingaddress->address = $request->address;
+        $shippingaddress->customer_id =  1;
+        $shippingaddress->save();
+        return redirect("/bill/1");
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function getBill($customer_id,Request $request){
+        $categories = Category::all();
+        $shippingaddress = Shippingaddress::where("customer_id",$customer_id)->orderBy("created_at", "desc")->first();
+        $products = \Cart::content();
+        $total = 0;
+        foreach($products as $p){
+            $total = $total + $p->options->promotion_price * $p->qty;
+        }
+        return view('layouts.bill',compact('categories','shippingaddress','products','total'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
