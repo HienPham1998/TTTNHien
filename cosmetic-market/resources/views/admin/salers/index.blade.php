@@ -98,17 +98,17 @@
 
                                                         <!-- Modal content-->
                                                         <div class="modal-content">
-                                                            <div class="modal-header" style="display: block;">
-                                                                <button type="button" class="close"
-                                                                        data-dismiss="modal">&times;
-                                                                </button>
+                                                            <div class="modal-header">
                                                                 <h4 class="modal-title">Delete</h4>
+                                                                <button type="button" class="close"
+                                                                        data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                                                                </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <p>Are you sure to delete?</p>
+                                                                <p style="text-align:left">Are you sure to delete?</p>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <form action="salers/destroy/{{ $saler->id }}"
+                                                                <form action="/manage/salers/destroy/{{ $saler->id }}"
                                                                       method="post">
                                                                     {{ csrf_field() }}
                                                                     {{ method_field('DELETE') }}

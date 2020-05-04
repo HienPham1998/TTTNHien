@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Saler;
+use Illuminate\Http\Request;
 
 class SalerController extends Controller
 {
@@ -12,7 +13,7 @@ class SalerController extends Controller
         return view('admin.salers.index', compact("salers"));
     }
 
-    public function update($request, $id)
+    public function update(Request $request, $id)
     {
         dd($id);
         $salers = Saler::find($id);
