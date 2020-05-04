@@ -141,8 +141,8 @@
 
   <div class="modal" id="editModal" role="dialog" aria-labelledby="editModalLabel" aria-hidden="false">
         <div class="modal-dialog" role="document">
-            <form id="editForm" method="POST" enctype="multipart/form-data">
-                @csrf
+            <form id="editForm" method="POST" enctype="multipart/form-data" action="/manage/salers/update/{{ $saler->id }}">
+            {{ csrf_field() }}
                 {{ method_field('PUT') }}
                 <div class="modal-content">
                     <div class="modal-header">
