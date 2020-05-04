@@ -9,7 +9,7 @@ use App\Product;
 use App\User;
 use App\Shippingaddress;
 use Auth;
-use App\Salers;
+use App\Saler;
 use Redirect; 
 use Session;
 class ClientController extends Controller
@@ -34,7 +34,7 @@ class ClientController extends Controller
          return redirect()->back()->withErrors($validator)->withInput();
      }
         $currentUser = Auth::user()->id;
-        $newSaler = new Salers();
+        $newSaler = new Saler();
         $newSaler->user_id = Auth::user()->id;
         $newSaler->firstname = $request->firstname;
         $newSaler->lastname = $request->lastname;

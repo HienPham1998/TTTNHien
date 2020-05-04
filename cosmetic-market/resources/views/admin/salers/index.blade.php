@@ -2,7 +2,7 @@
 @section('content')
   <div class="main-content" id="panel">
     <!-- Topnav -->
-    
+
     <!-- Header -->
     <!-- Header -->
     <div class="header bg-primary pb-6">
@@ -46,7 +46,7 @@
                     <th scope="col" data-sort="status">Lastname</th>
                     <th scope="col" data-sort="status">Email</th>
                     <th scope="col" data-sort="status">Phone</th>
-                    <th scope="col" data-sort="status">Action</th>
+                    <th scope="col" data-sort="status" style="text-align:center">Action</th>
                   </tr>
                 </thead>
                 <tbody class="list">
@@ -54,9 +54,7 @@
                   <tr>
                     <th scope="row">
                       <div class="media align-items-center">
-                        <a href="#" class="avatar rounded-circle mr-3">
-                          <img alt="" src="../assets/img/theme/bootstrap.jpg">
-                        </a>
+
                         <div class="media-body">
                           <span class="name mb-0 text-sm">{{ $saler->id }}</span>
                         </div>
@@ -67,7 +65,7 @@
                     </td>
                     <td>
                       <span class="badge badge-dot mr-4">
-                        <i class="bg-warning"></i>
+                        <!-- <i class="bg-warning"></i> -->
                         <span class="status">{{$saler->lastname }}</span>
                       </span>
                     </td>
@@ -82,7 +80,9 @@
                       </div>
                     </td>
                     <td class="text-right">
-                      <div class="dropdown">
+                        <button data-href="manage/salers/update/{{ $saler->id }}" id="edit" class="btn btn-warning">Edit</button>
+                        <button data-target="#modalDelete{{$saler->id}}" type="button" class="btn btn-danger" data-toggle="modal">Delete</button>
+                      <!-- <div class="dropdown">
                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <i class="fas fa-ellipsis-v"></i>
                         </a>
@@ -91,7 +91,38 @@
                           <a class="dropdown-item" href="#">Another action</a>
                           <a class="dropdown-item" href="#">Something else here</a>
                         </div>
-                      </div>
+
+                      </div> -->
+                      <div id="modalDelete{{$saler->id}}" class="modal fade" role="dialog">
+                                                    <div class="modal-dialog">
+
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                            <div class="modal-header" style="display: block;">
+                                                                <button type="button" class="close"
+                                                                        data-dismiss="modal">&times;
+                                                                </button>
+                                                                <h4 class="modal-title">Delete</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>Are you sure to delete?</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <form action="salers/destroy/{{ $saler->id }}"
+                                                                      method="post">
+                                                                    {{ csrf_field() }}
+                                                                    {{ method_field('DELETE') }}
+                                                                    <button type="button" class="btn btn-default"
+                                                                            data-dismiss="modal">Cancel
+                                                                    </button>
+                                                                    <button type="submit" class="btn btn-danger">Delete
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
                     </td>
                   </tr>
                 @endforeach
@@ -103,8 +134,98 @@
         </div>
       </div>
       <!-- Dark table -->
-     
-     
+
+
     </div>
   </div>
+
+  <div class="modal" id="editModal" role="dialog" aria-labelledby="editModalLabel" aria-hidden="false">
+        <div class="modal-dialog" role="document">
+            <form id="editForm" method="POST" enctype="multipart/form-data">
+                @csrf
+                {{ method_field('PUT') }}
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Update User</h5>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card card-user">
+                                    <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="col-md-12 pr-1">
+                                                <div class="form-group">
+                                                    <label>Firstname</label>
+                                                    <input type="text" name="firstname" class="form-control" placeholder="Username">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 pr-1">
+                                                <div class="form-group">
+                                                    <label>Lastname</label>
+                                                    <input type="text" name="lastname" class="form-control" placeholder="Username">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Email address</label>
+                                                    <input type="email" name="email" class="form-control" placeholder="Email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 pr-1">
+                                                <div class="form-group">
+                                                    <label>Phone</label>
+                                                    <input type="text" name="phone" class="form-control" placeholder="Username">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
+
+@push('scripts')
+    <script>
+        // Click edit button
+        $('#edit').click(function (e) {
+            e.preventDefault();
+            // Fill default value
+            var row = $(this).parent().parent().parent();
+            var col = row.find('td');
+            console.log(row);
+            console.log(col);
+            $('#editForm input[name="firstname"]').val(col[0].innerText.trim());
+            $('#editForm input[name="lastname"]').val(col[1].innerText.trim());
+            $('#editForm input[name="email"]').val(col[2].innerText);
+            $('#editForm input[name="phone"]').val(col[3].innerText);
+            // $('#editForm select[name="role_id"]').val($(col[4]).get(0).innerText === "User" ? 2 : 1);
+
+            $('#editModal').modal({
+                backdrop: 'static',
+                show: true
+            });
+        });
+    </script>
+@endpush
