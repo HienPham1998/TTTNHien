@@ -15,7 +15,6 @@ class SalerController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($id);
         $salers = Saler::find($id);
         $salers->firstname = $request->firstname;
         $salers->lastname = $request->lastname;
