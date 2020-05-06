@@ -41,6 +41,8 @@ Route::post('register-store', 'ClientController@postSaler');
 
 Route::get('/manage', 'AdminController@getAdmin');
 Route::get('/manage/customers/index', 'CustomerController@index');
+Route::put('/manage/customers/update/{id}', 'CustomerController@update');
+Route::delete('/manage/customers/destroy/{id}', 'CustomerController@destroy');
 Route::get('/manage/salers/index', 'SalerController@index');
 Route::put('/manage/salers/update/{id}', 'SalerController@update');
 Route::delete('/manage/salers/destroy/{id}', 'SalerController@destroy');
