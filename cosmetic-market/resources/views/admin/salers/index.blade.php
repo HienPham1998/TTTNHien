@@ -1,10 +1,6 @@
 @extends('admin.app')
 @section('content')
   <div class="main-content" id="panel">
-    <!-- Topnav -->
-
-    <!-- Header -->
-    <!-- Header -->
     <div class="header bg-primary pb-6">
       <div class="container-fluid">
         <div class="header-body">
@@ -80,7 +76,7 @@
                       </div>
                     </td>
                     <td class="text-right">
-                        <button data-href="manage/salers/update/{{ $saler->id }}" id="edit" class="btn btn-warning">Edit</button>
+                        <button id="edit" class="btn btn-warning">Edit</button>
                         <button data-target="#modalDelete{{$saler->id}}" type="button" class="btn btn-danger" data-toggle="modal">Delete</button>
                       <!-- <div class="dropdown">
                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

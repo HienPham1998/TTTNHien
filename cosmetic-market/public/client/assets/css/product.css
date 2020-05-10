@@ -1,0 +1,6 @@
+.shorten-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100px;
+    margin-bottom: 0;
+}
