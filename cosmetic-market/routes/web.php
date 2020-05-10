@@ -42,12 +42,19 @@ Route::get('register-store', 'ClientController@registerStore');
 Route::post('register-store', 'ClientController@postSaler');
 
 Route::get('/manage', 'AdminController@getAdmin');
+
 Route::get('/manage/customers/index', 'CustomerController@index');
 Route::put('/manage/customers/update/{id}', 'CustomerController@update');
 Route::delete('/manage/customers/destroy/{id}', 'CustomerController@destroy');
+
 Route::get('/manage/salers/index', 'SalerController@index');
 Route::put('/manage/salers/update/{id}', 'SalerController@update');
 Route::delete('/manage/salers/destroy/{id}', 'SalerController@destroy');
+
+Route::get('/profile/index', 'ProductController@index');
+Route::put('/profile/update/{id}', 'ProductController@update');
+Route::delete('/profile/destroy/{id}', 'ProductController@destroy');
+Route::post('/profile/index', 'ProductController@add');
 
 Route::get('send', 'EmailController@sendEmail');
 // Route::get('test', function(Request $request) {

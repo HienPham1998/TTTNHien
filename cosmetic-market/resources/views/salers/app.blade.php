@@ -32,6 +32,7 @@
         type="text/css">
     <!-- Argon CSS -->
     <link rel="stylesheet" href="{{asset('admin/assets/css/argon.css?v=1.2.0')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('client/assets/css/product.css')}}" type="text/css">
 </head>
 
 <body>
@@ -203,8 +204,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-auto">
                                                 <!-- Avatar -->
-                                                <!-- <img alt="Image placeholder" src="../assets/img/theme/team-1.jpg"
-                                                    class="avatar rounded-circle"> -->
+
                                             </div>
                                             <div class="col ml--2">
                                                 <div class="d-flex justify-content-between align-items-center">
@@ -223,8 +223,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-auto">
                                                 <!-- Avatar -->
-                                                <!-- <img alt="Image placeholder" src="../assets/img/theme/team-2.jpg"
-                                                    class="avatar rounded-circle"> -->
+
                                             </div>
                                             <div class="col ml--2">
                                                 <div class="d-flex justify-content-between align-items-center">
@@ -243,8 +242,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-auto">
                                                 <!-- Avatar -->
-                                                <!-- <img alt="Image placeholder" src="../assets/img/theme/team-3.jpg"
-                                                    class="avatar rounded-circle"> -->
+
                                             </div>
                                             <div class="col ml--2">
                                                 <div class="d-flex justify-content-between align-items-center">
@@ -263,8 +261,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-auto">
                                                 <!-- Avatar -->
-                                                <!-- <img alt="Image placeholder" src="../assets/img/theme/team-4.jpg"
-                                                    class="avatar rounded-circle"> -->
+
                                             </div>
                                             <div class="col ml--2">
                                                 <div class="d-flex justify-content-between align-items-center">
@@ -283,8 +280,7 @@
                                         <div class="row align-items-center">
                                             <div class="col-auto">
                                                 <!-- Avatar -->
-                                                <!-- <img alt="Image placeholder" src="../assets/img/theme/team-5.jpg"
-                                                    class="avatar rounded-circle"> -->
+
                                             </div>
                                             <div class="col ml--2">
                                                 <div class="d-flex justify-content-between align-items-center">
@@ -435,7 +431,6 @@
     <script src="{{asset('admin/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js')}}"></script>
     <script src="{{asset('admin/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js')}}"></script>
     <!-- Argon JS -->
-    <!-- <script src="{{asset('assets/js/argon.js?v=1.2.0')}}"></script> -->
     @stack('scripts')
 </body>
 

@@ -1,10 +1,14 @@
 @extends('admin.app')
 @section('content')
+<<<<<<< HEAD
 <div class="main-content" id="panel">
     <!-- Topnav -->
 
     <!-- Header -->
     <!-- Header -->
+=======
+  <div class="main-content" id="panel">
+>>>>>>> 73b7d0779dc7fb32a45dde033e59c4dfb73b9231
     <div class="header bg-primary pb-6">
         <div class="container-fluid">
             <div class="header-body">
@@ -29,85 +33,98 @@
     </div>
     <!-- Page content -->
     <div class="container-fluid mt--6">
-        <div class="row">
-            <div class="col">
-                <div class="card">
-                    <!-- Card header -->
-                    <div class="card-header border-0">
-                        <h3 class="mb-0">Light table</h3>
-                    </div>
-                    <!-- Light table -->
-                    <div class="table-responsive">
-                        <table class="table align-items-center table-flush">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col" data-sort="name">Id</th>
-                                    <th scope="col" data-sort="budget">Firstname</th>
-                                    <th scope="col" data-sort="status">Lastname</th>
-                                    <th scope="col" data-sort="status">Email</th>
-                                    <th scope="col" data-sort="status">Phone</th>
-                                    <th scope="col" data-sort="status" style="text-align:center">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody class="list">
-                                @foreach($salers as $key => $saler)
-                                <tr>
-                                    <th scope="row">
-                                        <div class="media align-items-center">
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <!-- Card header -->
+            <div class="card-header border-0">
+              <h3 class="mb-0">Light table</h3>
+            </div>
+            <!-- Light table -->
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col" data-sort="name">Id</th>
+                    <th scope="col" data-sort="budget">Firstname</th>
+                    <th scope="col" data-sort="status">Lastname</th>
+                    <th scope="col" data-sort="status">Email</th>
+                    <th scope="col" data-sort="status">Phone</th>
+                    <th scope="col" data-sort="status" style="text-align:center">Action</th>
+                  </tr>
+                </thead>
+                <tbody class="list">
+                @foreach($salers as $key => $saler)
+                  <tr>
+                    <th scope="row">
+                      <div class="media align-items-center">
 
-                                            <div class="media-body">
-                                                <span class="name mb-0 text-sm">{{ $saler->id }}</span>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <td class="budget">
-                                        {{$saler->firstname }}
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-dot mr-4">
-                                            <!-- <i class="bg-warning"></i> -->
-                                            <span class="status">{{$saler->lastname }}</span>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <div class="avatar-group">
-                                            {{ $saler->email }}
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            {{ $saler->phone }}
-                                        </div>
-                                    </td>
-                                    <td class="text-right">
-                                        <button data-href="manage/salers/update/{{ $saler->id }}" id="edit"
-                                            class="btn btn-warning btn-edit">Edit</button>
-                                        <button data-target="#modalDelete{{$saler->id}}" type="button"
-                                            class="btn btn-danger" data-toggle="modal">Delete</button>
-                                        <div id="modalDelete{{$saler->id}}" class="modal fade" role="dialog">
-                                            <div class="modal-dialog">
-                                                <!-- Modal content-->
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title">Delete</h4>
-                                                        <button type="button" class="close" data-dismiss="modal"><span
-                                                                aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <p style="text-align:left">Are you sure to delete?</p>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <form action="/manage/salers/destroy/{{ $saler->id }}"
-                                                            method="post">
-                                                            {{ csrf_field() }}
-                                                            {{ method_field('DELETE') }}
-                                                            <button type="button" class="btn btn-default"
-                                                                data-dismiss="modal">Cancel
-                                                            </button>
-                                                            <button type="submit" class="btn btn-danger">Delete
-                                                            </button>
-                                                        </form>
+                        <div class="media-body">
+                          <span class="name mb-0 text-sm">{{ $saler->id }}</span>
+                        </div>
+                      </div>
+                    </th>
+                    <td class="budget">
+                      {{$saler->firstname }}
+                    </td>
+                    <td>
+                      <span class="badge badge-dot mr-4">
+                        <!-- <i class="bg-warning"></i> -->
+                        <span class="status">{{$saler->lastname }}</span>
+                      </span>
+                    </td>
+                    <td>
+                      <div class="avatar-group">
+                        {{ $saler->email }}
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        {{ $saler->phone }}
+                      </div>
+                    </td>
+                    <td class="text-right">
+                        <button id="edit" class="btn btn-warning">Edit</button>
+                        <button data-target="#modalDelete{{$saler->id}}" type="button" class="btn btn-danger" data-toggle="modal">Delete</button>
+                      <!-- <div class="dropdown">
+                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-ellipsis-v"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                          <a class="dropdown-item" href="#">Action</a>
+                          <a class="dropdown-item" href="#">Another action</a>
+                          <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+
+                      </div> -->
+                      <div id="modalDelete{{$saler->id}}" class="modal fade" role="dialog">
+                                                    <div class="modal-dialog">
+
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Delete</h4>
+                                                                <button type="button" class="close"
+                                                                        data-dismiss="modal"><span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p style="text-align:left">Are you sure to delete?</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <form action="/manage/salers/destroy/{{ $saler->id }}"
+                                                                      method="post">
+                                                                    {{ csrf_field() }}
+                                                                    {{ method_field('DELETE') }}
+                                                                    <button type="button" class="btn btn-default"
+                                                                            data-dismiss="modal">Cancel
+                                                                    </button>
+                                                                    <button type="submit" class="btn btn-danger">Delete
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
 
