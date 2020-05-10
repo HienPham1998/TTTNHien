@@ -1,14 +1,6 @@
 @extends('admin.app')
 @section('content')
-<<<<<<< HEAD
-<div class="main-content" id="panel">
-    <!-- Topnav -->
-
-    <!-- Header -->
-    <!-- Header -->
-=======
   <div class="main-content" id="panel">
->>>>>>> 73b7d0779dc7fb32a45dde033e59c4dfb73b9231
     <div class="header bg-primary pb-6">
         <div class="container-fluid">
             <div class="header-body">
