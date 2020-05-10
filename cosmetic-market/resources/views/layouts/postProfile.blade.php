@@ -126,9 +126,9 @@
                                     <input type="text" class="form-control" name="avatar">
                                 </div>
                             </div>
-                            <div class="form-group" style="display: flex;justify-content: flex-end;">
+                            <!-- <div class="form-group" style="display: flex;justify-content: flex-end;">
                                 <button class="btn btn-success" type="submit">Update Profile</button>
-                            </div>
+                            </div> -->
                         </form>
 
                     </div>

@@ -79,54 +79,87 @@
                 <div class="row">
                     <div class="col-3">
                         <div class="left-profile">
-                            <img src="https://steamuserimages-a.akamaihd.net/ugc/921268572045139552/8F6DABFD815EA2BD8A6137F1D9342674624E19F2/"
-                                alt="" class="img-fluid" style="border-radius:50%">
-                                <h3>{{Auth::user()->name}}</h3>
-                                <button class="btn btn-success">Edit Profile</button>
+                            <img src="https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                alt="" class="rounded-circle" style="width:12vw; height:12vw">
+                            <h3 class="mt-2">{{Auth::user()->name}}</h3>
+                            @if($saler != null)
+                            <button class="btn btn-outline btn-outline-success">Edit Profile</button>
+                            @endif
                         </div>
                     </div>
                     <div class="col-9">
-                        <div class="form-group row">
-                            <div class="col-sm-2">
-                                <p>Firstname</p>
+                        @if($saler == null)
+                        <form  action="/profile/changepassword" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            {{ method_field('PUT') }}
+                            <div class="col-md-12 pr-1">
+                                <div class="form-group">
+                                    <label>Current Password</label>
+                                    <input type="password" name="currentPassword" class="form-control" placeholder="******">
+                                </div>
                             </div>
-                            <div class="col-sm-10">
-                                Firstname data
+                            <div class="col-md-12 pr-1">
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" name="password" class="form-control" placeholder="******">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-2">
-                                <p>Lastname</p>
+                            <div class="col-md-12 pr-1">
+                                <div class="form-group">
+                                    <label>Confirmation Password</label>
+                                    <input type="password" name="password_confirmation" class="form-control"
+                                        placeholder="******">
+                                </div>
                             </div>
-                            <div class="col-sm-10">
-                                Lastname data
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-2">
-                                <p>Email</p>
-                            </div>
-                            <div class="col-sm-10">
-                                Email data
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-2">
-                                <p>Phone</p>
-                            </div>
-                            <div class="col-sm-10">
-                                Phone data
-                            </div>
-                        </div>
+                            <button type="submit" class="btn btn-outline btn-outline-success">Change password</button>
                     </div>
                 </div>
-
-                <hr class="hr-text" data-content="Store Infomation">
-
-                <h2 class="pb-3">You haven't any store yet! Wanna become a salers? <a href="/register-store">Join us now </a></h2>
             </div>
-
         </div>
+    </div>
+    </form>
+    <button class="btn btn-outline-warning">ChangePassword</button>
+    @else
+    <div class="form-group row">
+        <div class="col-sm-2">
+            <p>Firstname:</p>
+        </div>
+        <div class="col-sm-10">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-2">
+            <p>Lastname</p>
+        </div>
+        <div class="col-sm-10">
+           
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-2">
+            <p>Email</p>
+        </div>
+        <div class="col-sm-10">
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-2">
+            <p>Phone</p>
+        </div>
+        <div class="col-sm-10">
+            Phone data
+        </div>
+    </div>
+    @endif
+    </div>
+    </div>
+
+    <hr class="hr-text" data-content="Store Infomation">
+
+    <h2 class="pb-3">You haven't any store yet! Wanna become a salers? <a href="/register-store">Join us now </a></h2>
+    </div>
+
+    </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">

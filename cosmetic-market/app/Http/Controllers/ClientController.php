@@ -51,12 +51,6 @@ class ClientController extends Controller
         return view('layouts.registerStore',compact('categories'));
     }
 
-    public function getProfile(){
-        $categories = Category::all();
-        $user = User::orderBy("created_at","desc")->first();
-        return view('layouts.profile',compact('categories','user'));
-    }
-
     public function getUpdateProfile(){
         return view('layouts.postProfile');
     }

@@ -131,7 +131,7 @@
 
 <div class="modal" id="editModal" role="dialog" aria-labelledby="editModalLabel" aria-hidden="false">
     <div class="modal-dialog" role="document">
-        <form id="editForm" method="POST" enctype="multipart/form-data">
+        <form id="editForm" method="POST" enctype="multipart/form-data" action="/manage/salers/update/{{ $saler->id }}">
             @csrf
            {{ method_field('PUT') }})
             <div class="modal-content">
@@ -139,7 +139,6 @@
                     <h5 class="modal-title" id="editModalLabel">Update User</h5>
                 </div>
                 <div class="modal-body">
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card card-user">
@@ -163,7 +162,6 @@
                                                     placeholder="Username">
                                             </div>
                                         </div>
-
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">

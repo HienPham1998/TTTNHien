@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-6" id="left">
                     <div class="text" id="form-row">
-                        <h1>Tittle</h1>
+                        <h1>Join with us</h1>
 
                     </div>
                 </div>

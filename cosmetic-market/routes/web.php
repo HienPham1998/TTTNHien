@@ -21,10 +21,12 @@ Route::get('update-cart/{id}', 'ClientController@updateCart');
 Route::get('post-product', 'ClientController@postProduct');
 Route::get('bill/{id}', 'ClientController@getBill');
 
-Route::get('profile', 'ClientController@getProfile');
+Route::get('profile', 'ProfileController@getProfile');
+
 
 Route::get('update-profile', 'ClientController@getUpdateProfile');
 Route::post('update-profile', 'ClientController@postUpdateProfile');
+Route::put('/profile/changepassword', 'ProfileController@updatePassword');
 
 Route::get('login', 'Auth\LoginController@getLogin');
 Route::post('login', 'Auth\LoginController@postLogin');
