@@ -2,114 +2,114 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Validator;
-use App\User;
-use App\Customer;
-use App\Salers;
 use App\Category;
+use App\Http\Controllers\Controller;
+use App\Salers;
+use App\User;
 use Auth;
-use Redirect; 
+use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
+use Redirect;
+use Validator;
+
 class LoginController extends Controller
 {
-    public function getLogin(){
+    public function getLogin()
+    {
         return view('auth.login');
     }
 
-    public function getRegister(){
+    public function getRegister()
+    {
         return view('auth.register');
     }
 
-    public function registerStore(){
+    public function registerStore()
+    {
         $categories = Category::all();
-        return view('layouts.registerStore',compact('categories'));
+        return view('layouts.registerStore', compact('categories'));
     }
 
-    
- public function postRegister(Request $request) {
-    $rules = [
-         'username' => 'required|min:8',
-         'password' => 'required|confirmed|min:8'
-     ];
+    public function postRegister(Request $request)
+    {
+        $rules = [
+            'username' => 'required|min:8',
+            'password' => 'required|confirmed|min:8',
+        ];
 
+        $validator = Validator::make($request->all(), $rules);
 
-     $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
-     if ($validator->fails()) {
-         return redirect()->back()->withErrors($validator)->withInput();
-     }
+        $newUser = new User();
+        $newUser->name = $request->username;
+        $newUser->password = bcrypt($request->password);
+        $newUser->role_id = 3;
+        $newUser->save();
 
-     $newUser = new User();
-     $newUser->name = $request->username;
-     $newUser->password = bcrypt($request->password);
-     $newUser->save();
+        return redirect('/login');
 
-     $newCustomer = new Customer();
-     $newCustomer->user_id = $newUser->id;
-     $newCustomer->save();
-
-     return redirect('/login');
-
- }
-
-     public function postLogin(Request $request){
-     $rules=[
-        'username'=> 'required',
-        'password'=> 'required'
-     ];
-     $validator = Validator::make($request->all(),$rules);
-
-     if($validator->fails()){
-         return redirect()->back()->withErrors($validator)->withInput();
-     }
-     else{
-         $username = $request->username;
-         $password = $request->password;
-         if( Auth::attempt(['name' => $username, 'password' =>$password])) {
-            //  if(Auth::user()->role_id ==1 )
-            // {
-            //     return redirect()->intended('/manage');
-            // }
-             return redirect()->intended('/');
-         }
-         else {
-             $errors = new MessageBag(['errorlogin' => 'Tên hoặc mật khẩu không đúng']);
-             return redirect()->back()->withInput()->withErrors($errors);
-         }
-      }
     }
-    
-    public function postSaler(Request $request){
-    $rules=[
-        'firstname'=> 'required',
-        'lastname'=> 'required',
-        'email'=> 'required',
-        'telephone'=> 'required',
-        'company'=> 'required',
-        'address'=> 'required',
-        'phone'=> 'required',
-        'email'=> 'required',
-        'image'=> 'required',
-     ];
-     
-      $validator = Validator::make($request->all(), $rules);
-     
-     if ($validator->fails()) {
-         return redirect()->back()->withErrors($validator)->withInput();
-     }
+
+    public function postLogin(Request $request)
+    {
+        $rules = [
+            'username' => 'required',
+            'password' => 'required',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $username = $request->username;
+            $password = $request->password;
+            if (Auth::attempt(['name' => $username, 'password' => $password])) {
+                //  if(Auth::user()->role_id ==1 )
+                // {
+                //     return redirect()->intended('/manage');
+                // }
+                return redirect()->intended('/');
+            } else {
+                $errors = new MessageBag(['errorlogin' => 'Tên hoặc mật khẩu không đúng']);
+                return redirect()->back()->withInput()->withErrors($errors);
+            }
+        }
+    }
+
+    public function postSaler(Request $request)
+    {
+        $rules = [
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'email' => 'required',
+            'telephone' => 'required',
+            'company' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'image' => 'required',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
         $currentUser = Auth::user()->id;
         $newSaler = new Salers();
         $newSaler->user_id = Auth::user()->id;
         dd($newSaler);
         $newSaler->save();
-     
+
         return redirect('/profile');
-     
+
     }
 
-    public function logout() {
+    public function logout()
+    {
         Auth::logout();
         // \Cart::destroy();
         return redirect("/");
@@ -131,5 +131,4 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    
 }

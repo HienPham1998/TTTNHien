@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateSalersTable extends Migration
 {
@@ -13,13 +13,14 @@ class CreateSalersTable extends Migration
      */
     public function up()
     {
-        Schema::create('salers', function (Blueprint $table) {
+        Schema::create('saler_details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
             $table->string('firstname');
             $table->string('lastname');
             $table->string('email');
             $table->string('phone');
+            $table->string('shopname');
+            $table->string('shopaddress');
             $table->timestamps();
         });
     }

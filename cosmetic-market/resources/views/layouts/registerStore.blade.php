@@ -31,6 +31,18 @@
               <input type="tel" class="form-control" id="input-telephone" placeholder="Telephone" name="phone" required>
             </div>
           </div>
+          <div class="form-group required">
+            <label for="input-telephone" class="col-sm-2 control-label">Shop name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="input-shop-name" placeholder="Telephone" name="shopname" required>
+            </div>
+          </div>
+          <div class="form-group required">
+            <label for="input-telephone" class="col-sm-2 control-label">Shop address</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="input-shop-address" placeholder="Telephone" name="shopaddress" required>
+            </div>
+          </div>
         </fieldset>
         <!-- <fieldset id="address">
           <legend>Your store infomation</legend>
@@ -63,7 +75,7 @@
             <div class="col-sm-10">
               <input type="text" class="form-control" id="input-postcode" placeholder="Image" value="" name="image">
             </div>
-          </div>    
+          </div>
         </fieldset> -->
         <div class="buttons">
           <div class="pull-right">I have read and agree to the <a class="agree" href="#"><b>Privacy Policy</b></a>

@@ -82,13 +82,13 @@
                             <img src="https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                                 alt="" class="rounded-circle" style="width:12vw; height:12vw">
                             <h3 class="mt-2">{{Auth::user()->name}}</h3>
-                            @if($saler != null)
+                            @if($user != null)
                             <button class="btn btn-outline btn-outline-success">Edit Profile</button>
                             @endif
                         </div>
                     </div>
                     <div class="col-9">
-                        @if($saler == null)
+                        @if($user == null)
                         <form  action="/profile/changepassword" method="POST" enctype="multipart/form-data">
                             @csrf
                             {{ method_field('PUT') }}
@@ -132,7 +132,7 @@
             <p>Lastname</p>
         </div>
         <div class="col-sm-10">
-           
+
         </div>
     </div>
     <div class="form-group row">
