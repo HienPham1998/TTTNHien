@@ -26,18 +26,20 @@
                     <td class="text-left">{{$product->name}}</td>
                     <td class="text-left">{{$product->options->cat_name}}</td>
                     <td class="text-right">{{$product->qty}}</td>
-                    @if($product->price != $product->options->promotion_price)
+                    <!-- @if($product->unit_price != $product->options->promotion_price)
                     <td class="text-right">
-                        <del class="lineThrough">${{$product->price}} </del>
+                        <del class="lineThrough">${{$product->unit_price}} </del>
                         &nbsp; &nbsp; &nbsp;${{$product->options->promotion_price}}
                     </td>
-                    @else
+                    @else -->
                     <td class="text-right">
                         &nbsp; &nbsp; &nbsp;${{$product->price}}
                     </td>
-                    @endif
+                    <!-- @endif -->
                     <td class="text-right">
-                        ${{$product->options->promotion_price}} </td>
+                        <!-- ${{$product->options->promotion_price}}  -->
+                        $4
+                        </td>
                 </tr>
                 @endforeach
 
@@ -53,7 +55,8 @@
                 </tr>
                 <tr>
                     <td class="text-right" colspan="4"><strong>Total:</strong></td>
-                    <td class="text-right">${{$total + 2 }}</td>
+                    <!-- <td class="text-right">${{$total + 2 }}</td> -->
+                    <td class="text-right">$6</td>
                 </tr>
                 <tr>
                     <td>
@@ -63,8 +66,8 @@
                                 style="width:70%" />
                         </div>
                     </td>
-                    <td>Transport unit:</td>
-                    <td>Fast delivery:</td>
+                    <td>Transport unit: Low Price Transport</td>
+                    <td>Fast delivery: None</td>
                     <td>Change</td>
                     <td></td>
                 </tr>
@@ -75,15 +78,15 @@
         <table class="table table-borderless">
             <thead>
                 <tr>
-                    <th scope="col">Shopee Voucher</th>
+                    <th scope="col">Voucher</th>
                     <th></th>
                     <th scope="col">THAY ĐỔI</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Shopee Xu</td>
-                    <td>Dùng 17700 Shopee Xu</td>
+                    <td>Xu</td>
+                    <td>Dùng 17700 Xu</td>
                 </tr>
                 <tr>
                     <td>Phương thức thanh toán:</td>

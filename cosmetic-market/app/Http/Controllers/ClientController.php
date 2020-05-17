@@ -134,7 +134,7 @@ class ClientController extends Controller
                 'options' => [
                     'image' => $product->image,
                     'cat_name' => $product->category->name,
-                    'promotion_price' => $product->price - $product->price * $product->sale / 100,
+                    'promotion_price' => $product->unit_price - $product->unit_price * $product->discount / 100,
                 ],
             ]);
         }
