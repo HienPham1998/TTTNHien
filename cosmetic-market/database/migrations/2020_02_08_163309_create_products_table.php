@@ -17,11 +17,13 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('category_id');
-            $table->integer('saler_id');
-            $table->double('sale');
-            $table->double('price');
+            $table->integer('discount');
+            $table->double('unit_price');
             $table->string('quantity');
             $table->string("image");
+            $table->string("ingredient");
+            $table->string("manufacturing_date");
+            $table->string("expiry_date");
             $table->string('description')->nullable();
             $table->timestamps();
             $table->softDeletes();

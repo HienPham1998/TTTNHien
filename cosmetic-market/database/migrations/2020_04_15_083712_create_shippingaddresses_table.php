@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateShippingaddressesTable extends Migration
 {
@@ -16,10 +16,10 @@ class CreateShippingaddressesTable extends Migration
         Schema::create('shippingaddresses', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-             $table->string('email')->nullable();
+            $table->string('email')->nullable();
             $table->string('phone');
             $table->string('address');
-            $table->integer('customer_id');
+            $table->integer('bill_id');
             $table->timestamps();
         });
     }
