@@ -129,7 +129,7 @@ class ClientController extends Controller
                 'id' => $id,
                 'name' => $product->name,
                 'qty' => 1,
-                'price' => $product->price,
+                'price' => $product->unit_price,
                 'weight' => 0,
                 'options' => [
                     'image' => $product->image,
@@ -162,14 +162,14 @@ class ClientController extends Controller
         $shippingaddress->email = $request->email;
         $shippingaddress->phone = $request->phone;
         $shippingaddress->address = $request->address;
-        $shippingaddress->customer_id = 1;
+        $shippingaddress->bill_id = 1;
         $shippingaddress->save();
         return redirect("/bill/1");
     }
-    public function getBill($customer_id, Request $request)
+    public function getBill($bill_id, Request $request)
     {
         $categories = Category::all();
-        $shippingaddress = Shippingaddress::where("customer_id", $customer_id)->orderBy("created_at", "desc")->first();
+        $shippingaddress = Shippingaddress::where("bill_id", $bill_id)->orderBy("created_at", "desc")->first();
         $products = \Cart::content();
         $total = 0;
         foreach ($products as $p) {

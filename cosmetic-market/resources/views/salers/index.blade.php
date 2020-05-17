@@ -83,12 +83,12 @@
                     </td>
                     <td>
                       <div class="avatar-group">
-                        {{ $prod->sale }}
+                        {{ $prod->discount }}
                       </div>
                     </td>
                     <td>
                       <div class="avatar-group">
-                        {{ $prod->price }}
+                        {{ $prod->unit_price }}
                       </div>
                     </td>
                     <td>

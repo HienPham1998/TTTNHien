@@ -45,6 +45,7 @@ class LoginController extends Controller
 
         $newUser = new User();
         $newUser->name = $request->username;
+        $newUser->email = $request->email;
         $newUser->password = bcrypt($request->password);
         $newUser->role_id = 3;
         $newUser->save();

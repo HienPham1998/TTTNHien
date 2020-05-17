@@ -27,9 +27,9 @@
                         <span class="riview"><a href="#">1 reviews</a> / <a href="#">Write a review</a></span> </div>
                     <ul class="list-unstyled productinfo-details-top">
                         <li>
-                            <label>Price: </label> ${{$product->price}}
+                            <label>Price: </label> ${{$product->unit_price}}
                         </li>
-                        <li><label>Sale: </label>{{$product->sale}}%</span></li>
+                        <li><label>Sale: </label>{{$product->discount}}%</span></li>
                     </ul>
                     <hr>
                     <ul class="list-unstyled product_info">

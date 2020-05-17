@@ -50,8 +50,8 @@ class ProductController extends Controller
         $product = new Product();
         $product->name = $request->name;
         $product->category_id = $request->category_id;
-        $product->sale = $request->sale;
-        $product->price = $request->price;
+        $product->discount = $request->discount;
+        $product->unit_price = $request->unit_price;
         $product->quantity = $request->quantity;
         $product->description = $request->description;
         if ($request->hasFile('image')) {

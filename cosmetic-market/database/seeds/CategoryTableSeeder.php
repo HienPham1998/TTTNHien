@@ -11,18 +11,22 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
-          
+
         DB::table('categories')->insert([
-            "name" => "lipstick"
+            "name" => "lipstick",
+            "category_type_id" => "1",
         ]);
         DB::table('categories')->insert([
-            "name" => "facingfoam"
+            "name" => "facingfoam",
+            "category_type_id" => "1",
         ]);
         DB::table('categories')->insert([
-            "name" => "perfume"
+            "name" => "perfume",
+            "category_type_id" => "1",
         ]);
         DB::table('categories')->insert([
-            "name" => "shampoo"
+            "name" => "shampoo",
+            "category_type_id" => "1",
         ]);
     }
 }
