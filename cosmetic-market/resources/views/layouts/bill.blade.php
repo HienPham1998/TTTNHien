@@ -26,19 +26,18 @@
                     <td class="text-left">{{$product->name}}</td>
                     <td class="text-left">{{$product->options->cat_name}}</td>
                     <td class="text-right">{{$product->qty}}</td>
-                    <!-- @if($product->unit_price != $product->options->promotion_price)
+                    @if($product->price != $product->options->promotion_price)
                     <td class="text-right">
-                        <del class="lineThrough">${{$product->unit_price}} </del>
+                        <del class="lineThrough">${{$product->price}} </del>
                         &nbsp; &nbsp; &nbsp;${{$product->options->promotion_price}}
                     </td>
-                    @else -->
+                    @else
                     <td class="text-right">
                         &nbsp; &nbsp; &nbsp;${{$product->price}}
                     </td>
-                    <!-- @endif -->
+                    @endif
                     <td class="text-right">
-                        <!-- ${{$product->options->promotion_price}}  -->
-                        $4
+                        ${{$product->options->promotion_price}}
                         </td>
                 </tr>
                 @endforeach
@@ -55,8 +54,7 @@
                 </tr>
                 <tr>
                     <td class="text-right" colspan="4"><strong>Total:</strong></td>
-                    <!-- <td class="text-right">${{$total + 2 }}</td> -->
-                    <td class="text-right">$6</td>
+                    <td class="text-right">${{$total + 2 }}</td>
                 </tr>
                 <tr>
                     <td>

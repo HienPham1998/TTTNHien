@@ -144,9 +144,12 @@ class ClientController extends Controller
     }
     public function updateCart($id, Request $request)
     {
-        // $product = Product::find($id);
-        // $quantity = $request->quantity;
-        // \Cart::update($product,['qty' => $quantity]);
+        $product = Product::find($id);
+        $quantity = $request->quantity;
+        \Cart::update($product, ['qty' => $quantity]);
+
+        // $row = \Card::get($id);
+        // \Cart::update($id, $row->qty + 1);
 
         return redirect()->back();
     }

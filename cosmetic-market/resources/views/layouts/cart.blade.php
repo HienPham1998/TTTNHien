@@ -3,7 +3,7 @@
 <div class="container">
     @if(Cart::count() != 0)
     <div class="col-sm-12" style="padding-top:80px" id="content">
-        <form enctype="multipart/form-data" method="post" action="#">
+        <form enctype="multipart/form-data"  action="#">
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
@@ -26,8 +26,9 @@
                             <td class="text-xs-left">
                                 <div style="max-width: 200px;" class="input-group d-flex">
                                     <form action="update-cart/{{$product->rowId}}" method="get">
-                                        <!-- <button class="btn btn-primary" title="" data-toggle="tooltip" type="submit"
-                                                data-original-title="Update"><i class="fa fa-refresh"></i></button> -->
+                                    @csrf
+                                        <button class="btn btn-primary" title="" data-toggle="tooltip" type="submit"
+                                                data-original-title="Update"><i class="fa fa-refresh"></i></button>
                                     </form>
 
                                     <form action="remove-from-cart/{{$product->rowId}}" method="get"
