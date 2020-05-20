@@ -33,6 +33,18 @@
                             <a class="nav-link" href="/register">Sign Up</a>
                         </li>
                     </ul>
+                    <!-- @if(session()->has("error"))
+                    <div class="alert alert-primary" role="alert">
+                        {{session("error")}}
+                        </div>
+                    @endif -->
+                    @if($errors->any())
+                    @foreach ($errors->all() as $error)
+                    <div class="alert alert-primary" role="alert">
+                        {{$error}}
+                        </div>
+                    @endforeach
+                    @endif
                     <form class="mt-3" method="POST" action="/login">
                         @csrf
                         <div class="form-group">

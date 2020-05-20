@@ -3,7 +3,6 @@
 <div class="container">
     @if(Cart::count() != 0)
     <div class="col-sm-12" style="padding-top:80px" id="content">
-        <form enctype="multipart/form-data"  action="#">
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
@@ -25,8 +24,10 @@
                             <td class="text-xs-left">{{$product->options->cat_name}}</td>
                             <td class="text-xs-left">
                                 <div style="max-width: 200px;" class="input-group d-flex">
-                                    <form action="update-cart/{{$product->rowId}}" method="get">
+                                    <form style="display:flex" action="update-cart/{{$product->rowId}}" method="get">
                                     @csrf
+                                        <input type="text" class="form-control quantity" size="1"
+                                            value="{{$product->qty}}" name="quantity">
                                         <button class="btn btn-primary" title="" data-toggle="tooltip" type="submit"
                                                 data-original-title="Update"><i class="fa fa-refresh"></i></button>
                                     </form>
@@ -34,8 +35,6 @@
                                     <form action="remove-from-cart/{{$product->rowId}}" method="get"
                                         class="form-inline">
                                         @csrf
-                                        <input type="text" class="form-control quantity" size="1"
-                                            value="{{$product->qty}}" name="quantity">
                                         <button class="btn btn-danger" type="submit" title="" data-toggle="tooltip"
                                             data-original-title="Remove"><i class="fa fa-times-circle"></i>
                                         </button>
@@ -53,13 +52,12 @@
                             </td>
                             @endif
                             <td class="text-xs-right">
-                                ${{$product->options->promotion_price}} </td>
+                                ${{$product->options->promotion_price * $product->qty}}  </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-        </form>
         <br>
         <div class="row">
             <div class="col-sm-4 offset-sm-8">

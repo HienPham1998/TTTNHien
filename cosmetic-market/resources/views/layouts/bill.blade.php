@@ -37,7 +37,7 @@
                     </td>
                     @endif
                     <td class="text-right">
-                        ${{$product->options->promotion_price}}
+                        ${{$product->options->promotion_price  * $product->qty}}
                         </td>
                 </tr>
                 @endforeach
