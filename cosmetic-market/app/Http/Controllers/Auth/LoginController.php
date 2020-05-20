@@ -63,7 +63,8 @@ class LoginController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            // return redirect()->back()->withErrors($validator)->withInput();
+            session()->flash('error', 'Username or password is not correct');
         } else {
             $username = $request->username;
             $password = $request->password;

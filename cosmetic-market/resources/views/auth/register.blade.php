@@ -18,7 +18,7 @@
     <div class="login" id="login-form">
         <div class="container">
             <div class="row">
-                <div class="col-6" id="left" style="height:402px">
+                <div class="col-6" id="left" style="height:488px">
                     <div class="text" id="form-row">
                         <h1>Tittle</h1>
 

@@ -99,23 +99,23 @@
                                               <button class="addtocart-btn" style="margin-top:1rem"><a
                                                     href="/add-to-cart/{{$product->id}}" title="Add to Cart"> Add to
                                                     Cart </a></button>
-                                                
+
                                             </li>
                                         </ul>
                                     <div class="caption product-detail" style="margin-bottom: 10px; ">
-                                        @if($product->sale != 0)
+                                        @if($product->discount != 0)
                                         <h4 class="product-name mt-4"><a href="#"
                                                 title="Casual Shirt With Ruffle Hem">{{$product->name}}</a></h4>
 
-                                        <del class="lineThrough fz-2">${{$product->price}}</del>
+                                        <del class="lineThrough fz-2">${{$product->unit_price}}</del>
                                         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b
-                                            class="price product-price fz-3">${{$product->price - $product->price* $product->sale/100}}
+                                            class="price product-price fz-3">${{$product->unit_price - $product->unit_price* $product->discount/100}}
                                         </b>
                                         @else
                                         <h4 class="product-name mt-4"><a href="#" title="Casual Shirt With Ruffle Hem">
                                                 {{$product->name}}</a></h4>
 
-                                        <b class="price product-price fz-3"> ${{$product->price}}</b>
+                                        <b class="price product-price fz-3"> ${{$product->unit_price}}</b>
                                         @endif
                                     </div>
                                 </div>
