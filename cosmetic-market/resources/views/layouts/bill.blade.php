@@ -37,7 +37,8 @@
                     </td>
                     @endif
                     <td class="text-right">
-                        ${{$product->options->promotion_price}} </td>
+                        ${{$product->options->promotion_price  * $product->qty}}
+                        </td>
                 </tr>
                 @endforeach
 
@@ -63,8 +64,8 @@
                                 style="width:70%" />
                         </div>
                     </td>
-                    <td>Transport unit:</td>
-                    <td>Fast delivery:</td>
+                    <td>Transport unit: Low Price Transport</td>
+                    <td>Fast delivery: None</td>
                     <td>Change</td>
                     <td></td>
                 </tr>
@@ -75,15 +76,15 @@
         <table class="table table-borderless">
             <thead>
                 <tr>
-                    <th scope="col">Shopee Voucher</th>
+                    <th scope="col">Voucher</th>
                     <th></th>
                     <th scope="col">THAY ĐỔI</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Shopee Xu</td>
-                    <td>Dùng 17700 Shopee Xu</td>
+                    <td>Xu</td>
+                    <td>Dùng 17700 Xu</td>
                 </tr>
                 <tr>
                     <td>Phương thức thanh toán:</td>

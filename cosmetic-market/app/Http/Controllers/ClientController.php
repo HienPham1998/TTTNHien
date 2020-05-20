@@ -134,7 +134,7 @@ class ClientController extends Controller
                 'options' => [
                     'image' => $product->image,
                     'cat_name' => $product->category->name,
-                    'promotion_price' => $product->price - $product->price * $product->sale / 100,
+                    'promotion_price' => $product->unit_price - $product->unit_price * $product->discount / 100,
                 ],
             ]);
         }
@@ -144,10 +144,8 @@ class ClientController extends Controller
     }
     public function updateCart($id, Request $request)
     {
-        // $product = Product::find($id);
-        // $quantity = $request->quantity;
-        // \Cart::update($product,['qty' => $quantity]);
-
+        $quantityUpdate = $request->quantity;
+        \Cart::update($id, $quantityUpdate);
         return redirect()->back();
     }
     public function removeFromCart($id, Request $request)
@@ -178,45 +176,46 @@ class ClientController extends Controller
         return view('layouts.bill', compact('categories', 'shippingaddress', 'products', 'total'));
     }
 
-     public function postBill(Request $request, $id)
+    public function postBill(Request $request, $id)
     {
-          $carts = \Cart::content();
+        $carts = \Cart::content();
         $bill = new Bill();
         $bill->customer_id = Auth::user()->id;
         // $bill->total = \Cart::subTotal() + 2;
 
         $bill->save();
 
-        foreach ($carts as $cart){
-            
-                $bill_detail = new Billdetail();
-                $bill_detail->bill_id = $bill->id;
-                $bill_detail->product_id = $cart->id; 
-                $bill_detail->product_name = $cart->name;
-                $bill_detail->quantity = $cart->qty;
-                if($cart->options->promotion_price == 0)
-                {
-                    $bill_detail->price = $cart->price;
-                }
-                else
-                    $bill_detail->price = $cart->options->promotion_price;
-                $bill_detail->save();
-                
-                $product = Product::find($cart->id);
-                if($product){
-                    $product->name = $product->name;
-                    $product->category_id = $product->category_id;
-                    $product->provider_id = $product->provider_id;
-                    $product->promotion_price = $product->promotion_price;
-                    $product->unit_price = $product->unit_price;
-                    $product->quantity = $product->quantity - $cart->qty;
-                    $product->image = $product->image;
-                    $product->description = $product->description;
-                    $product->save();
-                }
-                else
-                     return redirect()->back()->with('alert', 'Product does not exist');
+        foreach ($carts as $cart) {
+
+            $bill_detail = new Billdetail();
+            $bill_detail->bill_id = $bill->id;
+            $bill_detail->product_id = $cart->id;
+            $bill_detail->product_name = $cart->name;
+            $bill_detail->quantity = $cart->qty;
+            if ($cart->options->promotion_price == 0) {
+                $bill_detail->price = $cart->price;
+            } else {
+                $bill_detail->price = $cart->options->promotion_price;
             }
+
+            $bill_detail->save();
+
+            $product = Product::find($cart->id);
+            if ($product) {
+                $product->name = $product->name;
+                $product->category_id = $product->category_id;
+                $product->provider_id = $product->provider_id;
+                $product->promotion_price = $product->promotion_price;
+                $product->unit_price = $product->unit_price;
+                $product->quantity = $product->quantity - $cart->qty;
+                $product->image = $product->image;
+                $product->description = $product->description;
+                $product->save();
+            } else {
+                return redirect()->back()->with('alert', 'Product does not exist');
+            }
+
+        }
     }
     public function update(Request $request, $id)
     {

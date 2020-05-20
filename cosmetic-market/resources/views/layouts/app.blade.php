@@ -108,7 +108,7 @@
                                     <a href="/cart">
                                         <span id="cart-total" style="color:#ff8f00">
                                             <span id="span-cart">Shopping Cart</span><br>
-                                            {{Cart::count()}} item</span>
+                                            {{Cart::content()->count()}} item</span>
                                     </a>
                                 </button>
                             </div>

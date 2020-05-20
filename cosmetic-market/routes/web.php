@@ -17,12 +17,11 @@ Route::get('/category/{id}', 'ClientController@getProductByCategory');
 Route::get('/cart', 'ClientController@getCart');
 Route::get('/add-to-cart/{id}', 'ClientController@addToCart');
 Route::get('/remove-from-cart/{id}', 'ClientController@removeFromCart');
-Route::get('update-cart/{id}', 'ClientController@updateCart');
+Route::get('/update-cart/{id}', 'ClientController@updateCart');
 Route::get('post-product', 'ClientController@postProduct');
 Route::get('bill/{id}', 'ClientController@getBill');
 
 Route::get('profile', 'ProfileController@getProfile');
-
 
 Route::get('update-profile', 'ClientController@getUpdateProfile');
 Route::post('update-profile', 'ClientController@postUpdateProfile');
