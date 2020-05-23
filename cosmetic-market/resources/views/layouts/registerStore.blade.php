@@ -20,12 +20,6 @@
             </div>
           </div>
           <div class="form-group required">
-            <label for="input-email" class="col-sm-2 control-label">E-Mail</label>
-            <div class="col-sm-10">
-              <input type="email" class="form-control" id="input-email" placeholder="E-Mail" name="email" required>
-            </div>
-          </div>
-          <div class="form-group required">
             <label for="input-telephone" class="col-sm-2 control-label">Phone</label>
             <div class="col-sm-10">
               <input type="tel" class="form-control" id="input-telephone" placeholder="Telephone" name="phone" required>

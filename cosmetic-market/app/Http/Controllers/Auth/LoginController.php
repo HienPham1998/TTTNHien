@@ -33,8 +33,9 @@ class LoginController extends Controller
     public function postRegister(Request $request)
     {
         $rules = [
-            'username' => 'required|min:8',
-            'password' => 'required|confirmed|min:8',
+            'username' => 'required|min:8|max:12',
+            'password' => 'required|confirmed|min:10',
+            'email' => 'required|min:8',
         ];
 
         $validator = Validator::make($request->all(), $rules);
