@@ -21,6 +21,7 @@ class CreateSalersTable extends Migration
             $table->string('shopname');
             $table->string('shopaddress');
             $table->integer('user_id');
+            $table->timestamps();
         });
     }
 

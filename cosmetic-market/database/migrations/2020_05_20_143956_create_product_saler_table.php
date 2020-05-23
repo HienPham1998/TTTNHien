@@ -17,7 +17,7 @@ class CreateProductSalerTable extends Migration
             $table->integer('product_id')->unsigned();
             $table->integer('saler_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade'); 
-            $table->foreign('saler_id')->references('id')->on('salerdetails')->onDelete('cascade'); 
+            $table->foreign('saler_id')->references('id')->on('salers')->onDelete('cascade'); 
         });
     }
 
