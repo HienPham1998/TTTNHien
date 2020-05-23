@@ -13,7 +13,7 @@ class ProductTableSeeder extends Seeder
     {
         DB::table('products')->insert([
             "name" => "Hazeline Matcha Skin Cleanser ",
-            "category_id" => "4",
+            "category_id" => "5",
             "discount" => "3",
             "unit_price" => "4",
             "quantity" => "100",
@@ -24,7 +24,7 @@ class ProductTableSeeder extends Seeder
         ]);
         DB::table('products')->insert([
             "name" => "3CE cream",
-            "category_id" => "4",
+            "category_id" => "1",
             "discount" => "10",
             "unit_price" => "11",
             "quantity" => "200",
@@ -48,7 +48,7 @@ class ProductTableSeeder extends Seeder
         ]);
         DB::table('products')->insert([
             "name" => "E100 cleanser 50g",
-            "category_id" => "1",
+            "category_id" => "5",
             "discount" => "2",
             "unit_price" => "2.2",
             "quantity" => "140",
@@ -61,7 +61,7 @@ class ProductTableSeeder extends Seeder
         ]);
         DB::table('products')->insert([
             "name" => "Bath & Body Works Deep Cleansing Hand Soap Georgia Peach",
-            "category_id" => "2",
+            "category_id" => "6",
             "discount" => "0",
             "unit_price" => "50",
             "quantity" => "300",
@@ -74,7 +74,7 @@ class ProductTableSeeder extends Seeder
         ]);
         DB::table('products')->insert([
             "name" => "Diamonds Blush Eau De Perfum",
-            "category_id" => "5",
+            "category_id" => "3",
             "discount" => "50",
             "unit_price" => "100",
             "quantity" => "300",
@@ -87,7 +87,7 @@ class ProductTableSeeder extends Seeder
         ]);
         DB::table('products')->insert([
             "name" => "COVERGIRL LashBlast Volume Mascara Very Black 800",
-            "category_id" => "1",
+            "category_id" => "7",
             "discount" => "30",
             "unit_price" => "18",
             "quantity" => "20",
@@ -100,7 +100,7 @@ class ProductTableSeeder extends Seeder
         ]);
         DB::table('products')->insert([
             "name" => "Mountain Falls Hypoallergenic Tear-Free Baby Shampoo",
-            "category_id" => "3",
+            "category_id" => "4",
             "discount" => "20",
             "unit_price" => "30",
             "quantity" => "200",
@@ -113,7 +113,7 @@ class ProductTableSeeder extends Seeder
         ]);
         DB::table('products')->insert([
             "name" => "Mountain Falls Hypoallergenic Tear-Free Baby Shampoo",
-            "category_id" => "3",
+            "category_id" => "4",
             "discount" => "20",
             "unit_price" => "30",
             "quantity" => "200",
