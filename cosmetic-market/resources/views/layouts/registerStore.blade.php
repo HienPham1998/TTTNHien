@@ -3,42 +3,54 @@
 <div class="container">
     <div class="row" style="margin-top:50px">
         <div class="col-sm-8" id="content" style="margin-left:150px">
-      <form class="form-horizontal mt-5" method="POST" action="/register-store">
-        @csrf
-        <fieldset id="account">
-          <legend>Your infomation</legend>
-          <div class="form-group required">
-            <label for="input-firstname" class="col-sm-2 control-label">First Name</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="input-firstname" placeholder="First Name" name="firstname" required>
-            </div>
-          </div>
-          <div class="form-group required">
-            <label for="input-lastname" class="col-sm-2 control-label">Last Name</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="input-lastname" placeholder="Last Name" name="lastname" required>
-            </div>
-          </div>
-          <div class="form-group required">
-            <label for="input-telephone" class="col-sm-2 control-label">Phone</label>
-            <div class="col-sm-10">
-              <input type="tel" class="form-control" id="input-telephone" placeholder="Telephone" name="phone" required>
-            </div>
-          </div>
-          <div class="form-group required">
-            <label for="input-telephone" class="col-sm-2 control-label">Shop name</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="input-shop-name" placeholder="Telephone" name="shopname" required>
-            </div>
-          </div>
-          <div class="form-group required">
-            <label for="input-telephone" class="col-sm-2 control-label">Shop address</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="input-shop-address" placeholder="Telephone" name="shopaddress" required>
-            </div>
-          </div>
-        </fieldset>
-        <!-- <fieldset id="address">
+            <form class="form-horizontal mt-5" method="POST" action="/register-store">
+                @csrf
+                <fieldset id="account">
+                    @if($errors->any())
+                    @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger" role="alert">
+                        {{$error}}
+                    </div>
+                    @endforeach
+                    @endif
+                    <legend>Your infomation</legend>
+                    <div class="form-group required">
+                        <label for="input-firstname" class="col-sm-2 control-label">First Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="input-firstname" placeholder="First Name"
+                                name="firstname" required>
+                        </div>
+                    </div>
+                    <div class="form-group required">
+                        <label for="input-lastname" class="col-sm-2 control-label">Last Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="input-lastname" placeholder="Last Name"
+                                name="lastname" required>
+                        </div>
+                    </div>
+                    <div class="form-group required">
+                        <label for="input-telephone" class="col-sm-2 control-label">Phone</label>
+                        <div class="col-sm-10">
+                            <input type="tel" class="form-control" id="input-telephone" placeholder="Telephone"
+                                name="phone" required>
+                        </div>
+                    </div>
+                    <div class="form-group required">
+                        <label for="input-telephone" class="col-sm-2 control-label">Shop name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="input-shop-name" placeholder="Telephone"
+                                name="shopname" required>
+                        </div>
+                    </div>
+                    <div class="form-group required">
+                        <label for="input-telephone" class="col-sm-2 control-label">Shop address</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="input-shop-address" placeholder="Telephone"
+                                name="shopaddress" required>
+                        </div>
+                    </div>
+                </fieldset>
+                <!-- <fieldset id="address">
           <legend>Your store infomation</legend>
           <div class="form-group">
             <label for="input-company" class="col-sm-2 control-label">Name</label>
@@ -71,14 +83,15 @@
             </div>
           </div>
         </fieldset> -->
-        <div class="buttons">
-          <div class="pull-right">I have read and agree to the <a class="agree" href="#"><b>Privacy Policy</b></a>
-            <input type="checkbox" value="1" name="agree">
-            &nbsp;
-            <button type="submit" class="btn btn-primary">Continue</button>
-          </div>
+                <div class="buttons">
+                    <div class="pull-right">I have read and agree to the <a class="agree" href="#"><b>Privacy
+                                Policy</b></a>
+                        <input type="checkbox" value="1" name="agree">
+                        &nbsp;
+                        <button type="submit" class="btn btn-primary">Continue</button>
+                    </div>
+                </div>
+            </form>
         </div>
-      </form>
     </div>
-</div>
-@endsection
+    @endsection

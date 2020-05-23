@@ -34,8 +34,8 @@ class LoginController extends Controller
     {
         $rules = [
             'username' => 'required|min:8|max:12',
-            'password' => 'required|confirmed|min:10',
-            'email' => 'required|min:8',
+            'password' => 'required|confirmed|min:8',
+            'email' => 'required|email',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -49,6 +49,7 @@ class LoginController extends Controller
         $newUser->email = $request->email;
         $newUser->password = bcrypt($request->password);
         $newUser->role_id = 3;
+        $newUser->avatar = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ1P9NIBPbZvN_8V2uZ8cVfm4Rnwwel8_UF_89HT238qUQAOZ1p&usqp=CAU';
         $newUser->save();
 
         return redirect('/login');

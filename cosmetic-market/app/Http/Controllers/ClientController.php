@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Product;
-use App\SalerDetail;
+use App\Saler;
 use App\Shippingaddress;
 use App\User;
 use Auth;
@@ -26,7 +26,6 @@ class ClientController extends Controller
         $rules = [
             'firstname' => 'required',
             'lastname' => 'required',
-            'email' => 'required',
             'phone' => 'required',
             'shopname' => 'required',
             'shopaddress' => 'required',
@@ -41,14 +40,14 @@ class ClientController extends Controller
         $user->role_id = 2;
         $user->save();
 
-        $saler_detail = new SalerDetail();
-        $saler_detail->firstname = $request->firstname;
-        $saler_detail->lastname = $request->lastname;
-        $saler_detail->email = $request->email;
-        $saler_detail->phone = $request->phone;
-        $saler_detail->shopname = $request->shopname;
-        $saler_detail->shopaddress = $request->shopaddress;
-        $saler_detail->save();
+        $saler = new Saler();
+        $saler->firstname = $request->firstname;
+        $saler->lastname = $request->lastname;
+        $saler->phone = $request->phone;
+        $saler->shopname = $request->shopname;
+        $saler->shopaddress = $request->shopaddress;
+        $saler->user_id = $user->id;
+        $saler->save();
 
         return redirect('/profile');
 
@@ -60,19 +59,37 @@ class ClientController extends Controller
         return view('layouts.registerStore', compact('categories'));
     }
 
-    public function getUpdateProfile()
+    public function getUpdateProfile($profile_id)
     {
-        return view('layouts.postProfile');
+        $saler = Saler::find($profile_id);
+        $user = User::find(Auth::user()->id);
+        return view('layouts.postProfile', compact('saler', 'user'));
     }
 
-    public function postUpdateProfile(Request $request)
+    public function postUpdateProfile($id, Request $request)
     {
-        //     $rules=[
-        //     'firstname'=> 'required',
-        //     'lastname'=> 'required',
-        //     'email'=> 'required',
-        //     'phone'=> 'required',
-        //  ];
+        $rules = [
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'avatar' => 'required',
+        ];
+
+        $user = User::find(Auth::user()->id);
+        $user->email = $request->email;
+        $user->avatar = $request->avatar;
+
+        $user->save();
+
+        $saler = Saler::find($id);
+        $saler->firstname = $request->firstname;
+        $saler->lastname = $request->lastname;
+        $saler->phone = $request->phone;
+
+        $saler->save();
+        return redirect('/profile');
+
     }
 
     public function postProduct()

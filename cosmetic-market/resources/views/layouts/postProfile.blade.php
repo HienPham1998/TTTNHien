@@ -79,19 +79,22 @@
                 <div class="row">
                     <div class="col-3">
                         <div class="left-profile">
-                            <img src="https://steamuserimages-a.akamaihd.net/ugc/921268572045139552/8F6DABFD815EA2BD8A6137F1D9342674624E19F2/"
-                                alt="" class="img-fluid" style="border-radius:50%">
+                            <img src="{{$user->avatar}}" alt="" class="img-fluid"
+                                style="border-radius:50%;width:12vw;height:12vw;">
                             <h3>{{Auth::user()->name}}</h3>
                         </div>
                     </div>
                     <div class="col-9">
-                        <form method="POST" action="/update-profile">
+                        <form method="POST" action="/update-profile/{{$saler->id}}">
+                            {{ csrf_field() }}
+                            {{ method_field('PUT') }}
                             <div class="form-group row">
                                 <div class="col-sm-2">
                                     <label>Firstname</label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="firstname">
+                                    <input type="text" class="form-control" value="{{$saler->firstname}}"
+                                        name="firstname">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -99,7 +102,8 @@
                                     <label>Lastname</label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="lastname">
+                                    <input type="text" class="form-control" value="{{$saler->lastname}}"
+                                        name="lastname">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -107,7 +111,7 @@
                                     <label>Email</label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control" name="email">
+                                    <input type="email" class="form-control" value="{{$user->email}}" name="email">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -115,7 +119,7 @@
                                     <label>Phone</label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="phone">
+                                    <input type="text" class="form-control" value="{{$saler->phone}}" name="phone">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -123,12 +127,12 @@
                                     <label>Avatar</label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="avatar">
+                                    <input type="text" class="form-control" value="{{$user->avatar}}" name="avatar">
                                 </div>
                             </div>
-                            <!-- <div class="form-group" style="display: flex;justify-content: flex-end;">
+                            <div class="form-group" style="display: flex;justify-content: flex-end;">
                                 <button class="btn btn-success" type="submit">Update Profile</button>
-                            </div> -->
+                            </div>
                         </form>
 
                     </div>
@@ -146,6 +150,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
+
 </body>
 
 </html>

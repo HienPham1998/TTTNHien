@@ -23,8 +23,8 @@ Route::get('bill/{id}', 'ClientController@getBill');
 
 Route::get('profile', 'ProfileController@getProfile');
 
-Route::get('update-profile', 'ClientController@getUpdateProfile');
-Route::post('update-profile', 'ClientController@postUpdateProfile');
+Route::get('update-profile/{id}', 'ClientController@getUpdateProfile');
+Route::put('update-profile/{id}', 'ClientController@postUpdateProfile');
 Route::put('/profile/changepassword', 'ProfileController@updatePassword');
 
 Route::get('login', 'Auth\LoginController@getLogin');

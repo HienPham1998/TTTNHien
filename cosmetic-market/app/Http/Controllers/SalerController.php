@@ -32,4 +32,9 @@ class SalerController extends Controller
         session()->flash("success", "Delete successfully");
         return back();
     }
+     
+    public function getProduct(Request $request){
+        $product = Product::all();
+        return view('salers.index', compact("product"));    
+    }
 }
