@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Saler;
+use Auth;
 use Illuminate\Http\Request;
 
 class SalerController extends Controller
@@ -32,9 +33,12 @@ class SalerController extends Controller
         session()->flash("success", "Delete successfully");
         return back();
     }
-     
-    public function getProduct(Request $request){
-        $product = Product::all();
-        return view('salers.index', compact("product"));    
+
+    public function getProduct(Request $request)
+    {
+        $saler = Saler::all()->where('user_id', Auth::user()->id)->first();
+        $product = $saler->product()->get();
+        // dd($product);
+        return view('salers.index', compact("product"));
     }
 }

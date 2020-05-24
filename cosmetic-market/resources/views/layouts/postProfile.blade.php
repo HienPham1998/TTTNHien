@@ -42,7 +42,7 @@
                                 <ul class="list-inline" style="display:inherit">
                                     <li class="dropdown"><a href="#" title="My Account" class="dropdown-toggle"
                                             data-toggle="dropdown"><i class="fa fa-user"
-                                                aria-hidden="true"></i><span>{{Auth::user()->name}}</span> <span
+                                                aria-hidden="true"></i><span>{{Auth::user()->username}}</span> <span
                                                 class="caret"></span></a>
                                         <ul class="dropdown-menu dropdown-menu-right">
                                             <li><a href="/profile">Your profile</a></li>
@@ -81,7 +81,7 @@
                         <div class="left-profile">
                             <img src="{{$user->avatar}}" alt="" class="img-fluid"
                                 style="border-radius:50%;width:12vw;height:12vw;">
-                            <h3>{{Auth::user()->name}}</h3>
+                            <h3>{{Auth::user()->username}}</h3>
                         </div>
                     </div>
                     <div class="col-9">

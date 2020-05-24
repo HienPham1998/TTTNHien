@@ -42,7 +42,7 @@
                                 <ul class="list-inline" style="display:inherit">
                                     <li class="dropdown"><a href="#" title="My Account" class="dropdown-toggle"
                                             data-toggle="dropdown"><i class="fa fa-user"
-                                                aria-hidden="true"></i><span>{{Auth::user()->name}}</span> <span
+                                                aria-hidden="true"></i><span>{{Auth::user()->username}}</span> <span
                                                 class="caret"></span></a>
                                         <ul class="dropdown-menu dropdown-menu-right">
                                             <li><a href="/profile">Your profile</a></li>
@@ -79,20 +79,24 @@
                 <div class="row">
                     <div class="col-3">
                         <div class="left-profile">
-                            <img src="{{$user->avatar}}"
+                            @if($user->avatar != null)
+                            <img src="{{$user->avatar}}" alt="" class="rounded-circle" style="width:12vw; height:12vw">
+                            @else
+                            <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.iconfinder.com%2Ficons%2F745386%2Favatar_profile_profile_avatar_user_user_avatar_user_profile_icon&psig=AOvVaw06o5qT7RifPeBmecraYis0&ust=1590398663429000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKiM-eyWzOkCFQAAAAAdAAAAABAD"
                                 alt="" class="rounded-circle" style="width:12vw; height:12vw">
-                            <h3 class="mt-2">{{Auth::user()->name}}</h3>
-                            @if($user->role_id == 2)
+                            @endif
+                            <h3 class="mt-2">{{Auth::user()->username}}</h3>
+                            @if($user->role_id == 3)
                             <button class="btn btn-outline btn-outline-success">
-                            <a href="/update-profile/{{$saler->id}}">Edit Profile</a>
+                                <a href="/update-profile/{{$saler->id}}">Edit Profile</a>
                             </button>
                             @endif
                         </div>
                     </div>
                     <div class="col-9">
-                        @if($user->role_id == 3)
+                        @if($user->role_id == 2)
                         <form action="/profile/changepassword" method="POST" enctype="multipart/form-data">
-                        {{ csrf_field() }}
+                            {{ csrf_field() }}
                             {{ method_field('PUT') }}
                             <div class="col-md-12 pr-1">
                                 <div class="form-group">
@@ -122,7 +126,7 @@
                                 <p>Firstname: </p>
                             </div>
                             <div class="col-sm-10">
-                            {{$saler->firstname}}
+                                {{$saler->firstname}}
                             </div>
                         </div>
                         <div class="form-group row">
@@ -130,7 +134,7 @@
                                 <p>Lastname : </p>
                             </div>
                             <div class="col-sm-10">
-                            {{$saler->lastname}}
+                                {{$saler->lastname}}
                             </div>
                         </div>
                         <div class="form-group row">
@@ -138,7 +142,7 @@
                                 <p>Email:</p>
                             </div>
                             <div class="col-sm-10">
-                            {{$user->email}}
+                                {{$user->email}}
                             </div>
                         </div>
                         <div class="form-group row">
@@ -146,14 +150,14 @@
                                 <p>Phone:</p>
                             </div>
                             <div class="col-sm-10">
-                            {{$saler->phone}}
+                                {{$saler->phone}}
                             </div>
                         </div>
                         @endif
                     </div>
                 </div>
                 <hr class="hr-text" data-content="Store Infomation">
-                @if($user->role_id == 3)
+                @if($user->role_id != 3 )
                 <h2 class="pb-3">You haven't any store yet! Wanna become a salers? <a href="/register-store">Join us
                         now </a></h2>
                 @else
