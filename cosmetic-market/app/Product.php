@@ -10,7 +10,8 @@ class Product extends Model
     {
         return $this->belongsTo('App\Category');
     }
-    public function salerDetails(){
-        return $this.belongsToMany('App\SalerDetail');
+    public function saler()
+    {
+        return $this->belongsToMany('App\Saler');
     }
 }

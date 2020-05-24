@@ -100,8 +100,10 @@
 
     <div class="buttons">
         <div class="pull-right">
-            <input type="button" data-loading-text="Loading..." class="btn btn-primary" id="button-confirm"
-                value="Confirm Order">
+        <form class="form" method="POST" action="/order">
+                        @csrf
+            <button  data-loading-text="Loading..." class="btn btn-primary" id="button-confirm">Confirm Order</button>
+                </form>
         </div>
     </div>
 

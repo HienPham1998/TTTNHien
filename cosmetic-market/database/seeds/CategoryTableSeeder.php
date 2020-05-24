@@ -14,11 +14,11 @@ class CategoryTableSeeder extends Seeder
 
         DB::table('categories')->insert([
             "name" => "lipstick",
-            "category_type_id" => "1",
+            "category_type_id" => "5",
         ]);
         DB::table('categories')->insert([
             "name" => "facingfoam",
-            "category_type_id" => "1",
+            "category_type_id" => "3",
         ]);
         DB::table('categories')->insert([
             "name" => "perfume",
@@ -26,6 +26,18 @@ class CategoryTableSeeder extends Seeder
         ]);
         DB::table('categories')->insert([
             "name" => "shampoo",
+            "category_type_id" => "2",
+        ]);
+        DB::table('categories')->insert([
+            "name" => "cleanser",
+            "category_type_id" => "3",
+        ]);
+        DB::table('categories')->insert([
+            "name" => "shower gel",
+            "category_type_id" => "1",
+        ]);
+        DB::table('categories')->insert([
+            "name" => "make up",
             "category_type_id" => "1",
         ]);
     }

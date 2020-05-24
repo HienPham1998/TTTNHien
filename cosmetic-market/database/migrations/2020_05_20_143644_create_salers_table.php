@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateSalersTable extends Migration
 {
@@ -21,6 +21,7 @@ class CreateSalersTable extends Migration
             $table->string('shopname');
             $table->string('shopaddress');
             $table->integer('user_id');
+            $table->timestamps();
         });
     }
 
