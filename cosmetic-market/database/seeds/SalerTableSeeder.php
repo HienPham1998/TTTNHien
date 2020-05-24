@@ -11,7 +11,6 @@ class SalerTableSeeder extends Seeder
      */
     public function run()
     {
-
         DB::table('salers')->insert([
             "firstname" => "Hien",
             "lastname" => "Pham",

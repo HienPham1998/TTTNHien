@@ -18,6 +18,7 @@ class CreateBillsTable extends Migration
             $table->integer('user_id');
             $table->integer('total');
             $table->integer('voucher_id');
+            $table->string("transportUnit_id");
             $table->timestamps();
         });
     }

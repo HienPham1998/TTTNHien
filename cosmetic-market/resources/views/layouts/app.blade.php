@@ -58,7 +58,7 @@
                                 <ul class="list-inline" style="display:inherit">
                                     <li class="dropdown"><a href="#" title="My Account" class="dropdown-toggle"
                                             data-toggle="dropdown"><i class="fa fa-user"
-                                                aria-hidden="true"></i><span>{{Auth::user()->name}}</span> <span
+                                                aria-hidden="true"></i><span>{{Auth::user()->username}}</span> <span
                                                 class="caret"></span></a>
                                         <ul class="dropdown-menu dropdown-menu-right">
                                             <li><a href="/profile">Your profile</a></li>

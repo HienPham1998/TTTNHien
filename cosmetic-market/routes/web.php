@@ -20,11 +20,12 @@ Route::get('/remove-from-cart/{id}', 'ClientController@removeFromCart');
 Route::get('/update-cart/{id}', 'ClientController@updateCart');
 Route::get('post-product', 'ClientController@postProduct');
 Route::get('bill/{id}', 'ClientController@getBill');
+Route::post('order', 'ClientController@postBill');
 
 Route::get('profile', 'ProfileController@getProfile');
 
-Route::get('update-profile', 'ClientController@getUpdateProfile');
-Route::post('update-profile', 'ClientController@postUpdateProfile');
+Route::get('update-profile/{id}', 'ClientController@getUpdateProfile');
+Route::put('update-profile/{id}', 'ClientController@postUpdateProfile');
 Route::put('/profile/changepassword', 'ProfileController@updatePassword');
 
 Route::get('login', 'Auth\LoginController@getLogin');
@@ -50,7 +51,7 @@ Route::get('/manage/salers/index', 'SalerController@index');
 Route::put('/manage/salers/update/{id}', 'SalerController@update');
 Route::delete('/manage/salers/destroy/{id}', 'SalerController@destroy');
 
-Route::get('/profile/index', 'ProductController@index');
+Route::get('/profile/index', 'SalerController@getProduct');
 Route::put('/profile/update/{id}', 'ProductController@update');
 Route::delete('/profile/destroy/{id}', 'ProductController@destroy');
 Route::post('/profile/index', 'ProductController@add');

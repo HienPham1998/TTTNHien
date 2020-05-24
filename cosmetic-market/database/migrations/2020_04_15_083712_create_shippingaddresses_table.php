@@ -19,7 +19,7 @@ class CreateShippingaddressesTable extends Migration
             $table->string('email')->nullable();
             $table->string('phone');
             $table->string('address');
-            $table->integer('bill_id');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

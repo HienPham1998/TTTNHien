@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Product;
-use App\SalerDetail;
+use App\Saler;
 use App\Shippingaddress;
 use App\User;
+use App\Bill;
+use App\BillDetail;
 use Auth;
 use Illuminate\Http\Request;
 use Redirect;
@@ -26,7 +28,6 @@ class ClientController extends Controller
         $rules = [
             'firstname' => 'required',
             'lastname' => 'required',
-            'email' => 'required',
             'phone' => 'required',
             'shopname' => 'required',
             'shopaddress' => 'required',
@@ -41,14 +42,14 @@ class ClientController extends Controller
         $user->role_id = 2;
         $user->save();
 
-        $saler_detail = new SalerDetail();
-        $saler_detail->firstname = $request->firstname;
-        $saler_detail->lastname = $request->lastname;
-        $saler_detail->email = $request->email;
-        $saler_detail->phone = $request->phone;
-        $saler_detail->shopname = $request->shopname;
-        $saler_detail->shopaddress = $request->shopaddress;
-        $saler_detail->save();
+        $saler = new Saler();
+        $saler->firstname = $request->firstname;
+        $saler->lastname = $request->lastname;
+        $saler->phone = $request->phone;
+        $saler->shopname = $request->shopname;
+        $saler->shopaddress = $request->shopaddress;
+        $saler->user_id = $user->id;
+        $saler->save();
 
         return redirect('/profile');
 
@@ -60,19 +61,37 @@ class ClientController extends Controller
         return view('layouts.registerStore', compact('categories'));
     }
 
-    public function getUpdateProfile()
+    public function getUpdateProfile($profile_id)
     {
-        return view('layouts.postProfile');
+        $saler = Saler::find($profile_id);
+        $user = User::find(Auth::user()->id);
+        return view('layouts.postProfile', compact('saler', 'user'));
     }
 
-    public function postUpdateProfile(Request $request)
+    public function postUpdateProfile($id, Request $request)
     {
-        //     $rules=[
-        //     'firstname'=> 'required',
-        //     'lastname'=> 'required',
-        //     'email'=> 'required',
-        //     'phone'=> 'required',
-        //  ];
+        $rules = [
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'avatar' => 'required',
+        ];
+
+        $user = User::find(Auth::user()->id);
+        $user->email = $request->email;
+        $user->avatar = $request->avatar;
+
+        $user->save();
+
+        $saler = Saler::find($id);
+        $saler->firstname = $request->firstname;
+        $saler->lastname = $request->lastname;
+        $saler->phone = $request->phone;
+
+        $saler->save();
+        return redirect('/profile');
+
     }
 
     public function postProduct()
@@ -160,14 +179,14 @@ class ClientController extends Controller
         $shippingaddress->email = $request->email;
         $shippingaddress->phone = $request->phone;
         $shippingaddress->address = $request->address;
-        $shippingaddress->bill_id = 1;
+        $shippingaddress->user_id = Auth::user()->id;
         $shippingaddress->save();
-        return redirect("/bill/1");
+        return redirect("/bill/" . Auth::user()->id);
     }
-    public function getBill($bill_id, Request $request)
+    public function getBill($customer_id, Request $request)
     {
         $categories = Category::all();
-        $shippingaddress = Shippingaddress::where("bill_id", $bill_id)->orderBy("created_at", "desc")->first();
+        $shippingaddress = Shippingaddress::where("user_id", Auth::user()->id)->orderBy("created_at", "desc")->first();
         $products = \Cart::content();
         $total = 0;
         foreach ($products as $p) {
@@ -176,39 +195,40 @@ class ClientController extends Controller
         return view('layouts.bill', compact('categories', 'shippingaddress', 'products', 'total'));
     }
 
-    public function postBill(Request $request, $id)
+    public function postBill(Request $request)
     {
         $carts = \Cart::content();
         $bill = new Bill();
-        $bill->customer_id = Auth::user()->id;
-        // $bill->total = \Cart::subTotal() + 2;
+        $bill->user_id = Auth::user()->id;
+        $products = \Cart::content();
+        $total = 0;
+        foreach ($products as $p) {
+            $total = $total + $p->options->promotion_price * $p->qty;
+        }
+        $bill->total = $total;
+        $bill->voucher_id = 1;
+        $bill->transportUnit_id = 1;
 
         $bill->save();
 
         foreach ($carts as $cart) {
-
             $bill_detail = new Billdetail();
             $bill_detail->bill_id = $bill->id;
             $bill_detail->product_id = $cart->id;
-            $bill_detail->product_name = $cart->name;
             $bill_detail->quantity = $cart->qty;
-            if ($cart->options->promotion_price == 0) {
-                $bill_detail->price = $cart->price;
-            } else {
-                $bill_detail->price = $cart->options->promotion_price;
-            }
-
+            $bill_detail->unit_price = $cart->price;
             $bill_detail->save();
-
             $product = Product::find($cart->id);
             if ($product) {
                 $product->name = $product->name;
                 $product->category_id = $product->category_id;
-                $product->provider_id = $product->provider_id;
-                $product->promotion_price = $product->promotion_price;
+                $product->discount = $product->discount;
                 $product->unit_price = $product->unit_price;
                 $product->quantity = $product->quantity - $cart->qty;
                 $product->image = $product->image;
+                $product->ingredient = $product->ingredient;
+                $product->manufacturing_date = $product->manufacturing_date;
+                $product->expiry_date = $product->expiry_date;
                 $product->description = $product->description;
                 $product->save();
             } else {
@@ -216,6 +236,9 @@ class ClientController extends Controller
             }
 
         }
+        \Cart::destroy();
+        session()->flash("success", "Order Successfully");
+        return redirect('/');
     }
     public function update(Request $request, $id)
     {

@@ -33,8 +33,9 @@ class LoginController extends Controller
     public function postRegister(Request $request)
     {
         $rules = [
-            'username' => 'required|min:8',
+            'username' => 'required|min:8|max:12',
             'password' => 'required|confirmed|min:8',
+            'email' => 'required|email',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -44,10 +45,11 @@ class LoginController extends Controller
         }
 
         $newUser = new User();
-        $newUser->name = $request->username;
+        $newUser->username = $request->username;
         $newUser->email = $request->email;
         $newUser->password = bcrypt($request->password);
-        $newUser->role_id = 3;
+        $newUser->role_id = 2;
+        $newUser->avatar = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.iconfinder.com%2Ficons%2F745386%2Favatar_profile_profile_avatar_user_user_avatar_user_profile_icon&psig=AOvVaw06o5qT7RifPeBmecraYis0&ust=1590398663429000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKiM-eyWzOkCFQAAAAAdAAAAABAD';
         $newUser->save();
 
         return redirect('/login');
@@ -68,7 +70,7 @@ class LoginController extends Controller
         } else {
             $username = $request->username;
             $password = $request->password;
-            if (Auth::attempt(['name' => $username, 'password' => $password])) {
+            if (Auth::attempt(['username' => $username, 'password' => $password])) {
                 //  if(Auth::user()->role_id ==1 )
                 // {
                 //     return redirect()->intended('/manage');

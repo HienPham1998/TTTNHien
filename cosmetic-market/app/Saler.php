@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Saler extends Model
 {
-    public function products(){
-        return $this.belongsToMany('App\Product');
+    public function product()
+    {
+        return $this->belongsToMany('App\Product');
     }
 }
