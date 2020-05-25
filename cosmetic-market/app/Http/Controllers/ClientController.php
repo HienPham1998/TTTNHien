@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Bill;
+use App\BillDetail;
 use App\Category;
 use App\Product;
 use App\Saler;
 use App\Shippingaddress;
 use App\User;
-use App\Bill;
-use App\BillDetail;
 use Auth;
 use Illuminate\Http\Request;
 use Redirect;
@@ -99,13 +99,18 @@ class ClientController extends Controller
         $categories = Category::all();
         return view('layouts.postProduct', compact('categories'));
     }
-
     public function index()
     {
         $categories = Category::all();
-        $products = Product::orderBy("created_at", "desc")->paginate(16);
-        // dd($products);
-        return view('layouts.index', compact('categories', 'products'));
+        $salers = Saler::all();
+        $collections = collect([]);
+        foreach ($salers as $saler) {
+            $products = $saler->products()->get();
+            $collections->push($products);
+        }
+        // $collection = $collections->paginate(8);
+        $collection = $collections->all();
+        return view('layouts.index', compact('categories', 'salers', 'collection'));
     }
 
     /**
@@ -142,18 +147,21 @@ class ClientController extends Controller
     }
     public function addToCart($id, Request $request)
     {
-        $product = Product::find($id);
+        $saler = Saler::find($id);
+        dd($saler); 
+        $product = $saler->products()->get();
+        dd($product);
         if ($product) {
             \Cart::add([
                 'id' => $id,
                 'name' => $product->name,
                 'qty' => 1,
-                'price' => $product->unit_price,
+                'price' => $product->pivot->unit_price,
                 'weight' => 0,
                 'options' => [
-                    'image' => $product->image,
+                    'image' => $product->pivot->image,
                     'cat_name' => $product->category->name,
-                    'promotion_price' => $product->unit_price - $product->unit_price * $product->discount / 100,
+                    'promotion_price' => $product->pivot->unit_price - $product->pivot->unit_price * $product->pivot->discount / 100,
                 ],
             ]);
         }

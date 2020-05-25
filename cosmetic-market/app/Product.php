@@ -10,8 +10,8 @@ class Product extends Model
     {
         return $this->belongsTo('App\Category');
     }
-    public function saler()
+    public function salers()
     {
-        return $this->belongsToMany('App\Saler');
+        return $this->belongsToMany('App\Saler')->withPivot('discount', 'unit_price', 'quantity', 'description', 'image', 'ingredient', 'manufacturing_date', 'expiry_date')->withTimestamps();;
     }
 }

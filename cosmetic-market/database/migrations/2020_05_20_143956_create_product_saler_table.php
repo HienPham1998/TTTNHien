@@ -26,6 +26,7 @@ class CreateProductSalerTable extends Migration
             $table->string("expiry_date");
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('saler_id')->references('id')->on('salers')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
