@@ -15,7 +15,7 @@ Route::get('/', "ClientController@index");
 Route::get('/product-detail/{id}', 'ClientController@getProductDetail');
 Route::get('/category/{id}', 'ClientController@getProductByCategory');
 Route::get('/cart', 'ClientController@getCart');
-Route::get('/add-to-cart/{id}', 'ClientController@addToCart');
+Route::get('/add-to-cart/{saler_id}/{product_id}', 'ClientController@addToCart');
 Route::get('/remove-from-cart/{id}', 'ClientController@removeFromCart');
 Route::get('/update-cart/{id}', 'ClientController@updateCart');
 Route::get('post-product', 'ClientController@postProduct');

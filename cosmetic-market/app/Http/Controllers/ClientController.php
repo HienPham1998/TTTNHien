@@ -145,15 +145,13 @@ class ClientController extends Controller
 
         return view('layouts.cart', compact("categories", "products", "total"));
     }
-    public function addToCart($id, Request $request)
+    public function addToCart($saler_id,$product_id,Request $request)
     {
-        $saler = Saler::find($id);
-        dd($saler); 
-        $product = $saler->products()->get();
-        dd($product);
+        $saler = Saler::find($saler_id);
+        $product = $saler->products()->where('product_id',$product_id)->first();
         if ($product) {
             \Cart::add([
-                'id' => $id,
+                'id' => $product_id,
                 'name' => $product->name,
                 'qty' => 1,
                 'price' => $product->pivot->unit_price,

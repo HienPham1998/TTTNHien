@@ -98,7 +98,7 @@
                                             </li>
                                             <li>
                                               <button class="addtocart-btn" style="margin-top:1rem"><a
-                                                    href="/add-to-cart/{{$product->pivot->saler_id}}" title="Add to Cart"> Add to
+                                                    href="/add-to-cart/{{$product->pivot->saler_id}}/{{$product->pivot->product_id}}" title="Add to Cart"> Add to
                                                     Cart </a></button>
 
                                             </li>
