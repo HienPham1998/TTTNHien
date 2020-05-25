@@ -57,16 +57,8 @@ Route::delete('/profile/destroy/{id}', 'ProductController@destroy');
 Route::post('/profile/index', 'ProductController@add');
 
 Route::get('send', 'EmailController@sendEmail');
-// Route::get('test', function(Request $request) {
+Route::get('test', function(Request $request) {
 
-//     $currentUser = Auth::user()->id;
+    return App\Category::with('childs')->where('id',1)->get();
 
-//     // dd($currentUser);
-//     dd($request);
-
-//     Log::info($currentUser); // will show in your log
-//     Log::info($request); // will show in your log
-
-//     var_dump($currentUser);
-
-// });
+});

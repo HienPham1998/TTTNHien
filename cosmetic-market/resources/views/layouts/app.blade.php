@@ -42,8 +42,9 @@
                             <div class="language">
                                 <form action="#" method="post" enctype="multipart/form-data" id="language">
                                     <div class="btn-group">
-                                        <button class="btn btn-link dropdown-toggle" style="margin-top:3px" data-toggle="dropdown"
-                                            aria-expanded="false"> English <span class="caret"></span></button>
+                                        <button class="btn btn-link dropdown-toggle" style="margin-top:3px"
+                                            data-toggle="dropdown" aria-expanded="false"> English <span
+                                                class="caret"></span></button>
                                         <ul class="dropdown-menu">
                                             <li><a href="#">Arabic</a></li>
                                             <li><a href="#"> English</a></li>
@@ -139,9 +140,21 @@
                 aria-haspopup="true" aria-expanded="false">
                 Categories
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 @foreach($categories as $cat)
                 <a class="dropdown-item" href="/category/{{$cat->id}}">{{$cat->name}}</a>
+                @endforeach
+            </div> -->
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="padding:2px 10px">
+                @foreach($categories as $value => $category)
+                <div class="dropright" onmouseenter="hoverFunction({{$value}})" onmouseleave="hoverOut({{$value}})">
+                    {{$category->name}}
+                    <div class="sub-menu-content dropdown-menu" style="margin-left:10px;margin-top:-3px">
+                        @foreach($category->subcategory as $submenu)
+                        <a class="dropdown-item" href="/category/{{$cat->id}}">{{$submenu->name}}</a>
+                        @endforeach
+                    </div>
+                </div>
                 @endforeach
             </div>
         </li>
@@ -341,24 +354,46 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
     <!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/5e880e5035bcbb0c9aada3bf/default';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {},
+            Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/5e880e5035bcbb0c9aada3bf/default';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+
+    </script>
+    <!--End of Tawk.to Script-->
     <!-- <script>
         jQuery(document).ready(function ($) {
             $('.parallax').parallax();
         });
 
     </script> -->
+    <script>
+        let menuSubAll = document.querySelectorAll(".sub-menu-content");
+
+        function hoverFunction(index) {
+            menuSubAll.forEach((ele, i) => {
+                if (index === i) {
+                    ele.classList.add('show_menu');
+                }
+            })
+        }
+
+        function hoverOut(index) {
+            menuSubAll.forEach((ele, i) => {
+                ele.classList.remove('show_menu');
+            })
+
+        }
+
+    </script>
 </body>
 
 </html>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Bill;
 use App\BillDetail;
 use App\Category;
+use App\CategoryType;
 use App\Product;
 use App\Saler;
 use App\Shippingaddress;
