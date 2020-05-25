@@ -57,7 +57,7 @@
                                     </li>
                                     <li>
                                         <button type="button">
-                                            <a href="/add-to-cart/{{$product->id}}" data-toggle="tooltip"
+                                            <a href="/add-to-cart/{{$product->pivot->saler_id}}/{{$product->pivot->product_id}}" data-toggle="tooltip"
                                                 data-placement="top" title="Add to Cart"><i
                                                     class="fa fa-shopping-bag"></i>
                                             </a>
