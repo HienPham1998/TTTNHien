@@ -106,7 +106,7 @@
                                     <div class="caption product-detail" style="margin-bottom: 10px; ">
                                         @if($product->pivot->discount != 0)
                                         <h4 class="product-name mt-4"><a href="#"
-                                                title="Casual Shirt With Ruffle Hem">{{$product->pivot->name}}</a></h4>
+                                                title="Casual Shirt With Ruffle Hem">{{$products->name}}</a></h4>
 
                                         <del class="lineThrough fz-2">${{$product->pivot->unit_price}}</del>
                                         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b

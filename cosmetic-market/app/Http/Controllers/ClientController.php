@@ -102,16 +102,17 @@ class ClientController extends Controller
     }
     public function index()
     {
-        $categories = Category::all();
+        $categories = CategoryType::all();
         $salers = Saler::all();
         $collections = collect([]);
         foreach ($salers as $saler) {
             $products = $saler->products()->get();
             $collections->push($products);
         }
+        // dd($collections);
         // $collection = $collections->paginate(8);
         $collection = $collections->all();
-        return view('layouts.index', compact('categories', 'salers', 'collection'));
+        return view('layouts.index', compact('categories', 'collection'));
     }
 
     /**
@@ -125,13 +126,23 @@ class ClientController extends Controller
     }
     public function getProductbyCategory($category_id, Request $request)
     {
-        $categories = Category::all();
-        $products = Product::where("category_id", $category_id)->paginate(20);
-        return view('layouts.index', compact("categories", "products"));
+        $categories = CategoryType::all();
+        $products = Product::where("category_id", $category_id)->paginate(4);
+        // dd($products);
+        $collections = collect([]);
+        foreach ($products as $p) {
+            $products = $p->salers()->get();
+            $products->push($p->name);
+            $collections->push($products);
+        }
+        // dd($collections);
+        // $collection = $collections->paginate(8);
+        $collection = $collections->all();
+        return view('layouts.index', compact("categories", "collection"));
     }
     public function getProductDetail($id, Request $request)
     {
-        $categories = Category::all();
+        $categories = CategoryType::all();
         $p = Product::where("id", $id)->first();
         $product = $p->salers()->where('product_id',$id)->first();
         return view('layouts.productdetail', compact('categories', 'product','p'));

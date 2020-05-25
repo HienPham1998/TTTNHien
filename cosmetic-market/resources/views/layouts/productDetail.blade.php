@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <div class="col-sm-7 prodetail">
-                    <h1 class="productpage-title">Casual Shirt With Ruffle Hem</h1>
+                    <h1 class="productpage-title">{{$p->name}}</h1>
                     <div class="rating"> <span class="fa fa-stack">
                             <i class="fa fa-star-o fa-stack-2x"></i>
                             <i class="fa fa-star fa-stack-2x"></i></span>
