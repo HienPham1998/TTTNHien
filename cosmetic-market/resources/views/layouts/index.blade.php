@@ -73,12 +73,13 @@
                 <!-- tab-furniture-->
                 <div id="tab-furnitur" class="tab-content">
                     <div class="row">
+                        @foreach($collection as $products)
                         @foreach($products as $product)
                         <div class="product-layout  product-grid  col-lg-3 col-md-4 col-sm-6 col-12">
                             <div class="item">
                                 <div class="product-thumb">
                                     <div class="image product-imageblock"> <a> <img
-                                                src="{{$product->image}}" alt="iPod Classic" title="iPod Classic"
+                                                src="{{$product->pivot->image}}" alt="iPod Classic" title="iPod Classic"
                                                 class="img-fluid" /></a>
                                     </div>
                                      <ul class="button-group" style="display:block">
@@ -92,38 +93,39 @@
                                             </li>
                                             <li>
                                                 <a class="quick-view " data-toggle="tooltip" data-placement="top"
-                                                    title="Quick View" href="/product-detail/{{$product->id}}"><i
+                                                    title="Quick View" href="/product-detail/{{$product->pivot->product_id}}"><i
                                                         class="fa fa-eye"></i></a>
                                             </li>
                                             <li>
                                               <button class="addtocart-btn" style="margin-top:1rem"><a
-                                                    href="/add-to-cart/{{$product->id}}" title="Add to Cart"> Add to
+                                                    href="/add-to-cart/{{$product->pivot->saler_id}}" title="Add to Cart"> Add to
                                                     Cart </a></button>
 
                                             </li>
                                         </ul>
                                     <div class="caption product-detail" style="margin-bottom: 10px; ">
-                                        @if($product->discount != 0)
+                                        @if($product->pivot->discount != 0)
                                         <h4 class="product-name mt-4"><a href="#"
-                                                title="Casual Shirt With Ruffle Hem">{{$product->name}}</a></h4>
+                                                title="Casual Shirt With Ruffle Hem">{{$product->pivot->name}}</a></h4>
 
-                                        <del class="lineThrough fz-2">${{$product->unit_price}}</del>
+                                        <del class="lineThrough fz-2">${{$product->pivot->unit_price}}</del>
                                         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b
-                                            class="price product-price fz-3">${{$product->unit_price - $product->unit_price* $product->discount/100}}
+                                            class="price product-price fz-3">${{$product->pivot->unit_price - $product->pivot->unit_price* $product->pivot->discount/100}}
                                         </b>
                                         @else
                                         <h4 class="product-name mt-4"><a href="#" title="Casual Shirt With Ruffle Hem">
-                                                {{$product->name}}</a></h4>
+                                                {{$product->pivot->name}}</a></h4>
 
-                                        <b class="price product-price fz-3"> ${{$product->unit_price}}</b>
+                                        <b class="price product-price fz-3"> ${{$product->pivot->unit_price}}</b>
                                         @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
+                            @endforeach
                         @endforeach
+
                     </div>
-                    {{ $products->links() }}
                 </div>
             </div>
         </div>
