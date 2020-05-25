@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Bill;
+use App\BillDetail;
 use App\Category;
 use App\CategoryType;
 use App\Product;
 use App\Saler;
 use App\Shippingaddress;
 use App\User;
-use App\Bill;
-use App\BillDetail;
 use Auth;
 use Illuminate\Http\Request;
 use Redirect;
@@ -100,14 +100,18 @@ class ClientController extends Controller
         $categories = Category::all();
         return view('layouts.postProduct', compact('categories'));
     }
-
     public function index()
     {
-        $categories = CategoryType::all();
-        
-        $products = Product::orderBy("created_at", "desc")->paginate(16);
-        // dd($products);
-        return view('layouts.index', compact('categories', 'products'));
+        $categories = Category::all();
+        $salers = Saler::all();
+        $collections = collect([]);
+        foreach ($salers as $saler) {
+            $products = $saler->products()->get();
+            $collections->push($products);
+        }
+        // $collection = $collections->paginate(8);
+        $collection = $collections->all();
+        return view('layouts.index', compact('categories', 'salers', 'collection'));
     }
 
     /**
@@ -128,8 +132,9 @@ class ClientController extends Controller
     public function getProductDetail($id, Request $request)
     {
         $categories = Category::all();
-        $product = Product::where("id", $id)->first();
-        return view('layouts.productdetail', compact('categories', 'product'));
+        $p = Product::where("id", $id)->first();
+        $product = $p->salers()->where('product_id',$id)->first();
+        return view('layouts.productdetail', compact('categories', 'product','p'));
     }
     public function getCart()
     {
@@ -142,20 +147,21 @@ class ClientController extends Controller
 
         return view('layouts.cart', compact("categories", "products", "total"));
     }
-    public function addToCart($id, Request $request)
+    public function addToCart($saler_id,$product_id,Request $request)
     {
-        $product = Product::find($id);
+        $saler = Saler::find($saler_id);
+        $product = $saler->products()->where('product_id',$product_id)->first();
         if ($product) {
             \Cart::add([
-                'id' => $id,
+                'id' => $product_id,
                 'name' => $product->name,
                 'qty' => 1,
-                'price' => $product->unit_price,
+                'price' => $product->pivot->unit_price,
                 'weight' => 0,
                 'options' => [
-                    'image' => $product->image,
+                    'image' => $product->pivot->image,
                     'cat_name' => $product->category->name,
-                    'promotion_price' => $product->unit_price - $product->unit_price * $product->discount / 100,
+                    'promotion_price' => $product->pivot->unit_price - $product->pivot->unit_price * $product->pivot->discount / 100,
                 ],
             ]);
         }
@@ -222,17 +228,19 @@ class ClientController extends Controller
             $bill_detail->save();
             $product = Product::find($cart->id);
             if ($product) {
-                $product->name = $product->name;
-                $product->category_id = $product->category_id;
-                $product->discount = $product->discount;
-                $product->unit_price = $product->unit_price;
-                $product->quantity = $product->quantity - $cart->qty;
-                $product->image = $product->image;
-                $product->ingredient = $product->ingredient;
-                $product->manufacturing_date = $product->manufacturing_date;
-                $product->expiry_date = $product->expiry_date;
-                $product->description = $product->description;
-                $product->save();
+                $p = $product->salers()->where('product_id',$cart->id)->first();
+                // dd($p);
+                $product->salers()->updateExistingPivot($cart->id, array(
+                    "discount" => $p->pivot->discount,
+                    "unit_price" => $p->pivot->unit_price,
+                    "quantity" => $p->pivot->quantity - $cart->qty,
+                    "image" => $p->pivot->image,
+                    "ingredient" => $p->pivot->ingredient,
+                    "manufacturing_date" => $p->pivot->manufacturing_date,
+                    "expiry_date" => $p->pivot->expiry_date,
+                    "description" => $p->pivot->description
+                ), false);
+                // $product->save();
             } else {
                 return redirect()->back()->with('alert', 'Product does not exist');
             }
