@@ -6,8 +6,8 @@
             <div class="row">
                 <div class="col-sm-5">
                     <div class="thumbnails">
-                        <div><a class="thumbnail fancybox" href="image/product/product8.jpg" title="{{$product->name}}">
-                                <img class="img-fluid" src="{{$product->image}}" title="Casual Shirt With Ruffle Hem"
+                        <div><a class="thumbnail fancybox" href="image/product/product8.jpg" title="{{$p->name}}">
+                                <img class="img-fluid" src="{{$product->pivot->image}}" title="Casual Shirt With Ruffle Hem"
                                     alt="iPod Classic" /></a>
                         </div>
                     </div>
@@ -27,22 +27,22 @@
                         <span class="riview"><a href="#">1 reviews</a> / <a href="#">Write a review</a></span> </div>
                     <ul class="list-unstyled productinfo-details-top">
                         <li>
-                            <label>Price: </label> ${{$product->unit_price}}
+                            <label>Price: </label> ${{$product->pivot->unit_price}}
                         </li>
-                        <li><label>Sale: </label>{{$product->discount}}%</span></li>
+                        <li><label>Sale: </label>{{$product->pivot->discount}}%</span></li>
                     </ul>
                     <hr>
                     <ul class="list-unstyled product_info">
                         <li>
                             <label>Product Category:</label>
-                            <span>{{$product->category->name}}</span>
+                            <span>{{$p->category->name}}</span>
                         </li>
                         <li>
                             <label>Availability:</label>
-                            <span>{{$product->quantity}}</span></li>
+                            <span>{{$product->pivot->quantity}}</span></li>
                     </ul>
                     <hr>
-            <p class="product-desc">{{$product->description}}</p>
+            <p class="product-desc">{{$product->pivot->description}}</p>
                     <div id="product">
                         <div class="form-group">
                             <div class="qty">
@@ -83,7 +83,10 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab-description">
-                        <p class="product-desc"> {{$product->description}}</p>
+                        <p class="product-desc">Description: {{$product->pivot->description}}</p>
+                        <p class="product-desc"> Ingredient: {{$product->pivot->ingredient}}</p>
+                        <p class="product-desc"> Manufacturing date:{{$product->pivot->manufacturing_date}}</p>
+                        <p class="product-desc">Expiry date: {{$product->pivot->expiry_date}}</p>
                         <!-- cpt_container_end -->
                     </div>
                     <div class="tab-pane" id="tab-review">

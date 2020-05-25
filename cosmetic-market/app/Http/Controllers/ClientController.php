@@ -131,8 +131,9 @@ class ClientController extends Controller
     public function getProductDetail($id, Request $request)
     {
         $categories = Category::all();
-        $product = Product::where("id", $id)->first();
-        return view('layouts.productdetail', compact('categories', 'product'));
+        $p = Product::where("id", $id)->first();
+        $product = $p->salers()->where('product_id',$id)->first();
+        return view('layouts.productdetail', compact('categories', 'product','p'));
     }
     public function getCart()
     {
@@ -226,17 +227,19 @@ class ClientController extends Controller
             $bill_detail->save();
             $product = Product::find($cart->id);
             if ($product) {
-                $product->name = $product->name;
-                $product->category_id = $product->category_id;
-                $product->discount = $product->discount;
-                $product->unit_price = $product->unit_price;
-                $product->quantity = $product->quantity - $cart->qty;
-                $product->image = $product->image;
-                $product->ingredient = $product->ingredient;
-                $product->manufacturing_date = $product->manufacturing_date;
-                $product->expiry_date = $product->expiry_date;
-                $product->description = $product->description;
-                $product->save();
+                $p = $product->salers()->where('product_id',$cart->id)->first();
+                // dd($p);
+                $product->salers()->updateExistingPivot($cart->id, array(
+                    "discount" => $p->pivot->discount,
+                    "unit_price" => $p->pivot->unit_price,
+                    "quantity" => $p->pivot->quantity - $cart->qty,
+                    "image" => $p->pivot->image,
+                    "ingredient" => $p->pivot->ingredient,
+                    "manufacturing_date" => $p->pivot->manufacturing_date,
+                    "expiry_date" => $p->pivot->expiry_date,
+                    "description" => $p->pivot->description
+                ), false);
+                // $product->save();
             } else {
                 return redirect()->back()->with('alert', 'Product does not exist');
             }
