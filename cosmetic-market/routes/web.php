@@ -57,6 +57,8 @@ Route::delete('/profile/destroy/{id}', 'ProductController@destroy');
 Route::post('/profile/index', 'ProductController@add');
 
 Route::get('send', 'EmailController@sendEmail');
+Route::get('statistic', 'SalerController@statisticIndex');
+Route::get('billstatistic', 'SalerController@billStatistic');
 Route::get('test', function (Request $request) {
 
     return App\Category::with('childs')->where('id', 1)->get();

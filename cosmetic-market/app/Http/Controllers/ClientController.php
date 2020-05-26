@@ -40,7 +40,7 @@ class ClientController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $user = User::find(Auth::user()->id);
-        $user->role_id = 2;
+        $user->role_id = 3;
         $user->save();
 
         $saler = new Saler();

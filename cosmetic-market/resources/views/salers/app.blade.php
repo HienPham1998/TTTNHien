@@ -54,13 +54,7 @@
                                 <i class="ni ni-tv-2 text-primary"></i>
                                 <span class="nav-link-text">Dashboard</span>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/manage/customers/index">
-                                <i class="ni ni-planet text-orange"></i>
-                                <span class="nav-link-text">User</span>
-                            </a>
-                        </li>
+                        </li>                        
                         <li class="nav-item">
                             <a class="nav-link" href="map.html">
                                 <i class="ni ni-pin-3 text-primary"></i>
@@ -74,15 +68,15 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="tables.html">
+                            <a class="nav-link active" href="/statistic">
                                 <i class="ni ni-bullet-list-67 text-default"></i>
-                                <span class="nav-link-text">Tables</span>
+                                <span class="nav-link-text">Total money statistic</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="login.html">
+                            <a class="nav-link" href="/billstatistic">
                                 <i class="ni ni-key-25 text-info"></i>
-                                <span class="nav-link-text">Login</span>
+                                <span class="nav-link-text">Bill statistic</span>
                             </a>
                         </li>
                         <li class="nav-item">
