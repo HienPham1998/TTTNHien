@@ -63,6 +63,7 @@
                                                 class="caret"></span></a>
                                         <ul class="dropdown-menu dropdown-menu-right">
                                             <li><a href="/profile">Your profile</a></li>
+                                            <li><a href="/order">Your Order</a></li>
                                             <li><a href="/logout">Logout</a></li>
                                         </ul>
                                     </li>
@@ -145,11 +146,11 @@
                 <a class="dropdown-item" href="/category/{{$cat->id}}">{{$cat->name}}</a>
                 @endforeach
             </div> -->
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="padding:2px 10px">
-                @foreach($categories as $value => $category)
-                <div class="dropright" onmouseenter="hoverFunction({{$value}})" onmouseleave="hoverOut({{$value}})">
-                    {{$category->name}}
-                    <div class="sub-menu-content dropdown-menu" style="margin-left:10px;margin-top:-3px">
+            <div class="dropdown-menu" id="main-menu" aria-labelledby="navbarDropdown">
+                @foreach($categories as $key => $category)
+                <div class="dropright" onclick="hoverFunction({{$key}})" onmouseleave="hoverOut({{$key}})">
+                    <a href="#" class="dropdown-item">{{$category->name}}</a>
+                    <div class="sub-menu-content dropdown-menu" >
                         @foreach($category->subcategory as $submenu)
                         <a class="dropdown-item" href="/category/{{$cat->id}}">{{$submenu->name}}</a>
                         @endforeach
@@ -379,6 +380,7 @@
         let menuSubAll = document.querySelectorAll(".sub-menu-content");
 
         function hoverFunction(index) {
+            document.getElementById('main-menu').style.display="block";
             menuSubAll.forEach((ele, i) => {
                 if (index === i) {
                     ele.classList.add('show_menu');
@@ -388,12 +390,16 @@
 
         function hoverOut(index) {
             menuSubAll.forEach((ele, i) => {
+                setTimeout(() => {
+
                 ele.classList.remove('show_menu');
+                },300)
             })
 
         }
 
     </script>
+    @stack('scripts')
 </body>
 
 </html>

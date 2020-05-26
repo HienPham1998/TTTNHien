@@ -56,6 +56,9 @@ Route::put('/profile/update/{id}', 'ProductController@update');
 Route::delete('/profile/destroy/{id}', 'ProductController@destroy');
 Route::post('/profile/index', 'ProductController@add');
 
+Route::get('/order', 'ClientController@getOrder');
+// Route::post('/profile/index', 'ProductController@add');
+
 Route::get('send', 'EmailController@sendEmail');
 Route::get('test', function(Request $request) {
 

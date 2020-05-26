@@ -46,6 +46,7 @@
                                                 class="caret"></span></a>
                                         <ul class="dropdown-menu dropdown-menu-right">
                                             <li><a href="/profile">Your profile</a></li>
+                                            <li><a href="/order">Your Order</a></li>
                                             <li><a href="/logout">Logout</a></li>
                                         </ul>
                                     </li>
@@ -73,100 +74,22 @@
     </header>
 
     <div class="container">
-        <div id="box">
-            <div class="col-12">
-                <hr class="hr-text" data-content="Profile Infomation">
-                <div class="row">
-                    <div class="col-3">
-                        <div class="left-profile">
-                            @if($user->avatar != null)
-                            <img src="{{$user->avatar}}" alt="" class="rounded-circle" style="width:12vw; height:12vw">
-                            @else
-                            <img src="https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png"
-                                alt="" class="rounded-circle" style="width:12vw; height:12vw">
-                            @endif
-                            <h3 class="mt-2">{{Auth::user()->username}}</h3>
-                            @if($user->role_id == 3)
-                            <button class="btn btn-outline btn-outline-success">
-                                <a href="/update-profile/{{$saler->id}}">Edit Profile</a>
-                            </button>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="col-9">
-                        @if($user->role_id == 2)
-                        <form action="/profile/changepassword" method="POST" enctype="multipart/form-data">
-                            {{ csrf_field() }}
-                            {{ method_field('PUT') }}
-                            <div class="col-md-12 pr-1">
-                                <div class="form-group">
-                                    <label>Current Password</label>
-                                    <input type="password" name="currentPassword" class="form-control"
-                                        placeholder="******">
-                                </div>
-                            </div>
-                            <div class="col-md-12 pr-1">
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <input type="password" name="password" class="form-control" placeholder="******">
-                                </div>
-                            </div>
-                            <div class="col-md-12 pr-1">
-                                <div class="form-group">
-                                    <label>Confirmation Password</label>
-                                    <input type="password" name="password_confirmation" class="form-control"
-                                        placeholder="******">
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-outline btn-outline-success">Change password</button>
-                        </form>
-                        @else
-                        <div class="form-group row">
-                            <div class="col-sm-2">
-                                <p>Firstname: </p>
-                            </div>
-                            <div class="col-sm-10">
-                                {{$saler->firstname}}
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-2">
-                                <p>Lastname : </p>
-                            </div>
-                            <div class="col-sm-10">
-                                {{$saler->lastname}}
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-2">
-                                <p>Email:</p>
-                            </div>
-                            <div class="col-sm-10">
-                                {{$user->email}}
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-2">
-                                <p>Phone:</p>
-                            </div>
-                            <div class="col-sm-10">
-                                {{$saler->phone}}
-                            </div>
-                        </div>
-                        @endif
-                    </div>
-                </div>
-                <hr class="hr-text" data-content="Store Infomation">
-                @if($user->role_id != 3 )
-                <h2 class="pb-3">You haven't any store yet! Wanna become a salers? <a href="/register-store">Join us
-                        now </a></h2>
-                @else
-                <h2 class="pb-3"><a href="/profile/index">Go to your store now?</a></h2>
-                @endif
-            </div>
-        </div>
-    </div>
-    </div>
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>Image</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            @foreach
+            <tr>
+
+            </tr>
+            @endforeach
+            </tbody>
+        </table>
     </div>
 
 

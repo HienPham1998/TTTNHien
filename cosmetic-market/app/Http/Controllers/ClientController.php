@@ -40,7 +40,7 @@ class ClientController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $user = User::find(Auth::user()->id);
-        $user->role_id = 2;
+        $user->role_id = 3;
         $user->save();
 
         $saler = new Saler();
@@ -58,7 +58,7 @@ class ClientController extends Controller
 
     public function registerStore()
     {
-        $categories = Category::all();
+        $categories = CategoryType::all();
         return view('layouts.registerStore', compact('categories'));
     }
 
@@ -97,12 +97,12 @@ class ClientController extends Controller
 
     public function postProduct()
     {
-        $categories = Category::all();
+        $categories = CategoryType::all();
         return view('layouts.postProduct', compact('categories'));
     }
     public function index()
     {
-        $categories = Category::all();
+        $categories = CategoryType::all();
         $salers = Saler::all();
         $collections = collect([]);
         foreach ($salers as $saler) {
@@ -125,20 +125,20 @@ class ClientController extends Controller
     }
     public function getProductbyCategory($category_id, Request $request)
     {
-        $categories = Category::all();
+        $categories = CategoryType::all();
         $products = Product::where("category_id", $category_id)->paginate(20);
         return view('layouts.index', compact("categories", "products"));
     }
     public function getProductDetail($id, Request $request)
     {
-        $categories = Category::all();
+        $categories = CategoryType::all();
         $p = Product::where("id", $id)->first();
         $product = $p->salers()->where('product_id',$id)->first();
         return view('layouts.productdetail', compact('categories', 'product','p'));
     }
     public function getCart()
     {
-        $categories = Category::all();
+        $categories = CategoryType::all();
         $products = \Cart::content();
         $total = 0;
         foreach ($products as $p) {
@@ -193,7 +193,7 @@ class ClientController extends Controller
     }
     public function getBill($customer_id, Request $request)
     {
-        $categories = Category::all();
+        $categories = CategoryType::all();
         $shippingaddress = Shippingaddress::where("user_id", Auth::user()->id)->orderBy("created_at", "desc")->first();
         $products = \Cart::content();
         $total = 0;
@@ -201,6 +201,10 @@ class ClientController extends Controller
             $total = $total + $p->options->promotion_price * $p->qty;
         }
         return view('layouts.bill', compact('categories', 'shippingaddress', 'products', 'total'));
+    }
+
+    public function getOrder(){
+        return view('layouts.order');
     }
 
     public function postBill(Request $request)
