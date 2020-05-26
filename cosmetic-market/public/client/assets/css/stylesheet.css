@@ -14,6 +14,10 @@ body {
     display: block !important;
 }
 
+.nav-link.active {
+    background-color: #ff8f00 !important;
+    color: #000 !important;
+}
 
 .sub-menu-content {
     display: none;

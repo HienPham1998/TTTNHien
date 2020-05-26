@@ -78,8 +78,8 @@
             </div>
             <div class="productinfo-tab">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab-description" data-toggle="tab">Description</a></li>
-                    <li><a href="#tab-review" data-toggle="tab">Reviews (1)</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#tab-description" data-toggle="tab">Description</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tab-review" data-toggle="tab">Reviews (1)</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab-description">
@@ -136,3 +136,7 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+
+@endpush

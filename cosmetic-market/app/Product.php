@@ -15,4 +15,7 @@ class Product extends Model
         return $this->belongsTo('App\Saler');
     }
     use SoftDeletes;
+    public function bill(){
+        return $this->hasMany('App\BillDetail');
+    }
 }
