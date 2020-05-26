@@ -12,6 +12,6 @@ class Product extends Model
     }
     public function salers()
     {
-        return $this->belongsToMany('App\Saler')->withPivot('discount', 'unit_price', 'quantity', 'description', 'image', 'ingredient', 'manufacturing_date', 'expiry_date')->withTimestamps();;
+        return $this->belongsTo('App\Saler');
     }
 }
