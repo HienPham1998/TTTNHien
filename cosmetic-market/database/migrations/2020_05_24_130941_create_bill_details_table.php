@@ -21,6 +21,7 @@ class CreateBillDetailsTable extends Migration
             $table->integer('unit_price');
             $table->integer('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -81,7 +81,11 @@
         </div>
         <div class="buttons">
             <div class="float-left"><a class="btn btn-secondary" href="/">Continue Shopping</a></div>
+            @if(Auth::user())
             <div class="float-right btn btn-secondary" data-toggle="modal" data-target="#myModal">Check out</div>
+            @else
+            <div class="float-right btn btn-secondary" data-toggle="modal" data-target="#ModalLogin">Check out</div>
+            @endif
         </div>
     </div>
     @else
@@ -151,6 +155,25 @@
                 </div>
             </div>
         </form>
+    </div>
+</div>
+<!-- Modal-login -->
+<div class="modal" id="ModalLogin" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Please log in Or register <a href="/register" style="color:red">here</a></h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <a href="/login" class="btn btn-primary">Login now</a>
+            </div>
+
+        </div>
+
     </div>
 </div>
 @endsection

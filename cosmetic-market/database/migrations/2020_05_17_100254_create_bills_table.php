@@ -20,6 +20,7 @@ class CreateBillsTable extends Migration
             $table->integer('voucher_id');
             $table->string("transportUnit_id");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
