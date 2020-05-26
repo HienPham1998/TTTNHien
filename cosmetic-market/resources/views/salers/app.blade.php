@@ -70,7 +70,7 @@
                         <li class="nav-item">
                             <a class="nav-link active" href="/statistic">
                                 <i class="ni ni-bullet-list-67 text-default"></i>
-                                <span class="nav-link-text">Total money statistic</span>
+                                <span class="nav-link-text">Total bill statistic</span>
                             </a>
                         </li>
                         <li class="nav-item">
