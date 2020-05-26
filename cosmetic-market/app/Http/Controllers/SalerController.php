@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Saler;
-use App\Product;
 use App\Bill;
+use App\BillDetail;
 use App\Charts\SampleChart;
+use App\Product;
+use App\Saler;
 use Auth;
 use Carbon\Carbon;
 use DateInterval;
@@ -51,6 +52,11 @@ class SalerController extends Controller
     {
         $data = collect([]); // Could also be an array
         $labels = collect([]);
+        $b = collect([]);
+        $day = collect([]);
+        $week = collect([]);
+        $month = collect([]);
+        $products = Product::where('saler_id', Auth::user()->id)->get();
 
         if ($request->from_date && $request->to_date) {
             $begin = new DateTime($request->from_date);
@@ -63,19 +69,53 @@ class SalerController extends Controller
                 $full_date = $dt->format("Y-m-d");
                 $date = $dt->format("d/m");
                 $labels->push($date);
-                $data->push(Bill::withTrashed()->whereRaw('date(created_at) = ?', [date($full_date)])->sum("total"));
-                // dd($date);
+                //product
+                foreach ($products as $prod) {
+                    $billDetail = BillDetail::withTrashed()->where('product_id', $prod->id)->whereRaw('date(created_at) = ?', [date($full_date)])->get();
+                    $b->push($billDetail);
+                }
+                foreach ($b as $item) {
+                    if ($item != '[]') {
+                        $day->push($b->count());
+                    }
+                }
+                $data->push($day->count());
             }
         } else {
             $labels = collect(['Today', 'Week', 'Month']);
-            $data->push(Bill::whereDate('created_at', Carbon::today())->sum("total"));
-            $data->push(Bill::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->sum("total"));
-            $data->push(Bill::whereBetween('created_at', [Carbon::today()->startOfMonth(), Carbon::today()->endOfMonth()])->sum("total"));
+            foreach ($products as $prod) {
+                $b_day = BillDetail::withTrashed()->where('product_id', $prod->id)->whereDate('created_at', Carbon::today())->get();
+                foreach ($b_day as $item) {
+                    if ($item != '[]') {
+                        $day->push($b_day->count());
+                    }
+                }
+            }
+            $data->push($day->count());
+            foreach ($products as $prod) {
+                $b_week = BillDetail::withTrashed()->where('product_id', $prod->id)->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
+                foreach ($b_week as $item) {
+                    if ($item != '[]') {
+                        $week->push($b_week->count());
+                    }
+                }
+            }
+            $data->push($week->count());
+            foreach ($products as $prod) {
+                $b_month = BillDetail::withTrashed()->where('product_id', $prod->id)->whereBetween('created_at', [Carbon::today()->startOfMonth(), Carbon::today()->endOfMonth()])->get();
+                foreach ($b_month as $item) {
+                    if ($item != '[]') {
+                        $month->push($b_month->count());
+                    }
+                }
+            }
+            $data->push($month->count());
+        //   dd($data);
         }
 
         $chart = new SampleChart;
         $chart->labels($labels);
-        $chart->dataset('Total Money', 'line', $data);
+        $chart->dataset('Total Bill', 'bar', $data);
 
         return view("salers.statistic", compact("chart"));
     }
