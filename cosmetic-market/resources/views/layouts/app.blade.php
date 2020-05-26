@@ -22,13 +22,7 @@
         media="screen" />
     <link href="{{asset('client/assets/javascript/owl-carousel/owl.transitions.css')}}" type="text/css" rel="stylesheet"
         media="screen" />
-    <!-- <script type="text/javascript" src="{{asset('client/assets/javascript/jquery-2.1.1.min.js')}}" ></script>
-<script type="text/javascript" src="{{asset('client/assets/javascript/bootstrap/js/bootstrap.min.js')}}" ></script>
-<script type="text/javascript" src="{{asset('client/assets/javascript/template_js/jstree.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('client/assets/javascript/template_js/template.js')}}" ></script>
-<script type="text/javascript" src="{{asset('client/assets/javascript/common.js')}}" ></script>
-<script type="text/javascript" src="{{asset('client/assets/javascript/global.js')}}" ></script>
-<script type="text/javascript" src="{{asset('client/assets/javascript/owl-carousel/owl.carousel.min.js')}}" ></script> -->
+    
 </head>
 
 <body class="index">
@@ -152,7 +146,7 @@
                     <a href="#" class="dropdown-item">{{$category->name}}</a>
                     <div class="sub-menu-content dropdown-menu" >
                         @foreach($category->subcategory as $submenu)
-                        <a class="dropdown-item" href="/category/{{$cat->id}}">{{$submenu->name}}</a>
+                        <a class="dropdown-item" href="/category/{{$submenu->id}}">{{$submenu->name}}</a>
                         @endforeach
                     </div>
                 </div>

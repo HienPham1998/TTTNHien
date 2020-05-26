@@ -15,7 +15,7 @@ Route::get('/', "ClientController@index");
 Route::get('/product-detail/{id}', 'ClientController@getProductDetail');
 Route::get('/category/{id}', 'ClientController@getProductByCategory');
 Route::get('/cart', 'ClientController@getCart');
-Route::get('/add-to-cart/{saler_id}/{product_id}', 'ClientController@addToCart');
+Route::get('/add-to-cart/{product_id}', 'ClientController@addToCart');
 Route::get('/remove-from-cart/{id}', 'ClientController@removeFromCart');
 Route::get('/update-cart/{id}', 'ClientController@updateCart');
 Route::get('post-product', 'ClientController@postProduct');
@@ -60,8 +60,8 @@ Route::get('/order', 'ClientController@getOrder');
 // Route::post('/profile/index', 'ProductController@add');
 
 Route::get('send', 'EmailController@sendEmail');
-Route::get('test', function(Request $request) {
+Route::get('test', function (Request $request) {
 
-    return App\Category::with('childs')->where('id',1)->get();
+    return App\Category::with('childs')->where('id', 1)->get();
 
 });
