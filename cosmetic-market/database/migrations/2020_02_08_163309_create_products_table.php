@@ -17,6 +17,15 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('name'); 
             $table->integer('category_id');
+            $table->integer('discount');
+            $table->double('unit_price');
+            $table->string('quantity');
+            $table->string('description')->nullable();
+            $table->string('image');
+            $table->string("ingredient");
+            $table->string("manufacturing_date");
+            $table->string("expiry_date");
+            $table->integer('saler_id');
             $table->timestamps();
             $table->softDeletes();
         });

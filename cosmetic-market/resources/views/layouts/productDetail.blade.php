@@ -6,14 +6,14 @@
             <div class="row">
                 <div class="col-sm-5">
                     <div class="thumbnails">
-                        <div><a class="thumbnail fancybox" href="image/product/product8.jpg" title="{{$p->name}}">
-                                <img class="img-fluid" src="{{$product->pivot->image}}" title="Casual Shirt With Ruffle Hem"
+                        <div><a class="thumbnail fancybox" href="image/product/product8.jpg" title="{{$product->name}}">
+                                <img class="img-fluid" src="{{$product->image}}" title="Casual Shirt With Ruffle Hem"
                                     alt="iPod Classic" /></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-7 prodetail">
-                    <h1 class="productpage-title">{{$p->name}}</h1>
+                    <h1 class="productpage-title">{{$product->name}}</h1>
                     <div class="rating"> <span class="fa fa-stack">
                             <i class="fa fa-star-o fa-stack-2x"></i>
                             <i class="fa fa-star fa-stack-2x"></i></span>
@@ -27,22 +27,22 @@
                         <span class="riview"><a href="#">1 reviews</a> / <a href="#">Write a review</a></span> </div>
                     <ul class="list-unstyled productinfo-details-top">
                         <li>
-                            <label>Price: </label> ${{$product->pivot->unit_price}}
+                            <label>Price: </label> ${{$product->unit_price}}
                         </li>
-                        <li><label>Sale: </label>{{$product->pivot->discount}}%</span></li>
+                        <li><label>Sale: </label>{{$product->discount}}%</span></li>
                     </ul>
                     <hr>
                     <ul class="list-unstyled product_info">
                         <li>
                             <label>Product Category:</label>
-                            <span>{{$p->category->name}}</span>
+                            <span>{{$product->category->name}}</span>
                         </li>
                         <li>
                             <label>Availability:</label>
-                            <span>{{$product->pivot->quantity}}</span></li>
+                            <span>{{$product->quantity}}</span></li>
                     </ul>
                     <hr>
-            <p class="product-desc">{{$product->pivot->description}}</p>
+            <p class="product-desc">{{$product->description}}</p>
                     <div id="product">
                         <div class="form-group">
                             <div class="qty">
@@ -57,7 +57,7 @@
                                     </li>
                                     <li>
                                         <button type="button">
-                                            <a href="/add-to-cart/{{$product->pivot->saler_id}}/{{$product->pivot->product_id}}" data-toggle="tooltip"
+                                            <a href="/add-to-cart/{{$product->saler_id}}/{{$product->product_id}}" data-toggle="tooltip"
                                                 data-placement="top" title="Add to Cart"><i
                                                     class="fa fa-shopping-bag"></i>
                                             </a>
@@ -83,10 +83,10 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab-description">
-                        <p class="product-desc">Description: {{$product->pivot->description}}</p>
-                        <p class="product-desc"> Ingredient: {{$product->pivot->ingredient}}</p>
-                        <p class="product-desc"> Manufacturing date:{{$product->pivot->manufacturing_date}}</p>
-                        <p class="product-desc">Expiry date: {{$product->pivot->expiry_date}}</p>
+                        <p class="product-desc">Description: {{$product->description}}</p>
+                        <p class="product-desc"> Ingredient: {{$product->ingredient}}</p>
+                        <p class="product-desc"> Manufacturing date:{{$product->manufacturing_date}}</p>
+                        <p class="product-desc">Expiry date: {{$product->expiry_date}}</p>
                         <!-- cpt_container_end -->
                     </div>
                     <div class="tab-pane" id="tab-review">
