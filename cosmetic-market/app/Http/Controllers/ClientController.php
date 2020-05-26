@@ -195,7 +195,15 @@ class ClientController extends Controller
     }
 
     public function getOrder(){
-        return view('layouts.order');
+        $bill = Bill::where("user_id",Auth::user()->id)->first();
+        return view('layouts.order',compact('bill'));
+    }
+
+    public function deleteOrder($id){
+        $billDetail = BillDetail::find($id);
+        $billDetail->status = 2;
+        $billDetail->save();
+        return redirect('/order');
     }
 
     public function postBill(Request $request)

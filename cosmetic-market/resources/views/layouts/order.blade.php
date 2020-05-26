@@ -73,8 +73,9 @@
         </div>
     </header>
 
-    <div class="container">
-        <table class="table">
+    <div class="container" style="margin-top:10px">
+        <h3>Your Order:</h3>
+        <table class="table table-bordered">
             <tbody>
             <tr>
                 <th>Image</th>
@@ -83,9 +84,21 @@
                 <th>Status</th>
                 <th>Action</th>
             </tr>
-            @foreach
+                @foreach($bill->billDet as $detail)
             <tr>
-
+                <td style="width:10%">
+                <img class="img-thumbnail" style="width:100px" src="{{$detail->product->image}}" alt="">
+                </td>
+                <td>{{$detail->product->name}}</td>
+                <td>{{$detail->unit_price}}</td>
+                <td style="width:10%">{{$detail->status}}</td>
+                <td style="width:10%">
+                <form method="POST" action="/order/delete/{{$detail->id}}" >
+                {{ csrf_field() }}
+                {{ method_field('PUT') }}
+                    <button class="btn btn-primary" type="submit">Cancel</button>
+                </form>
+                </td>
             </tr>
             @endforeach
             </tbody>

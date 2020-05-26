@@ -14,4 +14,7 @@ class Product extends Model
     {
         return $this->belongsTo('App\Saler');
     }
+    public function bill(){
+        return $this->hasMany('App\BillDetail');
+    }
 }

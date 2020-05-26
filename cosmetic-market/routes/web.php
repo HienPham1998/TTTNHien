@@ -57,6 +57,7 @@ Route::delete('/profile/destroy/{id}', 'ProductController@destroy');
 Route::post('/profile/index', 'ProductController@add');
 
 Route::get('/order', 'ClientController@getOrder');
+Route::put('order/delete/{id}', 'ClientController@deleteOrder');
 // Route::post('/profile/index', 'ProductController@add');
 
 Route::get('send', 'EmailController@sendEmail');
