@@ -1,4 +1,4 @@
-@extends('admin.app');
+@extends('salers.app');
 @section('content')
 <div class="content">
   <div class="container-fluid">

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Bill;
 use App\BillDetail;
 use App\Charts\SampleChart;
 use App\Product;
@@ -52,39 +51,41 @@ class SalerController extends Controller
     {
         $data = collect([]); // Could also be an array
         $labels = collect([]);
-        $b = collect([]);
-        $day = collect([]);
         $week = collect([]);
+        $day = collect([]);
         $month = collect([]);
-        $products = Product::where('saler_id', Auth::user()->id)->get();
-
+        $saler = Saler::where('user_id', Auth::user()->id)->first();
+        $products = Product::where('saler_id', $saler->id)->get();
         if ($request->from_date && $request->to_date) {
             $begin = new DateTime($request->from_date);
             $end = new DateTime($request->to_date);
-
             $interval = DateInterval::createFromDateString('1 day');
             $period = new DatePeriod($begin, $interval, $end);
-
             foreach ($period as $dt) {
+                $b = collect([]);
+                $val = 0;
                 $full_date = $dt->format("Y-m-d");
                 $date = $dt->format("d/m");
                 $labels->push($date);
-                //product
                 foreach ($products as $prod) {
-                    $billDetail = BillDetail::withTrashed()->where('product_id', $prod->id)->whereRaw('date(created_at) = ?', [date($full_date)])->get();
-                    $b->push($billDetail);
+                    $billDetail = BillDetail::withTrashed()
+                        ->where('product_id', $prod->id)
+                        ->whereRaw('date(created_at) = ?', [date($full_date)])->get();
+                    $b->push($billDetail->count());
                 }
-                foreach ($b as $item) {
+                foreach ($b as $key => $item) {
                     if ($item != '[]') {
-                        $day->push($b->count());
+                        $val += $b[$key];
                     }
                 }
-                $data->push($day->count());
+                $data->push($val);
             }
         } else {
             $labels = collect(['Today', 'Week', 'Month']);
             foreach ($products as $prod) {
-                $b_day = BillDetail::withTrashed()->where('product_id', $prod->id)->whereDate('created_at', Carbon::today())->get();
+                $b_day = BillDetail::withTrashed()
+                    ->where('product_id', $prod->id)
+                    ->whereDate('created_at', Carbon::today())->get();
                 foreach ($b_day as $item) {
                     if ($item != '[]') {
                         $day->push($b_day->count());
@@ -93,7 +94,10 @@ class SalerController extends Controller
             }
             $data->push($day->count());
             foreach ($products as $prod) {
-                $b_week = BillDetail::withTrashed()->where('product_id', $prod->id)->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
+                $b_week = BillDetail::withTrashed()
+                    ->where('product_id', $prod->id)
+                    ->whereBetween('created_at',
+                        [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
                 foreach ($b_week as $item) {
                     if ($item != '[]') {
                         $week->push($b_week->count());
@@ -102,7 +106,10 @@ class SalerController extends Controller
             }
             $data->push($week->count());
             foreach ($products as $prod) {
-                $b_month = BillDetail::withTrashed()->where('product_id', $prod->id)->whereBetween('created_at', [Carbon::today()->startOfMonth(), Carbon::today()->endOfMonth()])->get();
+                $b_month = BillDetail::withTrashed()
+                    ->where('product_id', $prod->id)
+                    ->whereBetween('created_at',
+                        [Carbon::today()->startOfMonth(), Carbon::today()->endOfMonth()])->get();
                 foreach ($b_month as $item) {
                     if ($item != '[]') {
                         $month->push($b_month->count());
@@ -110,7 +117,6 @@ class SalerController extends Controller
                 }
             }
             $data->push($month->count());
-        //   dd($data);
         }
 
         $chart = new SampleChart;
@@ -119,35 +125,86 @@ class SalerController extends Controller
 
         return view("salers.statistic", compact("chart"));
     }
-    public function billStatistic(Request $request)
+    public function productStatistic(Request $request)
     {
         $data = collect([]); // Could also be an array
         $labels = collect([]);
-
+        $week = collect([]);
+        $day = collect([]);
+        $month = collect([]);
+        $saler = Saler::where('user_id', Auth::user()->id)->first();
+        $products = Product::where('saler_id', $saler->id)->get();
         if ($request->from_date && $request->to_date) {
             $begin = new DateTime($request->from_date);
             $end = new DateTime($request->to_date);
-
             $interval = DateInterval::createFromDateString('1 day');
             $period = new DatePeriod($begin, $interval, $end);
-
             foreach ($period as $dt) {
+                $b = collect([]);
+                $val = 0;
                 $full_date = $dt->format("Y-m-d");
                 $date = $dt->format("d/m");
                 $labels->push($date);
-                $data->push(Bill::withTrashed()->whereRaw('date(created_at) = ?', [date($full_date)])->count());
-                // dd($date);
+                foreach ($products as $prod) {
+                    $billDetail = BillDetail::withTrashed()
+                        ->where('product_id', $prod->id)
+                        ->whereRaw('date(created_at) = ?', [date($full_date)])->get();
+                    foreach ($billDetail as $bd) {
+                        $b->push($bd);
+                    }
+                }
+                foreach ($b as $key => $item) {
+                    if ($item != '[]') {
+                        $val += $item->quantity;
+                    }
+                }
+                $data->push($val);
             }
         } else {
+            $val = 0;
             $labels = collect(['Today', 'Week', 'Month']);
-            $data->push(Bill::whereDate('created_at', Carbon::today())->count());
-            $data->push(Bill::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count());
-            $data->push(Bill::whereBetween('created_at', [Carbon::today()->startOfMonth(), Carbon::today()->endOfMonth()])->count());
+            foreach ($products as $prod) {
+                $b_day = BillDetail::withTrashed()
+                    ->where('product_id', $prod->id)
+                    ->whereDate('created_at', Carbon::today())->get();
+                foreach ($b_day as $item) {
+                    if ($item != '[]') {
+                        $val += $item->quantity;
+                    }
+                }
+            }
+            $data->push($val);
+            foreach ($products as $prod) {
+                $b_week = BillDetail::withTrashed()
+                    ->where('product_id', $prod->id)
+                    ->whereBetween('created_at',
+                        [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
+                foreach ($b_week as $item) {
+                    if ($item != '[]') {
+                        $val += $item->quantity;
+                    }
+                }
+            }
+            $data->push($val);
+
+            foreach ($products as $prod) {
+                $b_month = BillDetail::withTrashed()
+                    ->where('product_id', $prod->id)
+                    ->whereBetween('created_at',
+                        [Carbon::today()->startOfMonth(), Carbon::today()->endOfMonth()])->get();
+                foreach ($b_month as $item) {
+                    if ($item != '[]') {
+                        $val += $item->quantity;
+                    }
+                }
+            }
+            $data->push($val);
+
         }
 
         $chart = new SampleChart;
         $chart->labels($labels);
-        $chart->dataset('Total bill', 'bar', $data);
+        $chart->dataset('Total products', 'line', $data);
 
         return view("salers.statistic", compact("chart"));
     }

@@ -41,7 +41,8 @@
         <div class="scrollbar-inner">
             <!-- Brand -->
             <div class="sidenav-header  align-items-center">
-                <a class="navbar-brand" href="javascript:void(0)">
+                <a class="navbar-brand" style="font-size:30px; color: orange">
+                    HD Market
                 </a>
             </div>
             <div class="navbar-inner">
@@ -50,18 +51,6 @@
                     <!-- Nav items -->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="dashboard.html">
-                                <i class="ni ni-tv-2 text-primary"></i>
-                                <span class="nav-link-text">Dashboard</span>
-                            </a>
-                        </li>                        
-                        <li class="nav-item">
-                            <a class="nav-link" href="map.html">
-                                <i class="ni ni-pin-3 text-primary"></i>
-                                <span class="nav-link-text">Google</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="profile.html">
                                 <i class="ni ni-single-02 text-yellow"></i>
                                 <span class="nav-link-text">Profile</span>
@@ -69,26 +58,14 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="/statistic">
-                                <i class="ni ni-bullet-list-67 text-default"></i>
+                            <i class="fas fa-chart-bar"></i>
                                 <span class="nav-link-text">Total bill statistic</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/billstatistic">
-                                <i class="ni ni-key-25 text-info"></i>
-                                <span class="nav-link-text">Bill statistic</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="register.html">
-                                <i class="ni ni-circle-08 text-pink"></i>
-                                <span class="nav-link-text">Register</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="upgrade.html">
-                                <i class="ni ni-send text-dark"></i>
-                                <span class="nav-link-text">Upgrade</span>
+                            <a class="nav-link" href="/productstatistic">
+                            <i class="fas fa-chart-area"></i>
+                                <span class="nav-link-text">Product statistic</span>
                             </a>
                         </li>
                     </ul>
