@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Saler;
 use App\Product;
 use App\Bill;
+use App\BillDetail;
+use App\User;
 use App\Charts\SampleChart;
+use Illuminate\Support\Collection;
 use Auth;
 use Carbon\Carbon;
 use DateInterval;
@@ -41,11 +44,65 @@ class SalerController extends Controller
         return back();
     }
 
+    public function getListPending(){
+        $user = User::find(Auth::user()->id);
+        $saler = Saler::where("user_id",Auth::user()->id)->first();
+        $product = Product::where("saler_id",$saler->id)->paginate(20);
+        $billDetail = BillDetail::all();
+        $collections = collect([]);
+        $listData = collect([]);
+        foreach($product as $prod){
+            $collections->push($prod);
+        }
+        foreach($collections as $coll){
+            foreach($billDetail as $bill){
+                if($coll->id == $bill->product_id){
+                    $listData->push($bill);
+                }
+            }
+        }
+        return view('salers.manage-order',compact('listData','user'));
+    }
+
+    public function getHistory(){
+        $user = User::find(Auth::user()->id);
+        $saler = Saler::where("user_id",Auth::user()->id)->first();
+        $product = Product::where("saler_id",$saler->id)->paginate(20);
+        $billDetail = BillDetail::all();
+        $collections = collect([]);
+        $listData = collect([]);
+        foreach($product as $prod){
+            $collections->push($prod);
+        }
+        foreach($collections as $coll){
+            foreach($billDetail as $bill){
+                if($coll->id == $bill->product_id){
+                    $listData->push($bill);
+                }
+            }
+        }
+        return view('salers.history',compact('user','listData'));
+    }
+
+    public function changeStatusOrder($id){
+        $bill = BillDetail::find($id);
+        $bill->status = 1;
+        $bill->save();
+        return redirect('/profile/list');
+    }
+
+    public function rejectOrder($id){
+        $bill = BillDetail::find($id);
+        $bill->delete();
+        return redirect('/profile/list');
+    }
+
     public function getProduct(Request $request)
     {
+        $user = User::find(Auth::user()->id);
         $product = Product::where('saler_id', Auth::user()->id)->paginate(20);
         // dd($product);
-        return view('salers.index', compact("product"));
+        return view('salers.index', compact("product","user"));
     }
     public function statisticIndex(Request $request)
     {

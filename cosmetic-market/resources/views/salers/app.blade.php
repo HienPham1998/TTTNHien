@@ -54,21 +54,21 @@
                                 <i class="ni ni-tv-2 text-primary"></i>
                                 <span class="nav-link-text">Dashboard</span>
                             </a>
-                        </li>                        
+                        </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="map.html">
+                            <a class="nav-link" href="/profile/list">
                                 <i class="ni ni-pin-3 text-primary"></i>
-                                <span class="nav-link-text">Google</span>
+                                <span class="nav-link-text">Manage Customer Order</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="profile.html">
+                            <a class="nav-link" href="/profile/history">
                                 <i class="ni ni-single-02 text-yellow"></i>
-                                <span class="nav-link-text">Profile</span>
+                                <span class="nav-link-text">Saled History</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="/statistic">
+                            <a class="nav-link" href="/statistic">
                                 <i class="ni ni-bullet-list-67 text-default"></i>
                                 <span class="nav-link-text">Total money statistic</span>
                             </a>
@@ -79,18 +79,7 @@
                                 <span class="nav-link-text">Bill statistic</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="register.html">
-                                <i class="ni ni-circle-08 text-pink"></i>
-                                <span class="nav-link-text">Register</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="upgrade.html">
-                                <i class="ni ni-send text-dark"></i>
-                                <span class="nav-link-text">Upgrade</span>
-                            </a>
-                        </li>
+                        
                     </ul>
                 </div>
             </div>
@@ -302,7 +291,12 @@
                                 aria-expanded="false">
                                 <div class="media align-items-center">
                                     <span class="avatar avatar-sm rounded-circle">
-                                        <img alt="" src="../assets/img/theme/team-4.jpg">
+                                        @if($user->avatar == null)
+                                        <img alt=""
+                                            src="https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png">
+                                        @else
+                                        <img alt="" src="{{$user->avatar}}">
+                                        @endif
                                     </span>
                                     <div class="media-body  ml-2  d-none d-lg-block">
                                         <span class="mb-0 text-sm  font-weight-bold">{{Auth::user()->name}}</span>
@@ -317,7 +311,7 @@
                                     <i class="ni ni-single-02"></i>
                                     <span>My profile</span>
                                 </a>
-                                <a href="#!" class="dropdown-item">
+                                <a href="/profile" class="dropdown-item">
                                     <i class="ni ni-settings-gear-65"></i>
                                     <span>Settings</span>
                                 </a>

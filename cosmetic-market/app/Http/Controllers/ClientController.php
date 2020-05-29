@@ -196,9 +196,16 @@ class ClientController extends Controller
 
     public function getOrder(){
         $bill = Bill::where("user_id",Auth::user()->id)->first();
-        return view('layouts.order',compact('bill'));
+        $categories = CategoryType::all();
+        return view('layouts.order',compact('bill','categories'));
     }
 
+    public function getHistory(){
+        $bill = Bill::where("user_id",Auth::user()->id)->first();
+        $categories = CategoryType::all();
+        return view('layouts.history',compact('bill','categories'));
+    }
+    
     public function deleteOrder($id){
         $billDetail = BillDetail::find($id);
         $billDetail->status = 2;

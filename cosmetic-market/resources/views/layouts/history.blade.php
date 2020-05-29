@@ -79,24 +79,11 @@
         <li class="nav-item">
             <a href="category.html" class="nav-link">Collection</a>
         </li>
-        <!-- <li class="nav-item dropdown">
-                    <a href="#" class="nav-link">Categories</a>
-                    <ul>
-                                @foreach($categories as $cat)
-                                <li><a href="/category/{{$cat->id}}">{{$cat->name}}</a></li>
-                                @endforeach
-                            </ul>
-                </li> -->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 Categories
             </a>
-            <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                @foreach($categories as $cat)
-                <a class="dropdown-item" href="/category/{{$cat->id}}">{{$cat->name}}</a>
-                @endforeach
-            </div> -->
             <div class="dropdown-menu" id="main-menu" aria-labelledby="navbarDropdown">
                 @foreach($categories as $key => $category)
                 <div class="dropright" onclick="hoverFunction({{$key}})" onmouseleave="hoverOut({{$key}})">
@@ -118,44 +105,28 @@
         </li>
     </ul>
     <div class="container" style="margin-top:10px">
-        <h3>Your Order:</h3>
+        <h3>Your History:</h3>
         <table class="table table-bordered">
             <tbody>
                 <tr>
                     <th>Image</th>
                     <th>Product Name</th>
                     <th>Price</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th>Shop Name</th>
+                    <th>Date</th>
                 </tr>
                 @foreach($bill->billDet as $detail)
+                @if($detail->status == 1)
                 <tr>
                     <td style="width:10%">
                         <img class="img-thumbnail" style="width:100px" src="{{$detail->product->image}}" alt="">
                     </td>
                     <td>{{$detail->product->name}}</td>
-                    <td>{{$detail->unit_price}}</td>
-                    @if($detail->status == 0)
-                    <td style="width:10%">Pending</td>
-                    <td style="width:10%">
-                        <form method="POST" action="/order/delete/{{$detail->id}}">
-                            {{ csrf_field() }}
-                            {{ method_field('PUT') }}
-                            <button class="btn btn-primary" type="submit">Cancel</button>
-                        </form>
-                    </td>
-                    @elseif($detail->status == 1)
-                    <td style="width:10%">Approve</td>
-                    <td style="width:10%">
-                        <i class="far fa-check-circle" style="font-size:25px;color:green"></i>
-                    </td>
-                    @else
-                        <td style="width:10%">Rejected</td>
-                    <td style="width:10%">
-                        <i class="far fa-times-circle" style="font-size:25px;color:red"></i>
-                    </td>
-                    @endif
+                    <td>${{$detail->unit_price}}</td>
+                    <td>{{$detail->product->saler->shopname}}</td>
+                    <td>{{$detail->created_at}}</td>
                 </tr>
+                @endif
                 @endforeach
             </tbody>
         </table>
@@ -175,29 +146,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
-    <script>
-        let menuSubAll = document.querySelectorAll(".sub-menu-content");
-
-        function hoverFunction(index) {
-            document.getElementById('main-menu').style.display = "block";
-            menuSubAll.forEach((ele, i) => {
-                if (index === i) {
-                    ele.classList.add('show_menu');
-                }
-            })
-        }
-
-        function hoverOut(index) {
-            menuSubAll.forEach((ele, i) => {
-                setTimeout(() => {
-
-                    ele.classList.remove('show_menu');
-                }, 300)
-            })
-
-        }
-
-    </script>
+    
 </body>
 
 </html>

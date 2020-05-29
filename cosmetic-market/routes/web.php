@@ -58,7 +58,13 @@ Route::post('/profile/index', 'ProductController@add');
 
 Route::get('/order', 'ClientController@getOrder');
 Route::put('order/delete/{id}', 'ClientController@deleteOrder');
-// Route::post('/profile/index', 'ProductController@add');
+
+Route::get('profile/list', 'SalerController@getListPending');
+Route::put('profile/approve/{id}', 'SalerController@changeStatusOrder');
+Route::delete('profile/reject/{id}', 'SalerController@rejectOrder');
+
+Route::get('profile/history', 'SalerController@getHistory');
+Route::get('history', 'ClientController@getHistory');
 
 Route::get('send', 'EmailController@sendEmail');
 Route::get('statistic', 'SalerController@statisticIndex');
