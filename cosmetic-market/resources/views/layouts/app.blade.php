@@ -22,7 +22,7 @@
         media="screen" />
     <link href="{{asset('client/assets/javascript/owl-carousel/owl.transitions.css')}}" type="text/css" rel="stylesheet"
         media="screen" />
-    
+
 </head>
 
 <body class="index">
@@ -118,10 +118,10 @@
     </header>
     <ul class="nav" style="background-color:#fff;justify-content:space-evenly">
         <li class="nav-item active">
-            <a href="/" class="nav-link">Home</a>
+            <a href="/" class="nav-link">HOME</a>
         </li>
         <li class="nav-item">
-            <a href="category.html" class="nav-link">Collection</a>
+            <a href="category.html" class="nav-link">COLLECTION</a>
         </li>
         <!-- <li class="nav-item dropdown">
                     <a href="#" class="nav-link">Categories</a>
@@ -134,20 +134,20 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                Categories
+                CATEGORIES
             </a>
             <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 @foreach($categories as $cat)
                 <a class="dropdown-item" href="/category/{{$cat->id}}">{{$cat->name}}</a>
                 @endforeach
             </div> -->
-            <div class="dropdown-menu" id="main-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu" id="main-menu" aria-labelledby="navbarDropdown" style="text-transform:uppercase; font-size:13px">
                 @foreach($categories as $key => $category)
                 <div class="dropright" onclick="hoverFunction({{$key}})" onmouseleave="hoverOut({{$key}})">
                     <a href="#" class="dropdown-item">{{$category->name}}</a>
                     <div class="sub-menu-content dropdown-menu" >
                         @foreach($category->subcategory as $submenu)
-                        <a class="dropdown-item" href="/category/{{$submenu->id}}">{{$submenu->name}}</a>
+                        <a class="dropdown-item" href="/category/{{$submenu->id}}" style="text-transform:uppercase; font-size:13px">{{$submenu->name}}</a>
                         @endforeach
                     </div>
                 </div>
@@ -155,10 +155,10 @@
             </div>
         </li>
         <li class="nav-item">
-            <a href="about-us.html" class="nav-link">About us</a>
+            <a href="about-us.html" class="nav-link">ABOUT US</a>
         </li>
         <li class="nav-item">
-            <a href="contact.html" class="nav-link">Contact Us</a>
+            <a href="contact.html" class="nav-link">CONTACT US</a>
         </li>
     </ul>
     @yield('content')

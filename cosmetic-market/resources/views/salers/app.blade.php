@@ -41,7 +41,8 @@
         <div class="scrollbar-inner">
             <!-- Brand -->
             <div class="sidenav-header  align-items-center">
-                <a class="navbar-brand" href="javascript:void(0)">
+                <a class="navbar-brand" style="font-size:30px; color: orange">
+                    HD Market
                 </a>
             </div>
             <div class="navbar-inner">
@@ -68,18 +69,17 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/statistic">
-                                <i class="ni ni-bullet-list-67 text-default"></i>
-                                <span class="nav-link-text">Total money statistic</span>
+                            <a class="nav-link active" href="/statistic">
+                            <i class="fas fa-chart-bar"></i>
+                                <span class="nav-link-text">Total bill statistic</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/billstatistic">
-                                <i class="ni ni-key-25 text-info"></i>
-                                <span class="nav-link-text">Bill statistic</span>
+                            <a class="nav-link" href="/productstatistic">
+                            <i class="fas fa-chart-area"></i>
+                                <span class="nav-link-text">Product statistic</span>
                             </a>
                         </li>
-                        
                     </ul>
                 </div>
             </div>

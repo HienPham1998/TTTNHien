@@ -119,6 +119,7 @@
     </ul>
     <div class="container" style="margin-top:10px">
         <h3>Your Order:</h3>
+            @if($bill != null)
         <table class="table table-bordered">
             <tbody>
                 <tr>
@@ -159,6 +160,9 @@
                 @endforeach
             </tbody>
         </table>
+            @else
+            <p>You haven't got any order yet</p>
+            @endif
     </div>
 
 
