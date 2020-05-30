@@ -108,7 +108,7 @@
                                                 class="btn btn-primary" data-toggle="modal">Reject</button>
                                         </form>
                                         <i class="far fa-check-circle" style="font-size:25px;color:green"></i>
-                                        @else
+                                        @elseif($prod->status == 0)
                                         <form action="/profile/approve/{{$prod->id}}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('PUT') }}
@@ -145,6 +145,19 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @else
+                                        <form action="/profile/approve/{{$prod->id}}" method="POST">
+                                            {{ csrf_field() }}
+                                            {{ method_field('PUT') }}
+                                            <button disabled class="btn btn-success">Approve</button>
+                                        </form>
+                                        <form action="/profile/reject/{{$prod->id}}" method="POST">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <button disabled data-target="#modalDelete{{$prod->id}}" type="submit"
+                                                class="btn btn-primary" data-toggle="modal">Reject</button>
+                                        </form>
+                                        <i class="far fa-times-circle" style="font-size:25px;color:red"></i>
                                         @endif
                                     </td>
                                 </tr>

@@ -24,7 +24,142 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="#" class="btn btn-sm btn-neutral add">New</a>
+                        <button type="button" class="btn btn-sm btn-neutral" data-target="#addingProduct"
+                            data-toggle="modal">New</button>
+                        <div class="modal fade" id="addingProduct" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <form id="editForm" method="POST" enctype="multipart/form-data" action="/profile/index">
+                                    {{ csrf_field() }}
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editModalLabel">Add Product</h5>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card card-user">
+                                                        <div class="card-body">
+
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Name</label>
+                                                                        <input type="text" name="name"
+                                                                            class="form-control"
+                                                                            placeholder="Name product...">
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Image</label>
+                                                                        <input type="file" name="image"
+                                                                            class="form-control"
+                                                                            placeholder="Image of product...">
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Category</label>
+                                                                        <input type="text" name="category_id"
+                                                                            class="form-control"
+                                                                            placeholder="Category ID...">
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label for="exampleInputEmail1">Discount</label>
+                                                                        <input type="text" name="discount"
+                                                                            class="form-control"
+                                                                            placeholder="Discount...">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Price</label>
+                                                                        <input type="text" name="unit_price"
+                                                                            class="form-control"
+                                                                            placeholder="Unit price...">
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Quantity</label>
+                                                                        <input type="text" name="quantity"
+                                                                            class="form-control"
+                                                                            placeholder="Quantity...">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Ingredient</label>
+                                                                        <input type="text" name="ingredient"
+                                                                            class="form-control"
+                                                                            placeholder="Ingredient...">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Manufacturing Date</label>
+                                                                        <input type="text" name="manu_date"
+                                                                            class="form-control"
+                                                                            placeholder="Manufacturing Date...">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Expiry Date</label>
+                                                                        <input type="text" name="expiry"
+                                                                            class="form-control"
+                                                                            placeholder="Expiry Date...">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label>Description</label>
+                                                                        <input type="text" name="description"
+                                                                            class="form-control"
+                                                                            placeholder="Description...">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-primary">Update</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -48,7 +183,7 @@
                                     <th scope="col" data-sort="budget">Image</th>
                                     <th scope="col" data-sort="status">Name</th>
                                     <th scope="col" data-sort="status">Category</th>
-                                    <th scope="col" data-sort="status">Sale</th>
+                                    <th scope="col" data-sort="status">Discount</th>
                                     <th scope="col" data-sort="status">Price</th>
                                     <th scope="col" data-sort="status">Quantity</th>
                                     <th scope="col" data-sort="status">Description</th>
@@ -104,17 +239,7 @@
                                         <button class="btn btn-warning edit">Edit</button>
                                         <button data-target="#modalDelete{{$prod->id}}" type="button"
                                             class="btn btn-danger" data-toggle="modal">Delete</button>
-                                        <!-- <div class="dropdown">
-                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-ellipsis-v"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" href="#">Action</a>
-                          <a class="dropdown-item" href="#">Another action</a>
-                          <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
 
-                      </div> -->
                                         <div class="modal" id="editModal" role="dialog" aria-labelledby="editModalLabel"
                                             aria-hidden="false">
                                             <div class="modal-dialog" role="document">
@@ -172,10 +297,11 @@
                                                                                 <div class="col-md-12">
                                                                                     <div class="form-group">
                                                                                         <label
-                                                                                            for="exampleInputEmail1">Sale</label>
-                                                                                        <input type="text" name="sale"
+                                                                                            for="exampleInputEmail1">Discount</label>
+                                                                                        <input type="text"
+                                                                                            name="discount"
                                                                                             class="form-control"
-                                                                                            placeholder="Email">
+                                                                                            placeholder="Discount...">
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -183,7 +309,8 @@
                                                                                 <div class="col-md-12">
                                                                                     <div class="form-group">
                                                                                         <label>Price</label>
-                                                                                        <input type="text" name="price"
+                                                                                        <input type="text"
+                                                                                            name="unit_price"
                                                                                             class="form-control"
                                                                                             placeholder="Price...">
                                                                                     </div>
@@ -201,6 +328,39 @@
                                                                                     </div>
                                                                                 </div>
 
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                    <div class="form-group">
+                                                                                        <label>Ingredient</label>
+                                                                                        <input type="text"
+                                                                                            name="ingredient"
+                                                                                            class="form-control"
+                                                                                            placeholder="Ingredient...">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                    <div class="form-group">
+                                                                                        <label>Manufacturing
+                                                                                            Date</label>
+                                                                                        <input type="text"
+                                                                                            name="manu_date"
+                                                                                            class="form-control"
+                                                                                            placeholder="Manufacturing Date...">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                    <div class="form-group">
+                                                                                        <label>Expiry Date</label>
+                                                                                        <input type="text" name="expiry"
+                                                                                            class="form-control"
+                                                                                            placeholder="Expiry Date...">
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                             <div class="row">
                                                                                 <div class="col-md-12">
@@ -229,118 +389,8 @@
                                                 </form>
                                             </div>
                                         </div>
-                                        <div class="modal" id="addModal" role="dialog" aria-labelledby="editModalLabel"
-                                            aria-hidden="false">
-                                            <div class="modal-dialog" role="document">
-                                                <form id="editForm" method="POST" enctype="multipart/form-data"
-                                                    action="/profile/index">
-                                                    {{ csrf_field() }}
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="editModalLabel">Add Product</h5>
-                                                        </div>
-                                                        <div class="modal-body">
 
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <div class="card card-user">
-                                                                        <div class="card-body">
 
-                                                                            <div class="row">
-                                                                                <div class="col-md-12">
-                                                                                    <div class="form-group">
-                                                                                        <label>Name</label>
-                                                                                        <input type="text" name="name"
-                                                                                            class="form-control"
-                                                                                            placeholder="Name product...">
-                                                                                    </div>
-                                                                                </div>
-
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-md-12">
-                                                                                    <div class="form-group">
-                                                                                        <label>Image</label>
-                                                                                        <input type="file" name="image"
-                                                                                            class="form-control"
-                                                                                            placeholder="Image of product...">
-                                                                                    </div>
-                                                                                </div>
-
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-md-12">
-                                                                                    <div class="form-group">
-                                                                                        <label>Category</label>
-                                                                                        <input type="text"
-                                                                                            name="category_id"
-                                                                                            class="form-control"
-                                                                                            placeholder="Category ID...">
-                                                                                    </div>
-                                                                                </div>
-
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-md-12">
-                                                                                    <div class="form-group">
-                                                                                        <label
-                                                                                            for="exampleInputEmail1">Sale</label>
-                                                                                        <input type="text" name="sale"
-                                                                                            class="form-control"
-                                                                                            placeholder="Sale">
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-md-12">
-                                                                                    <div class="form-group">
-                                                                                        <label>Price</label>
-                                                                                        <input type="text" name="price"
-                                                                                            class="form-control"
-                                                                                            placeholder="Price...">
-                                                                                    </div>
-                                                                                </div>
-
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-md-12">
-                                                                                    <div class="form-group">
-                                                                                        <label>Quantity</label>
-                                                                                        <input type="text"
-                                                                                            name="quantity"
-                                                                                            class="form-control"
-                                                                                            placeholder="Quantity...">
-                                                                                    </div>
-                                                                                </div>
-
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-md-12">
-                                                                                    <div class="form-group">
-                                                                                        <label>Description</label>
-                                                                                        <input type="text"
-                                                                                            name="description"
-                                                                                            class="form-control"
-                                                                                            placeholder="Description...">
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-dismiss="modal">Cancel</button>
-                                                            <button type="submit"
-                                                                class="btn btn-primary">Update</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
                                         <div id="modalDelete{{$prod->id}}" class="modal fade" role="dialog">
                                             <div class="modal-dialog">
                                                 <!-- Modal content-->
@@ -392,18 +442,21 @@
     $('.edit').click(function (e) {
         e.preventDefault();
         // Fill default value
-        var row = $(this).parent().parent();
+        console.log('edit');
+        var row = $(this).parent().parent().parent().parent();
         var col = row.find('td');
         var colImg = row.find('img')
         console.log(row);
         console.log(col);
-        console.log(colImg);
         $('#editForm input[name="name"]').val(col[1].innerText.trim());
         $('#editForm input[name="category_id"]').val(col[2].innerText.trim());
-        $('#editForm input[name="sale"]').val(col[3].innerText);
-        $('#editForm input[name="price"]').val(col[4].innerText);
+        $('#editForm input[name="discount"]').val(col[3].innerText);
+        $('#editForm input[name="unit_price"]').val(col[4].innerText);
         $('#editForm input[name="quantity"]').val(col[5].innerText);
-        $('#editForm input[name="description"]').val(col[6].innerText);
+        $('#editForm input[name="ingredient"]').val(col[6].innerText);
+        $('#editForm input[name="manu_date"]').val(col[7].innerText);
+        // $('#editForm input[name="expiry"]').val(col[8].innerText);
+        // $('#editForm input[name="description"]').val(col[9].innerText);
         // $('#editForm select[name="role_id"]').val($(col[4]).get(0).innerText === "User" ? 2 : 1);
 
         $('#editModal').modal({

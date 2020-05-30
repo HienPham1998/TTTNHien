@@ -158,7 +158,7 @@
                 </div>
                 <hr class="hr-text" data-content="Store Infomation">
                 @if($user->role_id != 3 )
-                <h2 class="pb-3">You haven't any store yet! Wanna become a salers? <a href="/register-store">Join us
+                <h2 class="pb-3">You haven't any store yet! Wanna become a salers? <a href="/send">Join us
                         now </a></h2>
                 @else
                 <h2 class="pb-3"><a href="/profile/index">Go to your store now?</a></h2>

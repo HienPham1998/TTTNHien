@@ -22,10 +22,6 @@
                             </ol>
                         </nav>
                     </div>
-                    <div class="col-lg-6 col-5 text-right">
-                        <a href="#" class="btn btn-sm btn-neutral add">New</a>
-                        <a href="#" class="btn btn-sm btn-neutral">Filters</a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -53,6 +49,8 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            {{count($listData)}}
+                                @if(count($listData) != 0)
                                 @foreach($listData as $key => $prod)
                                 @if($prod->status == 1)
                                 <tr>
@@ -88,10 +86,11 @@
                                         </div>
                                     </td>
                                 </tr>
+                                @endif
+                                @endforeach
                                 @else
                                 <p>None product is saled</p>
                                 @endif
-                                @endforeach
                             </tbody>
                         </table>
                     </div>

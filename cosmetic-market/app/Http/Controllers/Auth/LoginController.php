@@ -49,7 +49,7 @@ class LoginController extends Controller
         $newUser->email = $request->email;
         $newUser->password = bcrypt($request->password);
         $newUser->role_id = 2;
-        $newUser->avatar = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.iconfinder.com%2Ficons%2F745386%2Favatar_profile_profile_avatar_user_user_avatar_user_profile_icon&psig=AOvVaw06o5qT7RifPeBmecraYis0&ust=1590398663429000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKiM-eyWzOkCFQAAAAAdAAAAABAD';
+        $newUser->avatar = 'https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png';
         $newUser->save();
 
         return redirect('/login');

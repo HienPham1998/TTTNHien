@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Saler;
+use Auth;
 use Illuminate\Http\Request;
 use Image;
 
@@ -19,9 +21,12 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->name = $request->name;
         $product->category_id = $request->category_id;
-        $product->sale = $request->sale;
-        $product->price = $request->price;
+        $product->discount = $request->discount;
+        $product->unit_price = $request->unit_price;
         $product->quantity = $request->quantity;
+        $product->ingredient = $request->ingredient;
+        $product->manufacturing_date = $request->manu_date;
+        $product->expiry_date = $request->expiry;
         $product->description = $request->description;
         if ($request->hasFile('image')) {
             $img = $request->file('image');
@@ -47,13 +52,18 @@ class ProductController extends Controller
 
     public function add(Request $request)
     {
+        $saler = Saler::where('user_id', Auth::user()->id)->first();
         $product = new Product();
         $product->name = $request->name;
         $product->category_id = $request->category_id;
         $product->discount = $request->discount;
         $product->unit_price = $request->unit_price;
         $product->quantity = $request->quantity;
+        $product->ingredient = $request->ingredient;
+        $product->manufacturing_date = $request->manu_date;
+        $product->expiry_date = $request->expiry;
         $product->description = $request->description;
+        $product->saler_id = $saler->id;
         if ($request->hasFile('image')) {
             $img = $request->file('image');
             $filename = time() . '.' . $img->getClientOriginalExtension();

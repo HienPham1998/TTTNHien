@@ -21,6 +21,7 @@ Route::get('/update-cart/{id}', 'ClientController@updateCart');
 Route::get('post-product', 'ClientController@postProduct');
 Route::get('bill/{id}', 'ClientController@getBill');
 Route::post('order', 'ClientController@postBill');
+Route::get('/update-transport/{id}', 'ClientController@updateTransport');
 
 Route::get('profile', 'ProfileController@getProfile');
 
@@ -35,7 +36,8 @@ Route::get('register', 'Auth\LoginController@getRegister');
 Route::post('register', 'Auth\LoginController@postRegister');
 
 Route::get('logout', 'Auth\LoginController@logout');
-Route::put('addAddress', 'ClientController@addAddress');
+Route::post('addAddress', 'ClientController@addAddress');
+Route::put('address/update/{id}', 'ClientController@updateAddress');
 
 Route::get('register-store', 'ClientController@registerStore');
 // Route::post('register-store','Auth\LoginController@postSaler');
@@ -68,9 +70,13 @@ Route::delete('profile/reject/{id}', 'SalerController@rejectOrder');
 Route::get('profile/history', 'SalerController@getHistory');
 Route::get('history', 'ClientController@getHistory');
 
+Route::get('verify', 'ClientController@getVerify');
+Route::post('send-verify', 'ClientController@verifySaler');
+
 Route::get('send', 'EmailController@sendEmail');
 Route::get('statistic', 'SalerController@statisticIndex');
 Route::get('productstatistic', 'SalerController@productStatistic');
+
 Route::get('test', function (Request $request) {
 
     return App\Category::with('childs')->where('id', 1)->get();

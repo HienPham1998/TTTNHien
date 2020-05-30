@@ -97,7 +97,6 @@
     <div class="modal-dialog" role="document">
         <form action="addAddress" method="POST" enctype="multipart/form-data">
             @csrf
-            {{ method_field('PUT') }}
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editModalLabel">Add the shipping address</h5>

@@ -16,7 +16,7 @@ class CreateTransportUnitsTable extends Migration
         Schema::create('transport_units', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->integer('price');
+            $table->double('price');
             $table->timestamps();
         });
     }
