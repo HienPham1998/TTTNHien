@@ -69,7 +69,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="/statistic">
+                            <a class="nav-link" href="/statistic">
                             <i class="fas fa-chart-bar"></i>
                                 <span class="nav-link-text">Total bill statistic</span>
                             </a>

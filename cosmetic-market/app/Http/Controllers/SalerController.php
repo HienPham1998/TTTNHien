@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
-use App\Saler;
 use App\CategoryType;
 use App\Bill;
 use App\BillDetail;
-use App\User;
 use App\Charts\SampleChart;
-use Illuminate\Support\Collection;
+use App\Product;
+use App\Saler;
+use App\User;
 use Auth;
 use Carbon\Carbon;
 use DateInterval;
@@ -45,54 +44,58 @@ class SalerController extends Controller
         return back();
     }
 
-    public function getListPending(){
+    public function getListPending()
+    {
         $user = User::find(Auth::user()->id);
-        $saler = Saler::where("user_id",Auth::user()->id)->first();
-        $product = Product::where("saler_id",$saler->id)->paginate(20);
+        $saler = Saler::where("user_id", Auth::user()->id)->first();
+        $product = Product::where("saler_id", $saler->id)->paginate(20);
         $billDetail = BillDetail::all();
         $collections = collect([]);
         $listData = collect([]);
-        foreach($product as $prod){
+        foreach ($product as $prod) {
             $collections->push($prod);
         }
-        foreach($collections as $coll){
-            foreach($billDetail as $bill){
-                if($coll->id == $bill->product_id){
+        foreach ($collections as $coll) {
+            foreach ($billDetail as $bill) {
+                if ($coll->id == $bill->product_id) {
                     $listData->push($bill);
                 }
             }
         }
-        return view('salers.manage-order',compact('listData','user'));
+        return view('salers.manage-order', compact('listData', 'user'));
     }
 
-    public function getHistory(){
+    public function getHistory()
+    {
         $user = User::find(Auth::user()->id);
-        $saler = Saler::where("user_id",Auth::user()->id)->first();
-        $product = Product::where("saler_id",$saler->id)->paginate(20);
+        $saler = Saler::where("user_id", Auth::user()->id)->first();
+        $product = Product::where("saler_id", $saler->id)->paginate(20);
         $billDetail = BillDetail::all();
         $collections = collect([]);
         $listData = collect([]);
-        foreach($product as $prod){
+        foreach ($product as $prod) {
             $collections->push($prod);
         }
-        foreach($collections as $coll){
-            foreach($billDetail as $bill){
-                if($coll->id == $bill->product_id){
+        foreach ($collections as $coll) {
+            foreach ($billDetail as $bill) {
+                if ($coll->id == $bill->product_id) {
                     $listData->push($bill);
                 }
             }
         }
-        return view('salers.history',compact('user','listData'));
+        return view('salers.history', compact('user', 'listData'));
     }
 
-    public function changeStatusOrder($id){
+    public function changeStatusOrder($id)
+    {
         $bill = BillDetail::find($id);
         $bill->status = 1;
         $bill->save();
         return redirect('/profile/list');
     }
 
-    public function rejectOrder($id){
+    public function rejectOrder($id)
+    {
         $bill = BillDetail::find($id);
         $bill->delete();
         return redirect('/profile/list');
@@ -101,12 +104,15 @@ class SalerController extends Controller
     public function getProduct(Request $request)
     {
         $user = User::find(Auth::user()->id);
-        $product = Product::where('saler_id', Auth::user()->id)->paginate(20);
+        $saler = Saler::where('user_id', Auth::user()->id)->first();
+        // dd($saler);
+        $product = Product::where('saler_id', $saler->id)->paginate(6);
         // dd($product);
-        return view('salers.index', compact("product","user"));
+        return view('salers.index', compact("product", "user"));
     }
     public function statisticIndex(Request $request)
     {
+        $user = User::find(Auth::user()->id);
         $data = collect([]); // Could also be an array
         $labels = collect([]);
         $week = collect([]);
@@ -181,10 +187,11 @@ class SalerController extends Controller
         $chart->labels($labels);
         $chart->dataset('Total Bill', 'bar', $data);
 
-        return view("salers.statistic", compact("chart"));
+        return view("salers.statistic", compact("chart", "user"));
     }
     public function productStatistic(Request $request)
     {
+        $user = User::find(Auth::user()->id);
         $data = collect([]); // Could also be an array
         $labels = collect([]);
         $week = collect([]);
@@ -264,7 +271,7 @@ class SalerController extends Controller
         $chart->labels($labels);
         $chart->dataset('Total products', 'line', $data);
 
-        return view("salers.statistic", compact("chart"));
+        return view("salers.statistic", compact("chart", "user"));
     }
 
     function goToShop($id, Request $request){

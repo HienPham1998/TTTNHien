@@ -9,6 +9,7 @@ use App\CategoryType;
 use App\Product;
 use App\Saler;
 use App\Shippingaddress;
+use App\TransportUnit;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -95,6 +96,23 @@ class ClientController extends Controller
 
     }
 
+    public function getVerify()
+    {
+        return view('layouts.verify');
+    }
+
+    public function verifySaler(Request $request)
+    {
+        $user = User::find(Auth::user()->id);
+        $code = $user->remember_token;
+        if ($code == $request->code) {
+            return redirect('/register-store');
+        } else {
+            session()->flash("error", "Code is not match");
+            return back();
+        }
+    }
+
     public function postProduct()
     {
         $categories = CategoryType::all();
@@ -146,6 +164,7 @@ class ClientController extends Controller
     public function addToCart($product_id, Request $request)
     {
         $product = Product::where('id', $product_id)->first();
+        $transport = TransportUnit::find(1);
         if ($product) {
             \Cart::add([
                 'id' => $product_id,
@@ -157,6 +176,7 @@ class ClientController extends Controller
                     'image' => $product->image,
                     'cat_name' => $product->category->name,
                     'promotion_price' => $product->unit_price - $product->unit_price * $product->discount / 100,
+                    'transport' => $transport,
                 ],
             ]);
         }
@@ -168,6 +188,15 @@ class ClientController extends Controller
     {
         $quantityUpdate = $request->quantity;
         \Cart::update($id, $quantityUpdate);
+        return redirect()->back();
+    }
+    public function updateTransport($id, Request $request)
+    {
+        $item = \Cart::get($id);
+        $transportUpdate = strval($request->check);
+        $transport = TransportUnit::find($transportUpdate);
+        $option = $item->options->merge(['transport' => $transport]);
+        \Cart::update($id, ['options' => $option]);
         return redirect()->back();
     }
     public function removeFromCart($id, Request $request)
@@ -186,31 +215,46 @@ class ClientController extends Controller
         $shippingaddress->save();
         return redirect("/bill/" . Auth::user()->id);
     }
+
+    public function updateAddress($id, Request $request)
+    {
+        $address = Shippingaddress::find($id);
+        $address->name = $request->name;
+        $address->email = $request->email;
+        $address->phone = $request->phone;
+        $address->address = $request->address;
+        $address->save();
+        return redirect("/bill/" . Auth::user()->id);
+    }
     public function getBill($customer_id, Request $request)
     {
         $categories = CategoryType::all();
         $shippingaddress = Shippingaddress::where("user_id", Auth::user()->id)->orderBy("created_at", "desc")->first();
         $products = \Cart::content();
+        $transport = TransportUnit::all();
         $total = 0;
         foreach ($products as $p) {
             $total = $total + $p->options->promotion_price * $p->qty;
         }
-        return view('layouts.bill', compact('categories', 'shippingaddress', 'products', 'total'));
+        return view('layouts.bill', compact('categories', 'shippingaddress', 'products', 'total', 'transport'));
     }
 
-    public function getOrder(){
-        $bill = Bill::where("user_id",Auth::user()->id)->first();
+    public function getOrder()
+    {
+        $bills = Bill::where("user_id", Auth::user()->id)->get();
         $categories = CategoryType::all();
-        return view('layouts.order',compact('bill','categories'));
+        return view('layouts.order', compact('bills', 'categories'));
     }
 
-    public function getHistory(){
-        $bill = Bill::where("user_id",Auth::user()->id)->first();
+    public function getHistory()
+    {
+        $bill = Bill::where("user_id", Auth::user()->id)->first();
         $categories = CategoryType::all();
-        return view('layouts.history',compact('bill','categories'));
+        return view('layouts.history', compact('bill', 'categories'));
     }
-    
-    public function deleteOrder($id){
+
+    public function deleteOrder($id)
+    {
         $billDetail = BillDetail::find($id);
         $billDetail->status = 2;
         $billDetail->save();

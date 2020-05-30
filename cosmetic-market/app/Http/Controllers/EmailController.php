@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\User;
+use Auth;
+use Redirect;
 use \App\Mail\SendMail;
-use Redirect; 
 
 class EmailController extends Controller
 {
-    public function sendEmail(){
-        
-
+    public function sendEmail()
+    {
+        $random = str_random(6);
+        $user = User::find(Auth::user()->id);
         $details = [
-            'title' => 'Title: Mail from Real Programmer',
-            'body' => 'Body: This is for testing email'
+            'title' => 'Wanna become saler? Just one more step to join us!!!',
+            'token' => $random,
         ];
-
-        \Mail::to('hienktpm1@gmail.com')->send(new SendMail($details));
-        // $categories = Category::all();
-        // return view('layouts.index',compact('categories'));
-        return redirect('/');
-    } 
+        $user->remember_token = $random;
+        $user->save();
+        \Mail::to($user->email)->send(new SendMail($details));
+        return redirect('/verify');
+    }
 }

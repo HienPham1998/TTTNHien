@@ -5,7 +5,6 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SendMail extends Mailable
 {
@@ -17,10 +16,11 @@ class SendMail extends Mailable
      * @return void
      */
 
-     public $details;
-    public function __construct()
-    {
+    public $details;
 
+    public function __construct($details)
+    {
+        $this->details = $details;
     }
 
     /**
@@ -30,6 +30,6 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Subject:hello')->view('layouts.mail');
+        return $this->subject('Cosmetic Trading Floor')->view('layouts.mail');
     }
 }

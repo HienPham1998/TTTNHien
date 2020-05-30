@@ -47,6 +47,7 @@
                                         <ul class="dropdown-menu dropdown-menu-right">
                                             <li><a href="/profile">Your profile</a></li>
                                             <li><a href="/order">Your Order</a></li>
+                                            <li><a href="/history">Your History</a></li>
                                             <li><a href="/logout">Logout</a></li>
                                         </ul>
                                     </li>
@@ -79,24 +80,11 @@
         <li class="nav-item">
             <a href="category.html" class="nav-link">Collection</a>
         </li>
-        <!-- <li class="nav-item dropdown">
-                    <a href="#" class="nav-link">Categories</a>
-                    <ul>
-                                @foreach($categories as $cat)
-                                <li><a href="/category/{{$cat->id}}">{{$cat->name}}</a></li>
-                                @endforeach
-                            </ul>
-                </li> -->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 Categories
             </a>
-            <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                @foreach($categories as $cat)
-                <a class="dropdown-item" href="/category/{{$cat->id}}">{{$cat->name}}</a>
-                @endforeach
-            </div> -->
             <div class="dropdown-menu" id="main-menu" aria-labelledby="navbarDropdown">
                 @foreach($categories as $key => $category)
                 <div class="dropright" onclick="hoverFunction({{$key}})" onmouseleave="hoverOut({{$key}})">
@@ -119,7 +107,7 @@
     </ul>
     <div class="container" style="margin-top:10px">
         <h3>Your Order:</h3>
-            @if($bill != null)
+            @if(count($bills) != 0)
         <table class="table table-bordered">
             <tbody>
                 <tr>
@@ -129,6 +117,7 @@
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
+                @foreach($bills as $bill)
                 @foreach($bill->billDet as $detail)
                 <tr>
                     <td style="width:10%">
@@ -157,6 +146,7 @@
                     </td>
                     @endif
                 </tr>
+                @endforeach
                 @endforeach
             </tbody>
         </table>
