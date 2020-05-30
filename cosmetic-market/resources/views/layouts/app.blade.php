@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>HD Market</title>
+    <title>Cosmetic Trading Floor</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="e-commerce site well design with responsive view." />
@@ -32,20 +32,7 @@
                 <div class="row">
                     <div class="col-sm-12" style="display:flex;justify-content:space-between;">
                         <div class="top-left float-xs-left">
-                            <div class="wel-come-msg"> Welcome to HD market! </div>
-                            <div class="language">
-                                <form action="#" method="post" enctype="multipart/form-data" id="language">
-                                    <div class="btn-group">
-                                        <button class="btn btn-link dropdown-toggle" style="margin-top:3px"
-                                            data-toggle="dropdown" aria-expanded="false"> English <span
-                                                class="caret"></span></button>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#">Arabic</a></li>
-                                            <li><a href="#"> English</a></li>
-                                        </ul>
-                                    </div>
-                                </form>
-                            </div>
+                            <div class="wel-come-msg"> Welcome to our trading floor! </div>
                         </div>
                         <div class="top-right float-xs-right" style="display:flex;align-items:center">
                             <div id="top-links" class="nav float-xs-right">
@@ -85,20 +72,22 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 header-left" id="logoHeader">
+                <div class="col-lg-2 header-left" id="logoHeader">
                     <div id="logo"> <a id="aLogo" href="/"><img src="{{asset('client/assets/image/logo.png')}}"
-                                title="E-Commerce" alt="E-Commerce" class="img-fluid"></a>
+                                title="E-Commerce" alt="E-Commerce" style="width:50%" class="img-fluid"></a>
+                        <p class="text-center">Cosmetic Trading Floor</p>
                     </div>
                 </div>
-                <div class="col-lg-9 header-right" id="right-side">
+                <div class="col-lg-10 header-right" id="right-side">
                     <div class="row">
-                        <div class="col-sm-6 offset-sm-2">
-                            <div class="row" id="row-search">
-                                <input type="text" name="search" value="" placeholder="Enter your keyword ..."
+                            <form action="" method="GET" class="form-group form-inline col-sm-6 offset-sm-2 bmd-form-group" id="search">
+                            @csrf   
+                                <input type="text" name="search" value="{{ request()->search }}" placeholder="Enter your keyword ..."
                                     class="form-control" id="search-content">
-                                <button type="button" class="btn btn-primary"><span>Search</span></button>
-                            </div>
-                        </div>
+                                <button class="btn btn-primary" style="padding: 6px 15px; border-radius:5px"><span>Search</span></button>
+                            
+                        </form>
+
                         <div class="col-sm-4">
                             <div id="cart" class="btn-group btn-block" style="width:auto">
                                 <button type="button" class="btn btn-inverse btn-block btn-lg">
@@ -116,38 +105,27 @@
             </div>
         </div>
     </header>
-    <ul class="nav" style="background-color:#fff;justify-content:space-evenly">
+    <ul class="nav" style="background-color:#fff;justify-content:space-evenly;padding: 0 15%;">
         <li class="nav-item active">
             <a href="/" class="nav-link">HOME</a>
         </li>
         <li class="nav-item">
-            <a href="category.html" class="nav-link">COLLECTION</a>
+            <a href="#" class="nav-link">COLLECTION</a>
         </li>
-        <!-- <li class="nav-item dropdown">
-                    <a href="#" class="nav-link">Categories</a>
-                    <ul>
-                                @foreach($categories as $cat)
-                                <li><a href="/category/{{$cat->id}}">{{$cat->name}}</a></li>
-                                @endforeach
-                            </ul>
-                </li> -->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 CATEGORIES
             </a>
-            <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                @foreach($categories as $cat)
-                <a class="dropdown-item" href="/category/{{$cat->id}}">{{$cat->name}}</a>
-                @endforeach
-            </div> -->
-            <div class="dropdown-menu" id="main-menu" aria-labelledby="navbarDropdown" style="text-transform:uppercase; font-size:13px">
+            <div class="dropdown-menu" id="main-menu" aria-labelledby="navbarDropdown"
+                style="text-transform:uppercase; font-size:13px">
                 @foreach($categories as $key => $category)
                 <div class="dropright" onclick="hoverFunction({{$key}})" onmouseleave="hoverOut({{$key}})">
                     <a href="#" class="dropdown-item">{{$category->name}}</a>
-                    <div class="sub-menu-content dropdown-menu" >
+                    <div class="sub-menu-content dropdown-menu">
                         @foreach($category->subcategory as $submenu)
-                        <a class="dropdown-item" href="/category/{{$submenu->id}}" style="text-transform:uppercase; font-size:13px">{{$submenu->name}}</a>
+                        <a class="dropdown-item" href="/category/{{$submenu->id}}"
+                            style="text-transform:uppercase; font-size:13px">{{$submenu->name}}</a>
                         @endforeach
                     </div>
                 </div>
@@ -155,44 +133,21 @@
             </div>
         </li>
         <li class="nav-item">
-            <a href="about-us.html" class="nav-link">ABOUT US</a>
-        </li>
-        <li class="nav-item">
-            <a href="contact.html" class="nav-link">CONTACT US</a>
+            <a href="#contact-us" class="nav-link">CONTACT US</a>
         </li>
     </ul>
     @yield('content')
-    <div class="footer-top-cms parallax-container">
-        <div class="container">
-            <div class="row">
-                <div class="newslatter col-8">
-                    <form>
-                        <h5>SIGN UP FOR OUR DISCOUNTS TODAY!</h5>
-                        <h4 class="title-subline">Be sure to follow our blog and sign up for all of our mailing updates!
-                        </h4>
-                        <div class="row">
-                            <input type="text" class=" form-control col-9" placeholder="Your-email@website.com">
-                            <div class=" col-3">
-                                <a type="submit" value="Sign up" class="btn btn-large btn-primary">Subscribe</a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="footer-social col-4">
-                    <ul>
-                        <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li class="gplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        <li class="youtube"><a href="#"><i class="fa fa-youtube-play"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+    @if(session()->has("success"))
+    <div class="alert alert-warning alert-dismissible fade show "
+        style="width:20%; height:20%; position: fixed; top: 40%; left:40%; opacity:0.9; background-color: #ccc; border-color:#ccc;   box-shadow: 1px 1px 1px 2px #ccc;  ">
+        <button type="button" aria-hidden="true" class="close p-0" data-dismiss="alert" style=" top: 6px;
+    right: 8px;" aria-label="Close">
+            <i class="far fa-times-circle" style="color:#111"></i>
+        </button>
+        <p style="margin-top:25px; color:#111" class="text-center"> {{ session("success")}}</p>
+        @endif
     </div>
     <div class="container">
-        <h3 class="client-title">Favourite Brands</h3>
-        <h4 class="title-subline">The High Quality Products</h4>
         <div id="brand_carouse" class="owl-carousel brand-logo">
             <div class="item text-xs-center"> <a href="#"><img src="{{asset('client/assets/image/brand/brand1.png')}}"
                         alt="Disney" class="img-fluid" /></a> </div>
@@ -247,66 +202,43 @@
                 </div>
             </div>
         </div>
+        <hr>
         <div class="container">
             <div class="row">
-                <div class="col-sm-3 footer-block">
-                    <h5 class="footer-title">INFORMATION</h5>
-                    <ul class="list-unstyled ul-wrapper">
-                        <li><a href="contact.html">About Us</a></li>
-                        <li><a href="#">Delivery Information</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">Wish List</a></li>
-                        <li><a href="#">Gift Certificates</a></li>
-                        <li><a href="#">View Cart</a></li>
-                        <li><a href="#">Order History</a></li>
-                        <li><a href="#">Specials</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-3 footer-block">
-                    <h5 class="footer-title">MY ACCOUNT</h5>
-                    <ul class="list-unstyled ul-wrapper">
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="#">My Account</a></li>
-                        <li><a href="#">Order History</a></li>
-                        <li><a href="#">Wish List</a></li>
-                        <li><a href="#">Newsletter</a></li>
-                        <li><a href="#">Gift Certificates</a></li>
-                        <li><a href="#">Brands</a></li>
-                        <li><a href="#">Specials</a></li>
-                        <li><a href="#">Affiliates</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-3 footer-block">
-                    <h5 class="footer-title">Extras</h5>
-                    <ul class="list-unstyled ul-wrapper">
-                        <li><a href="#">Delivery information</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">Contact us</a></li>
-                        <li><a href="#">Sitemap</a></li>
-                        <li><a href="#">Product Recall</a></li>
-                        <li><a href="#">Gift Vouchers</a></li>
-                        <li><a href="#">Help & FAQs</a></li>
-                        <li><a href="#">Sale Only Today</a></li>
-                    </ul>
+                <div class="col-sm-5 footer-block">
+                    <h5 class="footer-title">Cosmetic Infomation</h5>
+                    <iframe width="400" height="250" src="https://www.youtube.com/embed/pfq000AF1i8" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
                 </div>
                 <div class="col-sm-3 footer-block">
                     <div class="content_footercms_right">
                         <div class="footer-contact">
-                            <h5 class="contact-title footer-title">Contact Us</h5>
-                            <ul class="ul-wrapper">
+                            <h5 class="contact-title footer-title" id="contact-us">Contact Us</h5>
+                            <ul class="ul-wrapper d-block">
                                 <li><i class="fa fa-map-marker"></i><span class="location2">Offices Addresss:<br>
-                                        218,Drimlend Building<br>
-                                        Sarthana jakatnaka, Surat City <br>
-                                        Gujarat-395013 INDIA</span></li>
+                                        218,Dream Building<br>
+                                        Hanoi City <br>
+                                        Vietnam</span></li>
                                 <li><i class="fa fa-envelope"></i><span class="mail2"><a
-                                            href="#">info@localhost.com</a><br>
-                                        <a href="#">your@domain.com</a></span></li>
-                                <li><i class="fa fa-mobile"></i><span class="phone2">+91 0987-654-321<br>
-                                        +91 0987-654-321</span></li>
+                                            href="#">hienp9237@@gmail.com</a><br>
+                                        <a href="#">hienktpm1@gmail.com</a></span></li>
+                                <li><i class="fa fa-mobile"></i><span class="phone2">+08 357 625 111 </span></li>
                             </ul>
                         </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <h5 class="footer-title">Facebook Page</h5>
+                    <div class="fb-page"
+                        data-href="https://www.facebook.com/Cosmetic-Trading-Floor-101549541589507/?modal=admin_todo_tour"
+                        data-tabs="timeline" data-width="400" data-height="250" data-small-header="false"
+                        data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                        <blockquote
+                            cite="https://www.facebook.com/Cosmetic-Trading-Floor-101549541589507/?modal=admin_todo_tour"
+                            class="fb-xfbml-parse-ignore"><a
+                                href="https://www.facebook.com/Cosmetic-Trading-Floor-101549541589507/?modal=admin_todo_tour">Cosmetic
+                                Trading Floor</a></blockquote>
                     </div>
                 </div>
             </div>
@@ -324,7 +256,7 @@
                     <li><a href="#">Contact</a></li>
                 </ul>
                 <div class="copyright"> Copyright - <a class="yourstore" href="http://www.lionode.com/"> Created by
-                        Lionode &copy; 2017 </a></div>
+                        HienPT19 &copy; 2020 </a></div>
                 <div class="footer-bottom-cms">
                     <div class="footer-payment">
                         <ul>
@@ -339,6 +271,9 @@
         </div>
         <a id="scrollup">Scroll</a>
     </footer>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0">
+    </script>
     <!-- <script src="{{asset('client/assets/javascript/jquery.parallax.js')}}"></script> -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
@@ -375,7 +310,7 @@
         let menuSubAll = document.querySelectorAll(".sub-menu-content");
 
         function hoverFunction(index) {
-            document.getElementById('main-menu').style.display="block";
+            document.getElementById('main-menu').style.display = "block";
             menuSubAll.forEach((ele, i) => {
                 if (index === i) {
                     ele.classList.add('show_menu');
@@ -387,8 +322,8 @@
             menuSubAll.forEach((ele, i) => {
                 setTimeout(() => {
 
-                ele.classList.remove('show_menu');
-                },300)
+                    ele.classList.remove('show_menu');
+                }, 300)
             })
 
         }

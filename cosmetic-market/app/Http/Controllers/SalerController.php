@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Saler;
 use App\Product;
+use App\Saler;
+use App\CategoryType;
 use App\Bill;
 use App\BillDetail;
 use App\User;
@@ -264,6 +265,13 @@ class SalerController extends Controller
         $chart->dataset('Total products', 'line', $data);
 
         return view("salers.statistic", compact("chart"));
+    }
+
+    function goToShop($id, Request $request){
+          $categories = CategoryType::all();
+          $saler = Saler::find($id);
+          $products = Product::where("saler_id",$id)->paginate(16);
+           return view('salers.shop', compact('categories', 'products','saler'));
     }
 
 }

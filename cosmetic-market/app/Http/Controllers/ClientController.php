@@ -100,10 +100,14 @@ class ClientController extends Controller
         $categories = CategoryType::all();
         return view('layouts.postProduct', compact('categories'));
     }
-    public function index()
+    public function index(Request $request)
     {
         $categories = CategoryType::all();
-        $products = Product::orderBy("created_at", "desc")->paginate(16);
+        $products = Product::orderBy("created_at", "desc");
+        if($request->search) {
+        $products = $products->where("name", "like", "%" . $request->search . "%")->orWhere("ingredient", "like", "%" . $request->search . "%")->orWhere("description", "like", "%" . $request->search . "%");
+        }
+        $products = $products->paginate(16);
         return view('layouts.index', compact('categories', 'products'));
     }
 
