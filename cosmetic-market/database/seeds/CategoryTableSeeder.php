@@ -14,7 +14,7 @@ class CategoryTableSeeder extends Seeder
 
         DB::table('categories')->insert([
             "name" => "lipstick",
-            "category_type_id" => "5",
+            "category_type_id" => "4",
         ]);
         DB::table('categories')->insert([
             "name" => "facingfoam",

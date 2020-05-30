@@ -17,7 +17,7 @@ class SalerTableSeeder extends Seeder
             "phone" => "0981778269",
             "shopname" => "LuckyStore",
             "shopaddress" => "Bac Tu Liem, Ha Noi",
-            "user_id" => "2",
+            "user_id" => "9",
         ]);
         DB::table('salers')->insert([
             "firstname" => "Dung",
@@ -25,7 +25,7 @@ class SalerTableSeeder extends Seeder
             "phone" => "0981778269",
             "shopname" => "HighStore",
             "shopaddress" => "Bac Tu Liem, Ha Noi",
-            "user_id" => "3",
+            "user_id" => "10",
         ]);
         DB::table('salers')->insert([
             "firstname" => "Dieu",
@@ -33,7 +33,7 @@ class SalerTableSeeder extends Seeder
             "phone" => "0981778269",
             "shopname" => "MoneyStore",
             "shopaddress" => "Bac Tu Liem, Ha Noi",
-            "user_id" => "5",
+            "user_id" => "11",
         ]);
         DB::table('salers')->insert([
             "firstname" => "Linh",
@@ -41,7 +41,7 @@ class SalerTableSeeder extends Seeder
             "phone" => "0981778269",
             "shopname" => "MoneyStore",
             "shopaddress" => "Bac Tu Liem, Ha Noi",
-            "user_id" => "6",
+            "user_id" => "12",
         ]);
         DB::table('salers')->insert([
             "firstname" => "Dung",
@@ -49,7 +49,7 @@ class SalerTableSeeder extends Seeder
             "phone" => "0981778269",
             "shopname" => "HDStore",
             "shopaddress" => "Bac Tu Liem, Ha Noi",
-            "user_id" => "7",
+            "user_id" => "13",
         ]);
     }
 }

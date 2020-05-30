@@ -45,7 +45,9 @@
                                                 aria-hidden="true"></i><span>{{Auth::user()->username}}</span> <span
                                                 class="caret"></span></a>
                                         <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="/profile">Your profile</a></li>
+                                            <li><a href="/profile">Your Profile</a></li>
+                                            <li><a href="/order">Your Order</a></li>
+                                            <li><a href="/history">Your History</a></li>
                                             <li><a href="/logout">Logout</a></li>
                                         </ul>
                                     </li>

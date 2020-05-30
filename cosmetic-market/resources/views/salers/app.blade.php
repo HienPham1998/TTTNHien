@@ -42,7 +42,7 @@
             <!-- Brand -->
             <div class="sidenav-header  align-items-center">
                 <a class="navbar-brand" style="font-size:30px; color: orange">
-                    HD Market
+                    C.E.M
                 </a>
             </div>
             <div class="navbar-inner">
@@ -51,7 +51,7 @@
                     <!-- Nav items -->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="dashboard.html">
+                            <a class="nav-link" href="/profile/index">
                                 <i class="ni ni-tv-2 text-primary"></i>
                                 <span class="nav-link-text">Dashboard</span>
                             </a>
@@ -146,21 +146,9 @@
                                 <div class="dropdown-header noti-title">
                                     <h6 class="text-overflow m-0">Welcome!</h6>
                                 </div>
-                                <a href="#!" class="dropdown-item">
+                                <a href="/profile" class="dropdown-item">
                                     <i class="ni ni-single-02"></i>
                                     <span>My profile</span>
-                                </a>
-                                <a href="/profile" class="dropdown-item">
-                                    <i class="ni ni-settings-gear-65"></i>
-                                    <span>Settings</span>
-                                </a>
-                                <a href="#!" class="dropdown-item">
-                                    <i class="ni ni-calendar-grid-58"></i>
-                                    <span>Activity</span>
-                                </a>
-                                <a href="#!" class="dropdown-item">
-                                    <i class="ni ni-support-16"></i>
-                                    <span>Support</span>
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a href="/logout" class="dropdown-item">

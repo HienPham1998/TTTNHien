@@ -4,9 +4,8 @@
 <div class="container mt-2">
     <div id="address" class="bill-card mt-3">
         <h2><i class="fas fa-map-marker-alt"></i> Địa chỉ nhận hàng:</h2>
-        <span>{{$shippingaddress->name}}</span>
-        <span>{{$shippingaddress->email}}</span>
-        <span>{{$shippingaddress->phone}}</span>
+        <span>{{$shippingaddress->name}}, </span>
+        <span>{{$shippingaddress->phone}}, </span>
         <span>{{$shippingaddress->address}}</span>
         <p class="changeAddress" style="float:right;cursor:pointer">THAY ĐỔI</p>
         <div class="modal" id="editModal" role="dialog" aria-labelledby="editModalLabel" aria-hidden="false">
@@ -32,15 +31,6 @@
                                                         <label>Name</label>
                                                         <input type="text" name="name" class="form-control"
                                                             placeholder="Name...">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label>Email</label>
-                                                        <input type="text" name="email" class="form-control"
-                                                            placeholder="Email...">
                                                     </div>
                                                 </div>
                                             </div>
@@ -116,22 +106,18 @@
             <tfoot>
                 <tr>
                     <td class="text-right" colspan="4"><strong>Sub-Total:</strong></td>
-                    <td class="text-right">{{$total}}</td>
+                    <td class="text-right">${{$total}}</td>
                 </tr>
                 <tr>
                     <td class="text-right" colspan="4"><strong>Flat Shipping Rate:</strong></td>
                     <td class="text-right">
-                    @foreach($products as $prod)
-                    <span>{{$prod->options->transport->price}}</span>
-                    @endforeach
+                    <span>${{$products->first()->options->transport->price}}</span>
                     </td>
                 </tr>
                 <tr>
                     <td class="text-right" colspan="4"><strong>Total:</strong></td>
                     <td class="text-right">
-                    @foreach($products as $prod)
-                    <span>${{$total + $prod->options->transport->price}}</span>
-                    @endforeach
+                    <span>${{$total + $products->first()->options->transport->price}}</span>
                     </td>
                 </tr>
                 <tr>
@@ -143,8 +129,8 @@
                         </div>
                     </td>
                     <td>
+                    <span>Transport Unit: {{$products->first()->options->transport->name}}</span>
                     @foreach($products as $prod)
-                    <span>Transport Unit: {{$prod->options->transport->name}}</span>
                     <div class="modal" id="updateAddress" role="dialog" aria-labelledby="editModalLabel" aria-hidden="false">
             <div class="modal-dialog" role="document">
                 <form id="updateForm" method="get" enctype="multipart/form-data"
@@ -196,29 +182,7 @@
             </tfoot>
         </table>
     </div>
-    <div class="bill-card mt-2">
-        <table class="table table-borderless">
-            <thead>
-                <tr>
-                    <th scope="col">Voucher</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Xu</td>
-                    <td>Dùng 17700 Xu</td>
-                </tr>
-                <tr>
-                    <td>Phương thức thanh toán:</td>
-                    <td>Thanh toán khi nhận hàng</td>
-                </tr>
-                <tr>
-                    <td>Thanh toán khi nhận hàng</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+
 
 
     <div class="buttons">
@@ -252,14 +216,13 @@
     // Click edit button
     $('.changeAddress').click(function (e) {
         // Fill default value
-        var row = $(this).parent().parent().parent();
+        var row = $(this).parent();
         var col = row.find('span');
         console.log(row);
         console.log(col);
-        $('#editForm input[name="name"]').val(col[8].innerText.trim());
-        $('#editForm input[name="email"]').val(col[9].innerText);
-        $('#editForm input[name="phone"]').val(col[10].innerText);
-        $('#editForm input[name="address"]').val(col[11].innerText);
+        $('#editForm input[name="name"]').val(col[0].innerText);
+        $('#editForm input[name="phone"]').val(col[1].innerText);
+        $('#editForm input[name="address"]').val(col[2].innerText);
         // $('#editForm select[name="role_id"]').val($(col[4]).get(0).innerText === "User" ? 2 : 1);
 
         $('#editModal').modal({

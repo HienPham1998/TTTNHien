@@ -7,7 +7,7 @@
                 @if(session()->has("success"))
                 <div class="alert alert-success alert-dismissible fade show">
                     <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                        <i class="material-icons">close</i>
+                       <i class="fas fa-times"></i>
                     </button>
                     <span> {{ session("success") }}</span>
                 </div>

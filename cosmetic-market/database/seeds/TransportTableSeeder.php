@@ -22,7 +22,7 @@ class TransportTableSeeder extends Seeder
         ]);
         DB::table('transport_units')->insert([
             "name" => "Giao hàng tiết kiệm",
-            "price" => "2",
+            "price" => "1",
         ]);
         DB::table('transport_units')->insert([
             "name" => "Ninja Van",

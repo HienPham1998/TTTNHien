@@ -7,24 +7,22 @@
                 @if(session()->has("success"))
                 <div class="alert alert-success alert-dismissible fade show">
                     <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                        <i class="material-icons">close</i>
+                        <i class="fas fa-times"></i>
                     </button>
                     <span> {{ session("success") }}</span>
                 </div>
                 @endif
                 <div class="row align-items-center py-4">
                     <div class="col-lg-6 col-7">
-                        <h6 class="h2 text-white d-inline-block mb-0">Tables</h6>
+                        <h6 class="h2 text-white d-inline-block mb-0">Product</h6>
                         <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                                <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Tables</li>
+                                <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
+                               
                             </ol>
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="#" class="btn btn-sm btn-neutral add">New</a>
                     </div>
                 </div>
             </div>
@@ -102,8 +100,8 @@
                                     </td>
                                     <td class="text-right">
                                         <button class="btn btn-warning edit">Verify</button>
-                                        <button data-target="" type="button"
-                                            class="btn btn-danger" data-toggle="modal">Reject</button>
+                                        <button data-target="" type="button" class="btn btn-danger"
+                                            data-toggle="modal">Reject</button>
                                         <div class="modal" id="editModal" role="dialog" aria-labelledby="editModalLabel"
                                             aria-hidden="false">
                                         </div>

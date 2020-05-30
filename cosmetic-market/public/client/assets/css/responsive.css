@@ -411,6 +411,7 @@ ul.main-navigation {
 /* content */
 .product-thumb .image img {
     max-width: none;
+    max-height:208px;
     width: 100%;
 }
 

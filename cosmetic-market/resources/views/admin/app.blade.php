@@ -33,6 +33,8 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <!-- Argon CSS -->
     <link rel="stylesheet" href="{{asset('admin/assets/css/argon.css?v=1.2.0')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('client/assets/css/product.css')}}" type="text/css">
+
 </head>
 
 <body>
@@ -50,12 +52,6 @@
                     <!-- Nav items -->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="dashboard.html">
-                                <i class="ni ni-tv-2 text-primary"></i>
-                                <span class="nav-link-text">Dashboard</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="/manage/salers/index">
                             <i class="fas fa-user-friends"></i>
                                 <span class="nav-link-text">Manage Salers</span>
@@ -63,7 +59,7 @@
                         </li>
                           <li class="nav-item">
                             <a class="nav-link" href="/manage/verifyProduct">
-                            <i class="fas fa-user-friends"></i>
+                            <i class="fas fa-toolbox"></i>
                                 <span class="nav-link-text">Verify Products</span>
                             </a>
                         </li>

@@ -118,7 +118,7 @@
                     <th>Action</th>
                 </tr>
                 @foreach($bills as $bill)
-                @foreach($bill->billDet as $detail)
+                @foreach($bill->billDetail as $detail)
                 <tr>
                     <td style="width:10%">
                         <img class="img-thumbnail" style="width:100px" src="{{$detail->product->image}}" alt="">

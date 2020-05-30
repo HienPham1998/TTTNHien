@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Cosmetic Trading Floor</title>
+    <title>Cosmetic Exchange</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="e-commerce site well design with responsive view." />
@@ -25,14 +25,14 @@
 
 </head>
 
-<body class="index">
+<body class="index" >
     <header>
         <div class="header-top">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12" style="display:flex;justify-content:space-between;">
                         <div class="top-left float-xs-left">
-                            <div class="wel-come-msg"> Welcome to our trading floor! </div>
+                            <div class="wel-come-msg"> Welcome to our cosmetic exchange! </div>
                         </div>
                         <div class="top-right float-xs-right" style="display:flex;align-items:center">
                             <div id="top-links" class="nav float-xs-right">
@@ -75,7 +75,7 @@
                 <div class="col-lg-2 header-left" id="logoHeader">
                     <div id="logo"> <a id="aLogo" href="/"><img src="{{asset('client/assets/image/logo.png')}}"
                                 title="E-Commerce" alt="E-Commerce" style="width:50%" class="img-fluid"></a>
-                        <p class="text-center">Cosmetic Trading Floor</p>
+                        <p class="text-center">Cosmetic Exchange</p>
                     </div>
                 </div>
                 <div class="col-lg-10 header-right" id="right-side">
@@ -112,12 +112,12 @@
         <li class="nav-item">
             <a href="#" class="nav-link">COLLECTION</a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" >
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+                aria-haspopup="true" aria-expanded="false" onclick="changeStatus()">
                 CATEGORIES
             </a>
-            <div class="dropdown-menu" id="main-menu" aria-labelledby="navbarDropdown"
+            <div class="dropdown-menu"  id="main-menu" aria-labelledby="navbarDropdown"
                 style="text-transform:uppercase; font-size:13px">
                 @foreach($categories as $key => $category)
                 <div class="dropright" onclick="hoverFunction({{$key}})" onmouseleave="hoverOut({{$key}})">
@@ -172,7 +172,7 @@
         </div>
     </div>
     <footer>
-        <div class="cms_searvice">
+        <div class="cms_searvice" >
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 ">
@@ -308,9 +308,9 @@
     </script> -->
     <script>
         let menuSubAll = document.querySelectorAll(".sub-menu-content");
-
+        let main = document.getElementById('main-menu');
         function hoverFunction(index) {
-            document.getElementById('main-menu').style.display = "block";
+            main.style.display = "block";
             menuSubAll.forEach((ele, i) => {
                 if (index === i) {
                     ele.classList.add('show_menu');
@@ -323,11 +323,21 @@
                 setTimeout(() => {
 
                     ele.classList.remove('show_menu');
-                }, 300)
+                }, 500)
             })
-
+        }
+        function hide(){
+            document.getElementById('main-menu').style.display = "none";
         }
 
+        function changeStatus(){
+            console.log(main.style.display)
+            if(main.style.display == "none"){
+                main.style.display = "block"
+            }else{
+                main.style.display = "none"
+            }
+        }
     </script>
     @stack('scripts')
 </body>

@@ -208,7 +208,6 @@ class ClientController extends Controller
     {
         $shippingaddress = new Shippingaddress();
         $shippingaddress->name = $request->name;
-        $shippingaddress->email = $request->email;
         $shippingaddress->phone = $request->phone;
         $shippingaddress->address = $request->address;
         $shippingaddress->user_id = Auth::user()->id;
@@ -248,7 +247,7 @@ class ClientController extends Controller
 
     public function getHistory()
     {
-        $bill = Bill::where("user_id", Auth::user()->id)->first();
+        $bill = Bill::where("user_id", Auth::user()->id)->get();
         $categories = CategoryType::all();
         return view('layouts.history', compact('bill', 'categories'));
     }

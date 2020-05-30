@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="container">
+<div class="container" onclick="hide()">
     <div class="cms_searvice mb-5">
         <div class="row">
             <div class="col-lg-4 ">
@@ -124,6 +124,7 @@
                         @endforeach
 
                     </div>
+                    {{$products->links()}}
                 </div>
             </div>
         </div>

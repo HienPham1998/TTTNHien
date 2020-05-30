@@ -7,19 +7,17 @@
                 @if(session()->has("success"))
                 <div class="alert alert-success alert-dismissible fade show">
                     <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                        <i class="material-icons">close</i>
+                        <i class="fas fa-times"></i>
                     </button>
                     <span> {{ session("success") }}</span>
                 </div>
                 @endif
                 <div class="row align-items-center py-4">
                     <div class="col-lg-6 col-7">
-                        <h6 class="h2 text-white d-inline-block mb-0">Tables</h6>
+                        <h6 class="h2 text-white d-inline-block mb-0">Manage Products</h6>
                         <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                                <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                                <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Tables</li>
+                                <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
                             </ol>
                         </nav>
                     </div>
@@ -28,7 +26,7 @@
                             data-toggle="modal">New</button>
                         <div class="modal fade" id="addingProduct" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog" role="document">
-                                <form id="editForm" method="POST" enctype="multipart/form-data" action="/profile/index">
+                                <form id="addForm" method="POST" enctype="multipart/form-data" action="/profile/index">
                                     {{ csrf_field() }}
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -67,9 +65,12 @@
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <label>Category</label>
-                                                                        <input type="text" name="category_id"
-                                                                            class="form-control"
-                                                                            placeholder="Category ID...">
+                                                                        <select class="form-control" name="category_id">
+                                                                            @foreach($categories as $cate)
+                                                                            <option value="{{$cate->id}}">
+                                                                                {{$cate->name}}</option>
+                                                                            @endforeach
+                                                                        </select>
                                                                     </div>
                                                                 </div>
 
@@ -172,7 +173,7 @@
                 <div class="card">
                     <!-- Card header -->
                     <div class="card-header border-0">
-                        <h3 class="mb-0">Light table</h3>
+                        <h3 class="mb-0">Product table</h3>
                     </div>
                     <!-- Light table -->
                     <div class="table-responsive">
@@ -186,6 +187,9 @@
                                     <th scope="col" data-sort="status">Discount</th>
                                     <th scope="col" data-sort="status">Price</th>
                                     <th scope="col" data-sort="status">Quantity</th>
+                                    <th scope="col" data-sort="status">Ingredient</th>
+                                    <th scope="col" data-sort="status">Mf Date</th>
+                                    <th scope="col" data-sort="status">Exp Date</th>
                                     <th scope="col" data-sort="status">Description</th>
                                     <th scope="col" data-sort="status" style="text-align:center">Action</th>
                                 </tr>
@@ -211,7 +215,7 @@
                                     <td>
                                         <span class="badge badge-dot mr-4">
                                             <!-- <i class="bg-warning"></i> -->
-                                            <span class="status">{{$prod->category_id }}</span>
+                                            <span class="status">{{$prod->category->name }}</span>
                                         </span>
                                     </td>
                                     <td>
@@ -229,6 +233,21 @@
                                             {{ $prod->quantity }}
                                         </div>
                                     </td>
+                                    <td>
+                                        <div class="avatar-group">
+                                            {{ $prod->ingredient }}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="avatar-group">
+                                            {{ $prod->manufacturing_date }}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="avatar-group">
+                                            {{ $prod->expiry_date }}
+                                        </div>
+                                    </td>
 
                                     <td>
                                         <div class="avatar-group">
@@ -236,14 +255,15 @@
                                         </div>
                                     </td>
                                     <td class="text-right">
-                                        <button class="btn btn-warning edit">Edit</button>
+                                        <button class="btn btn-warning edit" data-toggle="modal"
+                                            data-target="#edit{{$prod->id}}">Edit</button>
                                         <button data-target="#modalDelete{{$prod->id}}" type="button"
-                                            class="btn btn-danger" data-toggle="modal">Delete</button>
-
-                                        <div class="modal" id="editModal" role="dialog" aria-labelledby="editModalLabel"
-                                            aria-hidden="false">
-                                            <div class="modal-dialog" role="document">
-                                                <form id="editForm" method="POST" enctype="multipart/form-data"
+                                            class="btn btn-danger" data-toggle="modal">Delete
+                                        </button>
+                                        <div class="modal fade" id="edit{{$prod->id}}" role="dialog"
+                                            aria-labelledby="editModalLabel">
+                                            <div class="modal-dialog">
+                                                <form id="editForm" method="post" enctype="multipart/form-data"
                                                     action="/profile/update/{{ $prod->id }}">
                                                     {{ csrf_field() }}
                                                     {{ method_field('PUT') }}
@@ -253,7 +273,6 @@
                                                             </h5>
                                                         </div>
                                                         <div class="modal-body">
-
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <div class="card card-user">
@@ -285,10 +304,15 @@
                                                                                 <div class="col-md-12">
                                                                                     <div class="form-group">
                                                                                         <label>Category</label>
-                                                                                        <input type="text"
-                                                                                            name="category_id"
-                                                                                            class="form-control"
-                                                                                            placeholder="Category ID...">
+                                                                                        <select class="form-control"
+                                                                                            name="category_id">
+                                                                                            @foreach($categories as
+                                                                                            $cate)
+                                                                                            <option
+                                                                                                value="{{$cate->id}}">
+                                                                                                {{$cate->name}}</option>
+                                                                                            @endforeach
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
 
@@ -424,6 +448,7 @@
                             </tbody>
                         </table>
                     </div>
+                    {{$product->links()}}
                 </div>
             </div>
         </div>
@@ -442,24 +467,24 @@
     $('.edit').click(function (e) {
         e.preventDefault();
         // Fill default value
-        console.log('edit');
-        var row = $(this).parent().parent().parent().parent();
+        var row = $(this).parent().parent();
         var col = row.find('td');
-        var colImg = row.find('img')
         console.log(row);
         console.log(col);
+        let selectValue = col[2].innerText;
+        console.log(selectValue);
+        console.log($("#editForm select[name='category_id'] option:contains('"+selectValue+"')").prop('selected',true))
         $('#editForm input[name="name"]').val(col[1].innerText.trim());
-        $('#editForm input[name="category_id"]').val(col[2].innerText.trim());
+        $("select option:contains('"+selectValue+"')").prop('selected',true);
         $('#editForm input[name="discount"]').val(col[3].innerText);
         $('#editForm input[name="unit_price"]').val(col[4].innerText);
         $('#editForm input[name="quantity"]').val(col[5].innerText);
         $('#editForm input[name="ingredient"]').val(col[6].innerText);
         $('#editForm input[name="manu_date"]').val(col[7].innerText);
-        // $('#editForm input[name="expiry"]').val(col[8].innerText);
-        // $('#editForm input[name="description"]').val(col[9].innerText);
-        // $('#editForm select[name="role_id"]').val($(col[4]).get(0).innerText === "User" ? 2 : 1);
+        $('#editForm input[name="expiry"]').val(col[8].innerText);
+        $('#editForm input[name="description"]').val(col[9].innerText);
 
-        $('#editModal').modal({
+        $('#edit').modal({
             backdrop: 'static',
             show: true
         });

@@ -38,14 +38,14 @@
                     <div class="form-group required">
                         <label for="input-telephone" class="col-sm-2 control-label">Shop name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="input-shop-name" placeholder="Telephone"
+                            <input type="text" class="form-control" id="input-shop-name" placeholder="Shop name"
                                 name="shopname" required>
                         </div>
                     </div>
                     <div class="form-group required">
                         <label for="input-telephone" class="col-sm-2 control-label">Shop address</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="input-shop-address" placeholder="Telephone"
+                            <input type="text" class="form-control" id="input-shop-address" placeholder="Shop address"
                                 name="shopaddress" required>
                         </div>
                     </div>

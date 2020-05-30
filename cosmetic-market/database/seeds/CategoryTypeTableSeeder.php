@@ -21,9 +21,6 @@ class CategoryTypeTableSeeder extends Seeder
             "name" => "facecare",
         ]);
         DB::table('category_types')->insert([
-            "name" => "nailcare",
-        ]);
-        DB::table('category_types')->insert([
             "name" => "lipcare",
         ]);
     }

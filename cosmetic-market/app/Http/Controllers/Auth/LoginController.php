@@ -71,10 +71,10 @@ class LoginController extends Controller
             $username = $request->username;
             $password = $request->password;
             if (Auth::attempt(['username' => $username, 'password' => $password])) {
-                //  if(Auth::user()->role_id ==1 )
-                // {
-                //     return redirect()->intended('/manage');
-                // }
+                 if(Auth::user()->role_id ==1 )
+                {
+                    return redirect()->intended('/manage/salers/index');
+                }
                 return redirect()->intended('/');
             } else {
                 $errors = new MessageBag(['errorlogin' => 'Tên hoặc mật khẩu không đúng']);

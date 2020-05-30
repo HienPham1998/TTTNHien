@@ -8,7 +8,7 @@ class Bill extends Model
 {
     use SoftDeletes;
     //
-    public function billDet(){
+    public function billDetail(){
         return $this->hasMany("App\BillDetail");
     }
     public function user(){

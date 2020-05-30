@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CategoryType;
 use App\Bill;
 use App\BillDetail;
+use App\Category;
 use App\Charts\SampleChart;
 use App\Product;
 use App\Saler;
@@ -103,12 +104,13 @@ class SalerController extends Controller
 
     public function getProduct(Request $request)
     {
+        $categories = Category::all();
         $user = User::find(Auth::user()->id);
         $saler = Saler::where('user_id', Auth::user()->id)->first();
         // dd($saler);
         $product = Product::where('saler_id', $saler->id)->paginate(6);
         // dd($product);
-        return view('salers.index', compact("product", "user"));
+        return view('salers.index', compact("product", "user","categories"));
     }
     public function statisticIndex(Request $request)
     {

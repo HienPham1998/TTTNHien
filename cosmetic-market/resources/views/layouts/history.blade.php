@@ -21,7 +21,7 @@
                 <div class="row">
                     <div class="col-sm-12" style="display:flex;justify-content:space-between;">
                         <div class="top-left float-xs-left">
-                            <div class="wel-come-msg"> Welcome to HD market! </div>
+                            <div class="wel-come-msg"> Welcome to Cosmetic Exchange! </div>
                             <div class="language">
                                 <form action="#" method="post" enctype="multipart/form-data" id="language">
                                     <div class="btn-group">
@@ -115,18 +115,20 @@
                     <th>Shop Name</th>
                     <th>Date</th>
                 </tr>
-                @foreach($bill->billDet as $detail)
-                @if($detail->status == 1)
+                @foreach($bill as $b)
+                @foreach($b->billDetail as $billD)
+                @if($billD->status == 1)
                 <tr>
                     <td style="width:10%">
-                        <img class="img-thumbnail" style="width:100px" src="{{$detail->product->image}}" alt="">
+                        <img class="img-thumbnail" style="width:100px" src="{{$billD->product->image}}" alt="">
                     </td>
-                    <td>{{$detail->product->name}}</td>
-                    <td>${{$detail->unit_price}}</td>
-                    <td>{{$detail->product->saler->shopname}}</td>
-                    <td>{{$detail->created_at}}</td>
+                    <td>{{$billD->product->name}}</td>
+                    <td>${{$billD->unit_price}}</td>
+                    <td>{{$billD->product->saler->shopname}}</td>
+                    <td>{{$billD->created_at}}</td>
                 </tr>
                 @endif
+                @endforeach
                 @endforeach
             </tbody>
         </table>
@@ -146,7 +148,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
-    
+
 </body>
 
 </html>
